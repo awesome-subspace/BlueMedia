@@ -3,7 +3,7 @@
   "private": true,
   "scripts": {
     "docs:check": "node scripts/check-docs.mjs",
-    "docs:lint": "npx --yes @readme/cli@0.0.30 lint"
+    "docs:lint": "npx --yes @readme/cli@0.0.30 --no-check lint"
   },
   "engines": {
     "node": ">=24"
