@@ -1,81 +1,96 @@
 ---
-title: "快速开始"
-excerpt: "从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。"
+title: "编辑模板"
+excerpt: "编辑模板。改完 Meta 会重新审核，本地状态回到 PENDING。"
 ---
-从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。
 
-**用 AI 写对接代码？** 每个接口页面包屑右侧有「 **复制给 LLM**」按钮，复制出来的是一份自包含说明：方法与路径、鉴权与所需 scope、参数与请求体字段（含必填标记）、成功响应结构、错误信封约定，以及一条可直接跑的 curl。直接粘给你的 coding agent 即可，不需要让它去抓这个页面。结构与字段说明是英文的；散文描述保持中文原文并标了 `zh`——它们没有经过机器翻译，因为「必填」「不可重试」这类词一旦译歪，生成的代码就是错的。
+`PATCH /v1/templates/{id}`
 
-## Base URL
+编辑模板。改完 Meta 会重新审核，本地状态回到 PENDING。
 
-所有 `/v1/*` 接口的基地址是：
-
-```
-https://api.bsptest.com
-```
-
-## 1. 获取 API Key
-
-请联系我们公司邮箱 [senpeng.zheng1@bluefocus.com](mailto:senpeng.zheng1@bluefocus.com) 获取 API Key —— `bu` 级 Key（`sk_bu_...`，管这个 BU 的全部资源）或绑定单个 BM 的 `bm` 级 Key（`sk_bm_...`）。
-
-> 🚧 密钥只在创建时明文返回一次
+> 📘 鉴权
 >
-> 请立即保存；平台只存哈希，丢失后只能重新签发。
+> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
 
-## 2. 验证令牌
+## 请求
 
-用 `Authorization: Bearer <API_KEY>` 调 `GET /whoami`，确认令牌有效并核对返回的 `tenantId`。
+Base URL：`https://api.bsptest.com`
 
-<Tabs>
-<Tab title="curl">
+### 参数
 
-```bash
-curl https://api.bsptest.com/whoami \
-  -H "Authorization: Bearer sk_bu_xxx"
-```
+| 名称 | 位置 | 必填 | 类型/约束 | 说明 |
+| --- | --- | --- | --- | --- |
+| `id` | path | 是 | string |  |
 
-</Tab>
-<Tab title="200 OK">
+### 请求体
+请求体必填。
+### 请求体字段
+
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `components` | array | 否 | 新的组件数组（整份替换） |
+| `category` | MARKETING \| UTILITY \| AUTHENTICATION | 否 | 新类别 |
+| `parameterFormat` | positional \| named | 否 | 参数占位符风格 |
+| `allowCategoryChange` | boolean | 否 | 允许 Meta 在审核时重新归类（避免因类别不符被拒） |
+| `messageSendTtlSeconds` | integer | 否 | 用该模板发送的消息的 TTL |
+
+Content-Type：`application/json`
+Schema：
 
 ```json
 {
-  "tenantId": "tenant_01923abc...",
-  "apiKeyLevel": "bu",
-  "platformVersion": "1.0.xxx"
+  "type": "object",
+  "properties": {
+    "components": {
+      "type": "string",
+      "description": "array · 可选 — 新的组件数组（整份替换）"
+    },
+    "category": {
+      "type": "string",
+      "description": "MARKETING | UTILITY | AUTHENTICATION · 可选 — 新类别"
+    },
+    "parameterFormat": {
+      "type": "string",
+      "description": "positional | named · 可选 — 参数占位符风格"
+    },
+    "allowCategoryChange": {
+      "type": "string",
+      "description": "boolean · 可选 — 允许 Meta 在审核时重新归类（避免因类别不符被拒）"
+    },
+    "messageSendTtlSeconds": {
+      "type": "string",
+      "description": "integer · 可选 — 用该模板发送的消息的 TTL"
+    }
+  }
 }
 ```
 
-</Tab>
-</Tabs>
 
-## 3. 查看本 BU 的号码
+## 响应
 
-发消息前先确认自己名下有哪些已注册的号码：
+| 状态码 | 说明 |
+| --- | --- |
+| `200` | OK |
+| `4xx` | 客户端错误 |
 
-```bash
-curl https://api.bsptest.com/v1/phone-numbers \
-  -H "Authorization: Bearer sk_bu_xxx"
+### 200 响应 Schema
+
+```json
+{
+  "$ref": "#/components/schemas/MessageTemplate"
+}
 ```
 
-从返回列表里取一个 `id`（`pn_...` 格式）用在下一步——不要沿用文档里的占位符，那不是真实号码 ID。
+通用错误信封及处理建议见[错误码](/docs/error-codes)。
 
-## 4. 发出第一条消息
+## 补充说明
 
-```bash
-curl -X POST https://api.bsptest.com/v1/messages \
-  -H "Authorization: Bearer sk_bu_xxx" \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: order-8821-notify" \
-  -d '{
-    "phoneNumberId": "pn_01923abc",
-    "to": "8613800138000",
-    "type": "text",
-    "text": { "body": "你好，你的订单已发货。" }
-  }'
-```
+#### 只有 APPROVED / REJECTED 能改
+PENDING 的模板正在审核，改它会被 Meta 拒 —— 我们本地先挡并返回 409，让你看到「等审核结果」而不是一个含糊的上游错误。
 
-响应 `202 Accepted`，返回消息 id 与初始状态 `accepted`。 **这不代表已送达**——用 `GET /v1/messages/{id}` 或 Webhook 追踪后续状态（见 [发消息与状态追踪](/docs/postgresql-redis-get-ready#messaging)）。
+#### 改完状态会回到 PENDING
+Meta 对编辑后的模板**重新审核**。所以本地状态被打回 `PENDING`、上一次的拒绝原因被清空 —— 如果继续显示「已通过」，你会以为现在就能发，而实际会被拒。审核结果仍由 `message_template_status_update` webhook 回填。
 
-**幂等：** 带上 `Idempotency-Key`（≤200 字符）。同一 BU 下重复使用同一个 key 会返回 _原来那条_ 消息，不会重复发送——重试网络超时的请求时务必带上。
+#### 改不了 name 和 language
+Meta 的编辑接口里没有这两个字段，要换名字只能新建模板。请求体是 `.strict()` 的：传了它们会 400，而不是被默默忽略。
 
-接下来建议阅读 [认证与权限](/docs/postgresql-redis-get-ready#auth) 了解层级与 scope，以及 [Webhook 集成](/docs/postgresql-redis-get-ready#webhooks-guide) 了解如何接收状态回调和用户回复。
+本地没有 Meta template id 的模板（没同步过）会返回 409，先调 `POST /v1/templates/sync`。

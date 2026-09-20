@@ -1,76 +1,69 @@
 ---
-title: "快速开始"
-excerpt: "用 AI 写对接代码？ > > 每个接口页面包屑右侧有「 复制给 LLM」按钮，复制出来的是一份自包含说明：方法与路径、鉴权与所需 scope、参数与请求体字段（含必填标记）、成功响应结构、错误信封约定，以及一条可直接跑的 curl。"
+title: "局部更新端点"
+excerpt: "局部更新端点（url / events / metadata）。"
 ---
-> 👍 用 AI 写对接代码？
+
+`PATCH /v1/webhook-endpoints/{id}`
+
+局部更新端点（url / events / metadata）。
+
+> 📘 鉴权
 >
-> 每个接口页面包屑右侧有「 **复制给 LLM**」按钮，复制出来的是一份自包含说明：方法与路径、鉴权与所需 scope、参数与请求体字段（含必填标记）、成功响应结构、错误信封约定，以及一条可直接跑的 curl。直接粘给你的 coding agent 即可，不需要让它去抓这个页面。结构与字段说明是英文的；散文描述保持中文原文并标了 `zh`——它们没有经过机器翻译，因为「必填」「不可重试」这类词一旦译歪，生成的代码就是错的。
+> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
 
-> 📘 让 agent 自己取文档
->
-> `GET /docs/llms.txt`（索引，约 3k tokens）与 `GET /docs/llms-full.txt`（全文，约 16k tokens）是按 [llmstxt.org](https://llmstxt.org/) 约定提供的纯文本，通篇英文骨架，可直接喂给 coding agent 或让它自己拉取；分类页右上角也有「复制整个分类给 LLM」。
+## 请求
 
-## Base URL
+Base URL：`https://api.bsptest.com`
 
-所有 `/v1/*` 接口的基地址是：
+### 参数
 
-```
-https://api.bsptest.com
-```
+| 名称 | 位置 | 必填 | 类型/约束 | 说明 |
+| --- | --- | --- | --- | --- |
+| `id` | path | 是 | string |  |
 
-## 1. 获取 API Key
+### 请求体
+请求体必填。
+### 请求体字段
 
-请联系我们公司邮箱 [senpeng.zheng1@bluefocus.com](mailto:senpeng.zheng1@bluefocus.com) 获取 API Key —— `bu` 级 Key（`sk_bu_...`，管这个 BU 的全部资源）或绑定单个 BM 的 `bm` 级 Key（`sk_bm_...`）。
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `url` | string | 否 | 新回调地址。**同样过 SSRF 校验** —— 只在创建时校验的话，改一次 url 就能绕过整道防护 |
+| `events` | string[] | 否 | 替换订阅列表（整体替换，不是追加） |
+| `metadata` | object | 否 | 调用方自定义数据 |
 
-> 🚧 密钥只在创建时明文返回一次
->
-> 请立即保存；平台只存哈希，丢失后只能重新签发。
+Content-Type：`application/json`
+Schema：
 
-## 2. 验证令牌
-
-用 `Authorization: Bearer <API_KEY>` 调 `GET /whoami`，确认令牌有效并核对返回的 `tenantId`。
-
-```bash curl
-curl https://api.bsptest.com/whoami \
-  -H "Authorization: Bearer sk_bu_xxx"
-```
-
-```json 200 OK
+```json
 {
-  "tenantId": "tenant_01923abc...",
-  "apiKeyLevel": "bu",
-  "platformVersion": "1.0.xxx"
+  "type": "object",
+  "properties": {
+    "url": {
+      "type": "string",
+      "description": "string · 可选 — 新回调地址。**同样过 SSRF 校验** —— 只在创建时校验的话，改一次 url 就能绕过整道防护"
+    },
+    "events": {
+      "type": "string",
+      "description": "string[] · 可选 — 替换订阅列表（整体替换，不是追加）"
+    },
+    "metadata": {
+      "type": "string",
+      "description": "object · 可选 — 调用方自定义数据"
+    }
+  }
 }
 ```
 
-## 3. 查看本 BU 的号码
 
-发消息前先确认自己名下有哪些已注册的号码：
+## 响应
 
-```bash curl
-curl https://api.bsptest.com/v1/phone-numbers \
-  -H "Authorization: Bearer sk_bu_xxx"
-```
+| 状态码 | 说明 |
+| --- | --- |
+| `200` | OK |
+| `4xx` | 客户端错误 |
 
-从返回列表里取一个 `id`（`pn_...` 格式）用在下一步——不要沿用文档里的占位符，那不是真实号码 ID。
+通用错误信封及处理建议见[错误码](/docs/error-codes)。
 
-## 4. 发出第一条消息
+## 补充说明
 
-```bash curl
-curl -X POST https://api.bsptest.com/v1/messages \
-  -H "Authorization: Bearer sk_bu_xxx" \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: order-8821-notify" \
-  -d '{
-    "phoneNumberId": "pn_01923abc",
-    "to": "8613800138000",
-    "type": "text",
-    "text": { "body": "你好，你的订单已发货。" }
-  }'
-```
-
-响应 `202 Accepted`，返回消息 id 与初始状态 `accepted`。 **这不代表已送达**——用 `GET /v1/messages/{id}` 或 Webhook 追踪后续状态（见 [发消息与状态追踪](/docs/postgresql-redis-get-ready#messaging)）。
-
-**幂等：** 带上 `Idempotency-Key`（≤200 字符）。同一 BU 下重复使用同一个 key 会返回 _原来那条_ 消息，不会重复发送——重试网络超时的请求时务必带上。
-
-接下来建议阅读 [认证与权限](/docs/postgresql-redis-get-ready#auth) 了解层级与 scope，以及 [Webhook 集成](/docs/postgresql-redis-get-ready#webhooks-guide) 了解如何接收状态回调和用户回复。
+空 body 返回 400 而不是静默 200：空 patch 通常意味着字段名写错了，静默成功会让调用方以为改动生效。不返回 secret。

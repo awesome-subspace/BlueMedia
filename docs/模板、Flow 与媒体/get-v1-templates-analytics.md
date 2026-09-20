@@ -1,92 +1,52 @@
 ---
-title: "快速开始"
-excerpt: "从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。"
+title: "模板分析"
+excerpt: "模板分析：已发送 / 送达 / 已读 / 按钮点击。"
 ---
-[跳到主要内容](/docs/postgresql-redis-get-ready#docs-main)
 
-# 快速开始
+`GET /v1/templates/analytics`
 
-从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。
+模板分析：已发送 / 送达 / 已读 / 按钮点击。
 
-> 📘 提示
+> 📘 鉴权
 >
-> 每个接口页面包屑右侧有「 **复制给 LLM**」按钮，复制出来的是一份自包含说明：方法与路径、鉴权与所需 scope、参数与请求体字段（含必填标记）、成功响应结构、错误信封约定，以及一条可直接跑的 curl。直接粘给你的 coding agent 即可，不需要让它去抓这个页面。结构与字段说明是英文的；散文描述保持中文原文并标了 `zh`——它们没有经过机器翻译，因为「必填」「不可重试」这类词一旦译歪，生成的代码就是错的。
+> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
 
-> 📘 提示
->
-> `GET /docs/llms.txt`（索引，约 3k tokens）与 `GET /docs/llms-full.txt`（全文，约 16k tokens）是按 [llmstxt.org](https://llmstxt.org/) 约定提供的纯文本，通篇英文骨架，可直接喂给 coding agent 或让它自己拉取；分类页右上角也有「复制整个分类给 LLM」。
+## 请求
 
-## Base URL
+Base URL：`https://api.bsptest.com`
 
-所有 `/v1/*` 接口的基地址是：
+## 响应
 
-```
-https://api.bsptest.com
-```
+| 状态码 | 说明 |
+| --- | --- |
+| `200` | OK |
+| `4xx` | 客户端错误 |
 
-## 1. 获取 API Key
-
-请联系我们公司邮箱 [senpeng.zheng1@bluefocus.com](mailto:senpeng.zheng1@bluefocus.com) 获取 API Key —— `bu` 级 Key（`sk_bu_...`，管这个 BU 的全部资源）或绑定单个 BM 的 `bm` 级 Key（`sk_bm_...`）。
-
-> 🚧 注意
->
-> **密钥只在创建时明文返回一次。** 请立即保存；平台只存哈希，丢失后只能重新签发。
-
-## 2. 验证令牌
-
-用 `Authorization: Bearer <API_KEY>` 调 `GET /whoami`，确认令牌有效并核对返回的 `tenantId`。
-
-curl
-
-```bash
-curl https://api.bsptest.com/whoami \
-  -H "Authorization: Bearer sk_bu_xxx"
-```
-
-200 OK
+### 200 响应 Schema
 
 ```json
 {
-  "tenantId": "tenant_01923abc...",
-  "apiKeyLevel": "bu",
-  "platformVersion": "1.0.xxx"
+  "$ref": "#/components/schemas/TemplateAnalyticsResult"
 }
 ```
 
-## 3. 查看本 BU 的号码
+通用错误信封及处理建议见[错误码](/docs/error-codes)。
 
-发消息前先确认自己名下有哪些已注册的号码：
+## 补充说明
 
-curl
+查询参数：`wabaId`、`templateIds`（**本地**模板 id，逗号分隔）、`start`/`end`（unix 秒）、`metricTypes`（可选，默认 `SENT,DELIVERED,READ,CLICKED`）。
 
-```bash
-curl https://api.bsptest.com/v1/phone-numbers \
-  -H "Authorization: Bearer sk_bu_xxx"
-```
+#### 必须先确认开启
 
-从返回列表里取一个 `id`（`pn_...` 格式）用在下一步——不要沿用文档里的占位符，那不是真实号码 ID。
+先对该 WABA 调一次 `POST /v1/templates/analytics/enable`，否则 Meta 直接报错。那是 Meta 的一次性确认，**开了不能关**。
 
-## 4. 发出第一条消息
+#### 响应里的 warnings 要读
 
-curl
+这个接口有几条 Meta 侧的硬限制，我们不静默吞掉而是如实写进 `warnings`：
 
-```bash
-curl -X POST https://api.bsptest.com/v1/messages \
-  -H "Authorization: Bearer sk_bu_xxx" \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: order-8821-notify" \
-  -d '{
-    "phoneNumberId": "pn_01923abc",
-    "to": "8613800138000",
-    "type": "text",
-    "text": { "body": "你好，你的订单已发货。" }
-  }'
-```
+- **一次最多 10 个模板**，超了只取前 10 个；
+- **已读与按钮点击只保留 7 天**，跨度更长时前面那段这两项会是 0（不是 bug）；
+- **`COST` 对共享平台额度的 WABA 永远不返回**（Meta 的限制，而我们的客户都是这种）。花费请看 `GET /v1/credit-account/usage` —— 那才是平台对你的权威口径；
+- 传入当前授权范围之外的模板 id，或还没同步过 Meta id 的模板，会被忽略并在 `warnings` 里点名。
 
-响应 `202 Accepted`，返回消息 id 与初始状态 `accepted`。 **这不代表已送达**——用 `GET /v1/messages/{id}` 或 Webhook 追踪后续状态（见 [发消息与状态追踪](/docs/postgresql-redis-get-ready#messaging)）。
-
-> 📘 幂等
->
-> 带上 `Idempotency-Key`（≤200 字符）。同一 BU 下重复使用同一个 key 会返回 _原来那条_ 消息，不会重复发送——重试网络超时的请求时务必带上。
-
-接下来建议阅读 [认证与权限](/docs/postgresql-redis-get-ready#auth) 了解层级与 scope，以及 [Webhook 集成](/docs/postgresql-redis-get-ready#webhooks-guide) 了解如何接收状态回调和用户回复。
+按钮点击数据只对 `MARKETING` / `UTILITY` 类模板提供；欧盟与日本的 WABA 不支持（均为 Meta 的限制）。

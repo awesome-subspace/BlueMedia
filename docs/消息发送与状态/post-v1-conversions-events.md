@@ -1,85 +1,123 @@
 ---
-title: "快速开始"
-excerpt: "从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。"
+title: "上报一条转化事件"
+excerpt: "上报一条转化事件（Conversions API for business messaging）。返回 202 表示已排队，**不代表已发给 Meta**。"
 ---
-从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。
 
-**用 AI 写对接代码？** 每个接口页面包屑右侧有「 **复制给 LLM**」按钮，复制出来的是一份自包含说明：方法与路径、鉴权与所需 scope、参数与请求体字段（含必填标记）、成功响应结构、错误信封约定，以及一条可直接跑的 curl。直接粘给你的 coding agent 即可，不需要让它去抓这个页面。结构与字段说明是英文的；散文描述保持中文原文并标了 `zh`——它们没有经过机器翻译，因为「必填」「不可重试」这类词一旦译歪，生成的代码就是错的。
+`POST /v1/conversions/events`
 
-**让 agent 自己取文档：**`GET /docs/llms.txt`（索引，约 3k tokens）与 `GET /docs/llms-full.txt`（全文，约 16k tokens）是按 [llmstxt.org](https://llmstxt.org/) 约定提供的纯文本，通篇英文骨架，可直接喂给 coding agent 或让它自己拉取；分类页右上角也有「复制整个分类给 LLM」。
+上报一条转化事件（Conversions API for business messaging）。返回 202 表示已排队，**不代表已发给 Meta**。
 
-## Base URL
-
-所有 `/v1/*` 接口的基地址是：
-
-```
-https://api.bsptest.com
-```
-
-## 1. 获取 API Key
-
-请联系我们公司邮箱 [senpeng.zheng1@bluefocus.com](mailto:senpeng.zheng1@bluefocus.com) 获取 API Key —— `bu` 级 Key（`sk_bu_...`，管这个 BU 的全部资源）或绑定单个 BM 的 `bm` 级 Key（`sk_bm_...`）。
-
-> 🚧 密钥只在创建时明文返回一次
+> 📘 鉴权
 >
-> 请立即保存；平台只存哈希，丢失后只能重新签发。
+> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
 
-## 2. 验证令牌
+## 请求
 
-用 `Authorization: Bearer <API_KEY>` 调 `GET /whoami`，确认令牌有效并核对返回的 `tenantId`。
+Base URL：`https://api.bsptest.com`
 
-<Tabs>
-<Tab title="curl">
+### 请求体
+请求体必填。
+### 请求体字段
 
-```bash
-curl https://api.bsptest.com/whoami \
-  -H "Authorization: Bearer sk_bu_xxx"
-```
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `portfolioId` | string | 是 | 事件所属的 Business Portfolio，bm_...（Pixel 绑在它上面） |
+| `ctwaClid` | string | 是 | 广告点击 id。取自 `GET /v1/conversations/{id}` 的 `ctwaClid` |
+| `eventName` | string | 是 | Meta 标准事件名：Purchase / LeadSubmitted / AddToCart / InitiateCheckout |
+| `value` | number | 否 | **主单位**金额（与 Meta 的 custom_data.value 一致）。必须与 currency 同时给 |
+| `currency` | string | 否 | ISO 4217，三位 |
+| `timestamp` | integer | 否 | unix 秒，事件**真实发生**时间。省略取当前时间 |
+| `idempotencyKey` | string | 否 | 幂等键。省略时按「点击 + 事件名 + 秒级时间」自动生成 |
 
-</Tab>
-<Tab title="200 OK">
+Content-Type：`application/json`
+示例：
 
 ```json
 {
-  "tenantId": "tenant_01923abc...",
-  "apiKeyLevel": "bu",
-  "platformVersion": "1.0.xxx"
+  "portfolioId": "bm_x",
+  "ctwaClid": "<CTWA_CLID>",
+  "eventName": "Purchase",
+  "value": 250,
+  "currency": "USD"
 }
 ```
 
-</Tab>
-</Tabs>
+Schema：
 
-## 3. 查看本 BU 的号码
-
-发消息前先确认自己名下有哪些已注册的号码：
-
-```bash
-curl https://api.bsptest.com/v1/phone-numbers \
-  -H "Authorization: Bearer sk_bu_xxx"
+```json
+{
+  "type": "object",
+  "properties": {
+    "portfolioId": {
+      "type": "string",
+      "description": "string · 必填 — 事件所属的 Business Portfolio，bm_...（Pixel 绑在它上面）"
+    },
+    "ctwaClid": {
+      "type": "string",
+      "description": "string · 必填 — 广告点击 id。取自 `GET /v1/conversations/{id}` 的 `ctwaClid`"
+    },
+    "eventName": {
+      "type": "string",
+      "description": "string · 必填 — Meta 标准事件名：Purchase / LeadSubmitted / AddToCart / InitiateCheckout"
+    },
+    "value": {
+      "type": "string",
+      "description": "number · 可选 — **主单位**金额（与 Meta 的 custom_data.value 一致）。必须与 currency 同时给"
+    },
+    "currency": {
+      "type": "string",
+      "description": "string · 可选 — ISO 4217，三位"
+    },
+    "timestamp": {
+      "type": "string",
+      "description": "integer · 可选 — unix 秒，事件**真实发生**时间。省略取当前时间"
+    },
+    "idempotencyKey": {
+      "type": "string",
+      "description": "string · 可选 — 幂等键。省略时按「点击 + 事件名 + 秒级时间」自动生成"
+    }
+  },
+  "required": [
+    "portfolioId",
+    "ctwaClid",
+    "eventName"
+  ],
+  "example": {
+    "portfolioId": "bm_x",
+    "ctwaClid": "<CTWA_CLID>",
+    "eventName": "Purchase",
+    "value": 250,
+    "currency": "USD"
+  }
+}
 ```
 
-从返回列表里取一个 `id`（`pn_...` 格式）用在下一步——不要沿用文档里的占位符，那不是真实号码 ID。
 
-## 4. 发出第一条消息
+## 响应
 
-```bash
-curl -X POST https://api.bsptest.com/v1/messages \
-  -H "Authorization: Bearer sk_bu_xxx" \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: order-8821-notify" \
-  -d '{
-    "phoneNumberId": "pn_01923abc",
-    "to": "8613800138000",
-    "type": "text",
-    "text": { "body": "你好，你的订单已发货。" }
-  }'
-```
+| 状态码 | 说明 |
+| --- | --- |
+| `200` | OK |
+| `201` | Created |
+| `202` | Accepted |
+| `4xx` | 客户端错误 |
 
-响应 `202 Accepted`，返回消息 id 与初始状态 `accepted`。 **这不代表已送达**——用 `GET /v1/messages/{id}` 或 Webhook 追踪后续状态（见 [发消息与状态追踪](/docs/postgresql-redis-get-ready#messaging)）。
+通用错误信封及处理建议见[错误码](/docs/error-codes)。
 
-> 📘 幂等
->
-> 带上 `Idempotency-Key`（≤200 字符）。同一 BU 下重复使用同一个 key 会返回 *原来那条* 消息，不会重复发送——重试网络超时的请求时务必带上。
+## 补充说明
 
-接下来建议阅读 [认证与权限](/docs/postgresql-redis-get-ready#auth) 了解层级与 scope，以及 [Webhook 集成](/docs/postgresql-redis-get-ready#webhooks-guide) 了解如何接收状态回调和用户回复。
+#### 为什么是 202，不是「已上报」
+
+事件先落库、由调度器异步发给 Meta。两个原因：一是另一条来源（`automatic_events` webhook）是在 webhook 中继的**事务里**捕获的，在事务里做 Graph 往返会持住整批事件的行锁，而事务回滚后我们已经报过一个从未落库的转化；二是上报会失败（客户还没绑 Pixel、token 过期、Meta 5xx），而事件不可重造。用 `GET /v1/conversions/events` 看每条的 `status`。
+
+#### datasetBound=false 意味着什么
+
+当前 Business Portfolio 还没有 Pixel（dataset）——事件已经**保存**，但状态是 `skipped`，不会发出。Pixel 是客户在嵌入式注册（ES v4，登录配置里勾选 Conversions API）时选择的，Graph API 上查不到这个绑定关系。补绑之后这些事件可以重放。
+
+#### 金额单位
+
+请求里的 `value` 是**主单位**（250 = 250 元/美元），与 Meta 的 `custom_data.value` 一致；平台内部按 minor units 存（与账本同一表示法，避免浮点误差），只在发给 Meta 的出口换算一次。
+
+#### 没有 ctwaClid 的对话无法上报
+
+`ctwa_clid` 只在用户**点击 Click-to-WhatsApp 广告**进来的那条消息里出现（WhatsApp Status 广告位不带它）。普通对话没有可归因的点击，Meta 不接受。

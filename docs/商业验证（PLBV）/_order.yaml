@@ -1,4 +1,4 @@
 - get-v1-business-portfolios-portfolioid-certification
-- plbv-post-v1-business-portfolios-portfolioid-certification-refresh
+- post-v1-business-portfolios-portfolioid-certification-refresh
 - post-v1-business-portfolios-id-refresh-verification
-- token-scopes-get-v1-business-portfolios-id-token-scopes
+- get-v1-business-portfolios-id-token-scopes

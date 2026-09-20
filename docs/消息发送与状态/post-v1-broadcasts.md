@@ -1,93 +1,167 @@
 ---
-title: "快速开始"
-excerpt: "用 AI 写对接代码？ 每个接口页面包屑右侧有「 复制给 LLM」按钮，复制出来的是一份自包含说明：方法与路径、鉴权与所需 scope、参数与请求体字段（含必填标记）、成功响应结构、错误信封约定，以及一条可直接跑的 curl。"
+title: "创建群发"
+excerpt: "创建群发（批量模板发送）。返回 202 —— 响应返回时一条都还没发出去：真正的发送由平台按节流速度逐条推进。"
 ---
-**用 AI 写对接代码？** 每个接口页面包屑右侧有「 **复制给 LLM**」按钮，复制出来的是一份自包含说明：方法与路径、鉴权与所需 scope、参数与请求体字段（含必填标记）、成功响应结构、错误信封约定，以及一条可直接跑的 curl。直接粘给你的 coding agent 即可，不需要让它去抓这个页面。结构与字段说明是英文的；散文描述保持中文原文并标了 `zh`——它们没有经过机器翻译，因为「必填」「不可重试」这类词一旦译歪，生成的代码就是错的。
 
-**让 agent 自己取文档：**`GET /docs/llms.txt`（索引，约 3k tokens）与 `GET /docs/llms-full.txt`（全文，约 16k tokens）是按 [llmstxt.org](https://llmstxt.org/) 约定提供的纯文本，通篇英文骨架，可直接喂给 coding agent 或让它自己拉取；分类页右上角也有「复制整个分类给 LLM」。
+`POST /v1/broadcasts`
 
-## Base URL
+创建群发（批量模板发送）。返回 202 —— 响应返回时一条都还没发出去：真正的发送由平台按节流速度逐条推进。
 
-所有 `/v1/*` 接口的基地址是：
-
-```
-https://api.bsptest.com
-```
-
-## 1. 获取 API Key
-
-请联系我们公司邮箱 [senpeng.zheng1@bluefocus.com](mailto:senpeng.zheng1@bluefocus.com) 获取 API Key —— `bu` 级 Key（`sk_bu_...`，管这个 BU 的全部资源）或绑定单个 BM 的 `bm` 级 Key（`sk_bm_...`）。
-
-> 🚧 密钥只在创建时明文返回一次
+> 📘 鉴权
 >
-> 请立即保存；平台只存哈希，丢失后只能重新签发。
+> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
 
-## 2. 验证令牌
+## 请求
 
-用 `Authorization: Bearer <API_KEY>` 调 `GET /whoami`，确认令牌有效并核对返回的 `tenantId`。
+Base URL：`https://api.bsptest.com`
 
-<Tabs>
-<Tab title="curl">
+### 请求体
+请求体必填。
+### 请求体字段
 
-```bash
-curl https://api.bsptest.com/whoami \
-  -H "Authorization: Bearer sk_bu_xxx"
-```
+| 字段 | 类型 | 必填 | 说明 |
+| --- | --- | --- | --- |
+| `name` | string | 是 | 活动名，给人看的，如「双十一预热」 |
+| `phoneNumberId` | string | 是 | 发送号码，pn_... |
+| `template` | object | 是 | { name, language: { code }, components? }；一个活动只发一个模板 |
+| `recipients` | array | 是 | [{ to, variables? }]，最多 20000 条；variables 覆盖 template.components |
+| `scheduledAt` | ISO 8601 | 否 | 到点才开始派发；省略即立刻开始 |
+| `dryRun` | boolean | 否 | true 只校验与试算，不落库 |
 
-</Tab>
-<Tab title="200 OK">
+Content-Type：`application/json`
+示例：
 
 ```json
 {
-  "tenantId": "tenant_01923abc...",
-  "apiKeyLevel": "bu",
-  "platformVersion": "1.0.xxx"
+  "name": "双十一预热",
+  "phoneNumberId": "<YOUR_PHONE_NUMBER_ID>",
+  "template": {
+    "name": "promo_v1",
+    "language": {
+      "code": "zh_CN"
+    }
+  },
+  "recipients": [
+    {
+      "to": "8613800138000"
+    },
+    {
+      "to": "8613800138001",
+      "variables": [
+        {
+          "type": "body",
+          "parameters": [
+            {
+              "type": "text",
+              "text": "张三"
+            }
+          ]
+        }
+      ]
+    }
+  ]
 }
 ```
 
-</Tab>
-</Tabs>
+Schema：
 
-## 3. 查看本 BU 的号码
-
-发消息前先确认自己名下有哪些已注册的号码：
-
-<Tabs>
-<Tab title="curl">
-
-```bash
-curl https://api.bsptest.com/v1/phone-numbers \
-  -H "Authorization: Bearer sk_bu_xxx"
+```json
+{
+  "type": "object",
+  "properties": {
+    "name": {
+      "type": "string",
+      "description": "string · 必填 — 活动名，给人看的，如「双十一预热」"
+    },
+    "phoneNumberId": {
+      "type": "string",
+      "description": "string · 必填 — 发送号码，pn_..."
+    },
+    "template": {
+      "type": "string",
+      "description": "object · 必填 — { name, language: { code }, components? }；一个活动只发一个模板"
+    },
+    "recipients": {
+      "type": "string",
+      "description": "array · 必填 — [{ to, variables? }]，最多 20000 条；variables 覆盖 template.components"
+    },
+    "scheduledAt": {
+      "type": "string",
+      "description": "ISO 8601 · 可选 — 到点才开始派发；省略即立刻开始"
+    },
+    "dryRun": {
+      "type": "string",
+      "description": "boolean · 可选 — true 只校验与试算，不落库"
+    }
+  },
+  "required": [
+    "name",
+    "phoneNumberId",
+    "template",
+    "recipients"
+  ],
+  "example": {
+    "name": "双十一预热",
+    "phoneNumberId": "<YOUR_PHONE_NUMBER_ID>",
+    "template": {
+      "name": "promo_v1",
+      "language": {
+        "code": "zh_CN"
+      }
+    },
+    "recipients": [
+      {
+        "to": "8613800138000"
+      },
+      {
+        "to": "8613800138001",
+        "variables": [
+          {
+            "type": "body",
+            "parameters": [
+              {
+                "type": "text",
+                "text": "张三"
+              }
+            ]
+          }
+        ]
+      }
+    ]
+  }
+}
 ```
 
-</Tab>
-</Tabs>
 
-从返回列表里取一个 `id`（`pn_...` 格式）用在下一步——不要沿用文档里的占位符，那不是真实号码 ID。
+## 响应
 
-## 4. 发出第一条消息
+| 状态码 | 说明 |
+| --- | --- |
+| `200` | OK |
+| `201` | Created |
+| `202` | Accepted |
+| `4xx` | 客户端错误 |
 
-<Tabs>
-<Tab title="curl">
+通用错误信封及处理建议见[错误码](/docs/error-codes)。
 
-```bash
-curl -X POST https://api.bsptest.com/v1/messages \
-  -H "Authorization: Bearer sk_bu_xxx" \
-  -H "Content-Type: application/json" \
-  -H "Idempotency-Key: order-8821-notify" \
-  -d '{
-    "phoneNumberId": "pn_01923abc",
-    "to": "8613800138000",
-    "type": "text",
-    "text": { "body": "你好，你的订单已发货。" }
-  }'
-```
+## 补充说明
 
-</Tab>
-</Tabs>
+#### 它和自己循环调 POST /v1/messages 的区别
+节流、去重、中途停机恢复和费用预检都在平台这一侧。Cloud API 每个号码默认 80 msg/s（升级后 1000，与 WhatsApp Business app 共存的号码只有 20），超了返回 130429；平台按「每轮条数 × 每秒一轮」控速，默认约 50 msg/s。
 
-响应 `202 Accepted`，返回消息 id 与初始状态 `accepted`。 **这不代表已送达**——用 `GET /v1/messages/{id}` 或 Webhook 追踪后续状态（见 [发消息与状态追踪](/docs/postgresql-redis-get-ready#messaging)）。
+#### 创建时会做的四件事
+- **模板只校验一次**：未审核 / 该号码所属 WABA 下不存在 → 直接 404/409，而不是变成几万条失败收件人。
+- **号码去重**：`+86 133…`、`86133…`、带空格与连字符的写法视为同一个人，只发一次。响应里 `submitted` / `accepted` / `duplicates` 分别是提交数、落库数、被去掉的重复数。
+- **无效号码逐条给原因**：`invalid` 数组里是 `{ to, reason }`（empty / not_a_number / length_out_of_range）。只判断「明显不是号码」——国家码是否存在、号码是否注册过 WhatsApp 只有 Meta 知道，平台不猜。
+- **费用预检**：预估 = 去重后人数 × 单条预估额度。余额不够整场活动时直接返回 402 并带上 `requiredMinor` / `availableMinor`，而不是发到一半停下。
 
-**幂等：** 带上 `Idempotency-Key`（≤200 字符）。同一 BU 下重复使用同一个 key 会返回 _原来那条_ 消息，不会重复发送——重试网络超时的请求时务必带上。
+#### warnings 要看
+`warnings` 不阻断创建，但每一条都会真实影响投递结果：
+- 人数超过该号码所属 **Business Portfolio** 的消息限额（新组合只有 250 个唯一用户/24h，且被组合下所有号码共用），超出部分会被 Meta 拒绝；
+- 本地不知道限额档位（没同步过）——先调 POST /v1/phone-numbers/{id}/refresh；
+- MARKETING 模板发给 +1 号码：WhatsApp 不向美国号码投递营销模板（加拿大同为 +1，本地无法区分，所以平台只提示、不擅自丢弃）；
+- MARKETING 模板受**人均频次上限**约束，超限的收件人以 131049 失败，且 24 小时内不得重试（平台不会自动重试这类失败）；
+- 号码质量评分为 YELLOW/RED 时做大批量营销发送，会进一步拉低评分并可能触发限额下调。
 
-接下来建议阅读 [认证与权限](/docs/postgresql-redis-get-ready#auth) 了解层级与 scope，以及 [Webhook 集成](/docs/postgresql-redis-get-ready#webhooks-guide) 了解如何接收状态回调和用户回复。
+#### 幂等
+每个收件人对应的消息使用固定幂等键 `bcast:<recipientId>`，所以派发进程重启不会给同一个人重复发。活动本身没有幂等键：重复 POST 会创建两个活动。
