@@ -1,0 +1,5 @@
+- api-key-post-v1-api-keys
+- key-get-v1-api-keys
+- scopes-get-v1-api-keys-scopes
+- key-delete-v1-api-keys-id
+- key-delete-v1-api-keys-id-purge

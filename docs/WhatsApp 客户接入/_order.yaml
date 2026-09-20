@@ -1,0 +1,13 @@
+- embedded-signup-post-v1-onboarding-es-events
+- post-v1-onboarding-invitations-token-es-events
+- post-v1-onboarding-embedded-signup
+- get-v1-onboarding-embedded-signup
+- get-v1-onboarding-embedded-signup-operationid
+- post-v1-onboarding-embedded-signup-operationid-retry
+- post-v1-onboarding-invitations
+- get-v1-onboarding-invitations
+- delete-v1-onboarding-invitations-id
+- get-v1-onboarding-invitations-token
+- meta-post-v1-onboarding-invitations-token-complete
+- post-v1-onboarding-invitations-token-retry
+- get-v1-onboarding-invitations-token-status
