@@ -1,0 +1,9 @@
+- post-v1-webhook-endpoints
+- get-v1-webhook-endpoints
+- get-v1-webhook-endpoints-id
+- delete-v1-webhook-endpoints-id
+- patch-v1-webhook-endpoints-id
+- post-v1-webhook-endpoints-id-rotate-secret
+- post-v1-webhook-endpoints-id-enable
+- post-v1-webhook-endpoints-id-verify
+- post-v1-webhook-endpoints-id-test
