@@ -1,5 +1,6 @@
 ---
 title: "验证令牌 · GET /whoami"
+excerpt: "从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。"
 ---
 [跳到主要内容](/docs/postgresql-redis-get-ready#docs-main)
 
