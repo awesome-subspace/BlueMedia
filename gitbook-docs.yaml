@@ -1,0 +1,12 @@
+$schema: https://api.gitbook.com/gitbook-docs.yaml
+site:
+  title: BlueMedia
+  structure:
+    - type: space
+      key: space-guides
+      title: API 文档
+      path: docs
+      default: true
+      content:
+        directory: ./docs
+        language: zh

@@ -1,0 +1,10 @@
+{
+  "name": "bluemedia-api-docs",
+  "private": true,
+  "scripts": {
+    "docs:check": "node scripts/check-docs.mjs"
+  },
+  "engines": {
+    "node": ">=24"
+  }
+}
