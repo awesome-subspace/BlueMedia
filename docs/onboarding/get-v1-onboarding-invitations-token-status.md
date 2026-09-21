@@ -1,15 +1,17 @@
 ---
 title: "轮询接入进度"
-excerpt: "【客户侧，无需鉴权】轮询接入进度。仅返回脱敏步骤与错误，不含任何 Token、code 或账户信息。"
+description: "【客户侧，无需鉴权】轮询接入进度。仅返回脱敏步骤与错误，不含任何 Token、code 或账户信息。"
 ---
 
-`GET /v1/onboarding/invitations/{token}/status`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/onboarding/invitations/{token}/status</code></div>
 
 【客户侧，无需鉴权】轮询接入进度。仅返回脱敏步骤与错误，不含任何 Token、code 或账户信息。
 
-> 📘 鉴权
->
-> 此接口不需要 API Key。
+:::note[鉴权]
+
+此接口不需要 API Key。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `token` | path | 是 | string | 邀请链接里的一次性 token |
-
 
 ## 响应
 

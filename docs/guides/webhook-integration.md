@@ -1,6 +1,6 @@
 ---
 title: "Webhook 集成"
-excerpt: "创建一个回调端点，接收用户消息、状态更新和号码/模板等资产变更，无需轮询。"
+description: "创建一个回调端点，接收用户消息、状态更新和号码/模板等资产变更，无需轮询。"
 ---
 
 创建一个回调端点，接收用户消息、状态更新和号码/模板等资产变更，无需轮询。
@@ -34,8 +34,11 @@ curl -X POST https://api.bsptest.com/v1/webhook-endpoints \
 
 `DELETE /v1/webhook-endpoints/{id}` 是**软停用**（status 变 `disabled`，投递停止，历史记录保留），响应体是停用后的端点对象而不是空 body。要恢复用 `POST /v1/webhook-endpoints/{id}/enable`：验证过的端点回到 `active`；没验证过的连接协议端点回到 `pending`（必须重新过验证，这一点不接受调用方指定）。
 
-> 📘
-> **轮换 secret 前先看这条。**`POST .../rotate-secret` 立即生效、没有重叠期：下一条投递就用新 secret 签名，你还没存好新值时收到的投递会验签失败，并按 4xx 判为**永久失败、不重试**。安全做法是低峰期轮换，或先 `DELETE`（停用）→ 轮换 → 存好 → `POST .../enable`。
+:::note
+
+**轮换 secret 前先看这条。**`POST .../rotate-secret` 立即生效、没有重叠期：下一条投递就用新 secret 签名，你还没存好新值时收到的投递会验签失败，并按 4xx 判为**永久失败、不重试**。安全做法是低峰期轮换，或先 `DELETE`（停用）→ 轮换 → 存好 → `POST .../enable`。
+
+:::
 
 ## URL 的限制
 
@@ -57,6 +60,22 @@ curl -X POST https://api.bsptest.com/v1/webhook-endpoints \
 
 挑战按**与真实事件完全相同的方式签名**，所以验证通过意味着后续真实事件也能验通。
 
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as 调用方
+    participant P as BlueMedia
+    participant E as 你的端点
+    C->>P: POST /v1/webhook-endpoints/{id}/verify
+    P->>E: POST webhook.verification（data.challenge = ch_...）
+    Note over P,E: 超时 5 秒，响应体最多读 4 KB
+    E->>E: 先验签，再取 challenge
+    E-->>P: 回显 {"challenge":"ch_..."}
+    P->>P: 定时安全比较
+    P-->>C: 通过则端点变 active；失败保持 pending，原因在 reason 里
+```
+
+
 ## 验证签名
 
 签名方案有两套，**由端点创建时是否走连接协议决定**。读取端点时返回的 `apiVersion` 为 `null` 就是下面第一套。
@@ -65,7 +84,7 @@ curl -X POST https://api.bsptest.com/v1/webhook-endpoints \
 
 每次回调带 `X-Webhook-Signature-256: sha256=<hex>`，是对**原始请求体字节**用端点 secret 做 HMAC-SHA256 的结果。收到回调后必须先验证，再解析 JSON——用同样的算法自己算一遍，和 header 比对：
 
-```Node.js
+```js
 const crypto = require('node:crypto');
 
 function verify(rawBody, signatureHeader, secret) {
@@ -92,7 +111,7 @@ function verify(rawBody, signatureHeader, secret) {
 
 `<hex>` 是 `HMAC_SHA256(secret, "<Webhook-Timestamp>.<原始请求体>")`。**时间戳参与签名**而不只是一个头，所以它本身不可篡改，接收方可以据此拒绝容忍窗口之外的重放：
 
-```Node.js
+```js
 const crypto = require('node:crypto');
 
 function verifyV1(rawBody, timestampHeader, signatureHeader, secret) {
@@ -161,7 +180,7 @@ Meta 入站事件：
 
 回调体是 `{ kind, ...上下文字段, message / status / value }` 的形态，字段随 `kind` 变化：
 
-```status 事件示例
+```json title="status 事件示例"
 {
   "kind": "status",
   "wabaId": "waba_...",
@@ -179,7 +198,7 @@ Meta 入站事件：
 
 平台自己发布的事件（`job.*` / `usage.updated` / `webhook.verification`）用一个固定信封，业务内容在 `data` 里：
 
-```webhook.verification 示例
+```json title="webhook.verification 示例"
 {
   "id": "evt_...",
   "type": "webhook.verification",

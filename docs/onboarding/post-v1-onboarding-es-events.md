@@ -1,15 +1,17 @@
 ---
 title: "上报一次 Embedded Signup 会话事件"
-excerpt: "上报一次 Embedded Signup 会话事件（客户放弃在哪一屏、或客户自助报错）。恒 202。"
+description: "上报一次 Embedded Signup 会话事件（客户放弃在哪一屏、或客户自助报错）。恒 202。"
 ---
 
-`POST /v1/onboarding/es-events`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/onboarding/es-events</code></div>
 
 上报一次 Embedded Signup 会话事件（客户放弃在哪一屏、或客户自助报错）。恒 202。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -93,7 +95,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

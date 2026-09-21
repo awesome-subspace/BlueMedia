@@ -1,15 +1,17 @@
 ---
 title: "设置某个 Business Portfolio 的预算上限"
-excerpt: "设置某个 Business Portfolio 的预算上限。"
+description: "设置某个 Business Portfolio 的预算上限。"
 ---
 
-`PUT /v1/credit-account/allocations/{portfolioId}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--put">PUT</span><code class="endpoint-path">/v1/credit-account/allocations/{portfolioId}</code></div>
 
 设置某个 Business Portfolio 的预算上限。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -51,7 +53,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

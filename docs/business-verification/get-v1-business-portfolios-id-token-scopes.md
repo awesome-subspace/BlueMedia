@@ -1,15 +1,17 @@
 ---
 title: "诊断客户 Token Scopes"
-excerpt: "诊断该 portfolio 的客户 Embedded Signup token 被 Meta 授予了哪些 scope（经 debug_token）。用于判断 analytics/WABA 状态的权限报错是 token 缺 whatsapp_business_management 还是平台 App 缺 Advanced Access。不回显 token 本身。"
+description: "诊断该 portfolio 的客户 Embedded Signup token 被 Meta 授予了哪些 scope（经 debug_token）。用于判断 analytics/WABA 状态的权限报错是 token 缺 whatsapp_business_management 还是平台 App 缺 Advanced Access。不回显 token 本身。"
 ---
 
-`GET /v1/business-portfolios/{id}/token-scopes`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/business-portfolios/{id}/token-scopes</code></div>
 
 诊断该 portfolio 的客户 Embedded Signup token 被 Meta 授予了哪些 scope（经 debug_token）。用于判断 analytics/WABA 状态的权限报错是 token 缺 whatsapp_business_management 还是平台 App 缺 Advanced Access。不回显 token 本身。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内 Business Portfolio ID，`bm_...` |
-
 
 ## 响应
 

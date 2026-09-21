@@ -1,15 +1,17 @@
 ---
 title: "读取 WABA 的 Flow 列表"
-excerpt: "读取 WABA 的 Flow 列表；wabaId 必填。"
+description: "读取 WABA 的 Flow 列表；wabaId 必填。"
 ---
 
-`GET /v1/flows`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/flows</code></div>
 
 读取 WABA 的 Flow 列表；wabaId 必填。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `wabaId` | query | 是 | string | 平台内 WABA ID，`waba_...`。**必填**，缺失或空串返回 `400 VALIDATION_FAILED` |
-
 
 ## 响应
 

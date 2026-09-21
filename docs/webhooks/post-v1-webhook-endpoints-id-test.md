@@ -1,15 +1,17 @@
 ---
 title: "发一条测试事件"
-excerpt: "发一条测试事件（与 verify 同一机制）。"
+description: "发一条测试事件（与 verify 同一机制）。"
 ---
 
-`POST /v1/webhook-endpoints/{id}/test`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/webhook-endpoints/{id}/test</code></div>
 
 发一条测试事件（与 verify 同一机制）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 回调端点 ID，`whe_...` |
-
 
 ## 响应
 

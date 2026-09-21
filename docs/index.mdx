@@ -1,0 +1,69 @@
+---
+title: "BlueMedia API"
+description: "使用 BlueMedia API 接入 WhatsApp Business Platform，完成客户接入、号码管理、消息发送、Webhook 回调和账务查询。"
+slug: /
+---
+
+import CardGrid from '@site/src/components/CardGrid';
+
+# BlueMedia API
+
+通过 BlueMedia API 接入 WhatsApp Business Platform，完成客户接入、号码管理、模板与消息发送、Webhook 回调和账务查询。
+
+:::info
+
+开始前请准备 BlueMedia 提供的 **API Key**。除特别标注的公开端点外，请求都需要携带 `Authorization: Bearer <API_KEY>`。
+
+:::
+
+**API Base URL**
+
+```text
+https://api.bsptest.com
+```
+
+## 从这里开始
+
+<CardGrid
+  items={[
+    {
+      title: '快速开始',
+      description: '验证 API Key，并完成第一次 API 调用。',
+      to: '/docs/guides/quickstart',
+    },
+    {
+      title: '发送第一条消息',
+      description: '提交消息并跟踪 accepted、sent、delivered、read 等状态。',
+      to: '/docs/guides/messaging',
+    },
+    {
+      title: '接入客户',
+      description: '创建邀请，让客户完成 Meta 授权和资产落地。',
+      to: '/docs/guides/customer-onboarding',
+    },
+    {
+      title: '配置 Webhook',
+      description: '安全接收消息状态、入站消息和业务事件。',
+      to: '/docs/guides/webhook-integration',
+    },
+    {
+      title: '管理号码',
+      description: '完成验证码、注册、商业资料和生命周期管理。',
+      to: '/docs/guides/phone-numbers',
+    },
+    {
+      title: '错误码与排障',
+      description: '根据 HTTP 状态、错误码和 requestId 快速定位问题。',
+      to: '/docs/guides/error-codes',
+    },
+  ]}
+/>
+
+## 推荐接入顺序
+
+1. 阅读[快速开始](guides/quickstart.md)，验证 API Key。
+2. 按[客户接入](guides/customer-onboarding.md)完成 Business Portfolio、WABA 和号码接入。
+3. 配置 [Webhook](guides/webhook-integration.md)，确保能接收异步状态和入站消息。
+4. 按[发消息与状态追踪](guides/messaging.md)发送测试消息并确认最终状态。
+
+左侧导航已按业务域收录全部接口。每个接口均为独立 Markdown 页面，可单独维护、评审和追踪变更。

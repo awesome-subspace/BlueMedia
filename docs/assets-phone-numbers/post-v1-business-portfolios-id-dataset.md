@@ -1,15 +1,17 @@
 ---
 title: "绑定 Meta Pixel"
-excerpt: "绑定或更换该 Business Portfolio 的 Meta Pixel（dataset）。同时把此前因缺 Pixel 而跳过的转化事件重新排队。"
+description: "绑定或更换该 Business Portfolio 的 Meta Pixel（dataset）。同时把此前因缺 Pixel 而跳过的转化事件重新排队。"
 ---
 
-`POST /v1/business-portfolios/{id}/dataset`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/business-portfolios/{id}/dataset</code></div>
 
 绑定或更换该 Business Portfolio 的 Meta Pixel（dataset）。同时把此前因缺 Pixel 而跳过的转化事件重新排队。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -46,7 +48,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

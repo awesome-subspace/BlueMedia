@@ -1,15 +1,17 @@
 ---
 title: "从失败步骤恢复"
-excerpt: "从失败步骤恢复；号码注册使用平台自动生成并加密保存的默认 PIN。"
+description: "从失败步骤恢复；号码注册使用平台自动生成并加密保存的默认 PIN。"
 ---
 
-`POST /v1/onboarding/embedded-signup/{operationId}/retry`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/onboarding/embedded-signup/{operationId}/retry</code></div>
 
 从失败步骤恢复；号码注册使用平台自动生成并加密保存的默认 PIN。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -43,7 +45,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

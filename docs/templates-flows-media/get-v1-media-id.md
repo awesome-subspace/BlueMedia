@@ -1,15 +1,17 @@
 ---
 title: "读取媒体 MIME、大小、哈希和临时 URL"
-excerpt: "读取媒体 MIME、大小、哈希和临时 URL。"
+description: "读取媒体 MIME、大小、哈希和临时 URL。"
 ---
 
-`GET /v1/media/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/media/{id}</code></div>
 
 读取媒体 MIME、大小、哈希和临时 URL。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | Meta 媒体 id |
-
 
 ## 响应
 

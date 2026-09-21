@@ -1,15 +1,17 @@
 ---
 title: "撤销当前账户中尚未使用的邀请"
-excerpt: "撤销当前账户中尚未使用的邀请；已完成的邀请不可撤销（返回 409）。"
+description: "撤销当前账户中尚未使用的邀请；已完成的邀请不可撤销（返回 409）。"
 ---
 
-`DELETE /v1/onboarding/invitations/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/onboarding/invitations/{id}</code></div>
 
 撤销当前账户中尚未使用的邀请；已完成的邀请不可撤销（返回 409）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 邀请记录 ID，`inv_...`（不是链接里的 token） |
-
 
 ## 响应
 

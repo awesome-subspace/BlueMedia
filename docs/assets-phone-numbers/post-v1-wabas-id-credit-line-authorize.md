@@ -1,15 +1,17 @@
 ---
 title: "授权 BlueMedia 信用额度并挂载到该 WABA"
-excerpt: "授权 BlueMedia 信用额度并挂载到该 WABA。Meta 会先向客户的 Business Portfolio 共享额度，再挂载到指定 WABA，因此同一 Portfolio 下的其它 WABA 会共享授权。重复调用不会重复授权或重复挂载；挂载失败仍返回 200，原因见 waba.error。"
+description: "授权 BlueMedia 信用额度并挂载到该 WABA。Meta 会先向客户的 Business Portfolio 共享额度，再挂载到指定 WABA，因此同一 Portfolio 下的其它 WABA 会共享授权。重复调用不会重复授权或重复挂载；挂载失败仍返回 200，原因见 waba.error。"
 ---
 
-`POST /v1/wabas/{id}/credit-line/authorize`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/wabas/{id}/credit-line/authorize</code></div>
 
 授权 BlueMedia 信用额度并挂载到该 WABA。Meta 会先向客户的 Business Portfolio 共享额度，再挂载到指定 WABA，因此同一 Portfolio 下的其它 WABA 会共享授权。重复调用不会重复授权或重复挂载；挂载失败仍返回 200，原因见 waba.error。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内 WABA ID，`waba_...` |
-
 
 ## 响应
 

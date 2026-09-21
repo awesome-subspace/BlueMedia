@@ -1,15 +1,17 @@
 ---
 title: "列出 Portfolios"
-excerpt: "列出当前 API Key 可访问的 Business Portfolios。"
+description: "列出当前 API Key 可访问的 Business Portfolios。"
 ---
 
-`GET /v1/business-portfolios`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/business-portfolios</code></div>
 
 列出当前 API Key 可访问的 Business Portfolios。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

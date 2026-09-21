@@ -1,15 +1,17 @@
 ---
 title: "列出号码"
-excerpt: "列出号码，可按 WABA 过滤。"
+description: "列出号码，可按 WABA 过滤。"
 ---
 
-`GET /v1/phone-numbers`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/phone-numbers</code></div>
 
 列出号码，可按 WABA 过滤。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `wabaId` | query | 否 | string | 按 WABA 过滤，`waba_...`。省略或传空串表示不过滤 |
-
 
 ## 响应
 

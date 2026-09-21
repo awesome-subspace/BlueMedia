@@ -1,15 +1,17 @@
 ---
 title: "删除模板"
-excerpt: "删除模板，返回 204。"
+description: "删除模板，返回 204。"
 ---
 
-`DELETE /v1/templates/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/templates/{id}</code></div>
 
 删除模板，返回 204。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内模板 ID，`tmpl_...` |
-
 
 ## 响应
 

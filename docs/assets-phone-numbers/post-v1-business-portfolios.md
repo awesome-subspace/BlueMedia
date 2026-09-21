@@ -1,15 +1,17 @@
 ---
 title: "手工创建 Portfolio"
-excerpt: "手工创建 Portfolio；推荐使用 Embedded Signup。"
+description: "手工创建 Portfolio；推荐使用 Embedded Signup。"
 ---
 
-`POST /v1/business-portfolios`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/business-portfolios</code></div>
 
 手工创建 Portfolio；推荐使用 Embedded Signup。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

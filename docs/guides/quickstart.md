@@ -1,6 +1,6 @@
 ---
 title: "快速开始"
-excerpt: "从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。"
+description: "从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。"
 ---
 
 从拿到 API Key 到发出第一条 WhatsApp 消息，共 4 步。
@@ -17,8 +17,11 @@ https://api.bsptest.com
 
 请联系我们公司邮箱 [senpeng.zheng1@bluefocus.com](mailto:senpeng.zheng1@bluefocus.com) 获取 API Key。Key 的授权范围由 BlueMedia 配置，调用方不需要选择或理解内部权限层级。
 
-> 🚧
-> **密钥只在创建时明文返回一次。**请立即保存；平台只存哈希，丢失后只能重新签发。
+:::warning
+
+**密钥只在创建时明文返回一次。**请立即保存；平台只存哈希，丢失后只能重新签发。
+
+:::
 
 ## 2\. 验证令牌
 
@@ -66,7 +69,10 @@ curl -X POST https://api.bsptest.com/v1/messages \
 
 响应 `202 Accepted`，返回消息 id 与初始状态 `accepted`。**这不代表已送达**——用 `GET /v1/messages/{id}` 或 Webhook 追踪后续状态（见[发消息与状态追踪](messaging.md)）。
 
-> 📘
-> **幂等：**带上 `Idempotency-Key`（≤200 字符）。在当前授权范围内重复使用同一个 key 会返回*原来那条*消息，不会重复发送——重试网络超时的请求时务必带上。
+:::note
+
+**幂等：**带上 `Idempotency-Key`（≤200 字符）。在当前授权范围内重复使用同一个 key 会返回*原来那条*消息，不会重复发送——重试网络超时的请求时务必带上。
+
+:::
 
 接下来建议阅读[认证与权限](authentication.md)了解授权范围与 scope，以及[Webhook 集成](webhook-integration.md)了解如何接收状态回调和用户回复。

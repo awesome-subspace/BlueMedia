@@ -1,15 +1,17 @@
 ---
 title: "修改名称、验证状态或审核状态"
-excerpt: "修改名称、验证状态或审核状态。"
+description: "修改名称、验证状态或审核状态。"
 ---
 
-`PATCH /v1/wabas/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/wabas/{id}</code></div>
 
 修改名称、验证状态或审核状态。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内 WABA ID，`waba_...` |
-
 
 ## 响应
 

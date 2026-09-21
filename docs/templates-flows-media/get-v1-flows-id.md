@@ -1,15 +1,17 @@
 ---
 title: "校验 WABA 归属后读取 Flow 详情"
-excerpt: "校验 WABA 归属后读取 Flow 详情。"
+description: "校验 WABA 归属后读取 Flow 详情。"
 ---
 
-`GET /v1/flows/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/flows/{id}</code></div>
 
 校验 WABA 归属后读取 Flow 详情。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -21,7 +23,6 @@ Base URL：`https://api.bsptest.com`
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | Meta 侧的 Flow id |
 | `wabaId` | query | 是 | string | 平台内 WABA ID，`waba_...`。**必填**——Flow 不存在于平台库内，归属校验只能靠它 |
-
 
 ## 响应
 

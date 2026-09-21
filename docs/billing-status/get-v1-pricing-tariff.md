@@ -1,15 +1,17 @@
 ---
 title: "我的售价策略"
-excerpt: "我的售价策略（含历史生效记录）。"
+description: "我的售价策略（含历史生效记录）。"
 ---
 
-`GET /v1/pricing/tariff`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/pricing/tariff</code></div>
 
 我的售价策略（含历史生效记录）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。本端点当前**不强制额外 scope**（任意有效 API Key 均可调用）；它读的是本账户自己的计费口径，建议仍用带 `billing:read` 的 Key 调用。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。本端点当前**不强制额外 scope**（任意有效 API Key 均可调用）；它读的是本账户自己的计费口径，建议仍用带 `billing:read` 的 Key 调用。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

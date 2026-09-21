@@ -1,6 +1,6 @@
 ---
 title: "客户接入"
-excerpt: "把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）接入 BlueMedia 有两条路径：运营人员代客户完成 Embedded Signup，或生成一次性邀请链接让客户在自己的设备上自助完成 Meta 授权。"
+description: "把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）接入 BlueMedia 有两条路径：运营人员代客户完成 Embedded Signup，或生成一次性邀请链接让客户在自己的设备上自助完成 Meta 授权。"
 ---
 
 把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）接入 BlueMedia 有两条路径：运营人员代客户完成 Embedded Signup，或生成一次性邀请链接让客户在自己的设备上自助完成 Meta 授权。
@@ -12,8 +12,11 @@ excerpt: "把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）�
 | `POST /v1/onboarding/embedded-signup` | 销售或客服在门户里代客户操作，且已取得客户授权结果               | API Key 或门户会话                            |
 | 邀请链接 `/v1/onboarding/invitations` | 客户自己完成 Meta 授权；客户全程不接触任何 API Key 或 App Secret | 创建/管理需凭证；客户侧凭链接里的一次性 token |
 
-> 📘
-> **两条路径共用同一套编排。**邀请链接的 complete/retry 内部直接复用 Embedded Signup 的状态机，进度模型、步骤、错误码完全一致，只是入口和凭据不同。
+:::note
+
+**两条路径共用同一套编排。**邀请链接的 complete/retry 内部直接复用 Embedded Signup 的状态机，进度模型、步骤、错误码完全一致，只是入口和凭据不同。
+
+:::
 
 ## 编排的五个阶段
 
@@ -29,6 +32,24 @@ excerpt: "把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）�
 
 任一步失败即整体中断：`currentStep` 与 `lastError*` 停在失败处，状态变为 `failed`。此时要调 `POST .../embedded-signup/{operationId}/retry` **从断点续跑**，而不是重新 POST 创建接口——那会新建一条全新 operation。retry 的 `code` 参数可选：旧 token 还有效就省略（直接续跑），token 失效才需要客户重新授权拿一个新 code。已完成但当时没注册号码的 operation，也可以用 retry 单独补跑注册步骤。
 
+```mermaid
+flowchart TB
+    S([complete 或 retry 触发]) --> T1["exchange_token<br/>换取授权凭据并 AES-256-GCM 加密保存"]
+    T1 --> T2["subscribe_app<br/>订阅应用，打通 webhook 管道"]
+    T2 --> T3["register_phone<br/>注册号码到 Cloud API"]
+    T3 --> T4["sync_resources<br/>拉取 WABA / 号码最新详情"]
+    T4 --> T5["persist_assets<br/>资产与归属关系落库"]
+    T5 --> OK([completed])
+    T3 -. 未请求号码注册则整步 skipped .-> T4
+    T1 -. 任一步失败 .-> F
+    T2 -. 失败 .-> F
+    T3 -. 失败 .-> F
+    T4 -. 失败 .-> F
+    T5 -. 失败 .-> F
+    F["failed<br/>currentStep 与 lastError 停在失败处"] -->|"POST .../retry 从断点续跑"| S
+```
+
+
 ## 邀请链接
 
 运营人员为指定客户与 Business Portfolio 生成一条一次性链接：
@@ -40,7 +61,7 @@ curl -X POST https://api.bsptest.com/v1/onboarding/invitations \
   -d '{ "portfolioId": "bm_01923abc", "expiresInSeconds": 86400 }'
 ```
 
-```201 Created
+```json title="201 Created"
 {
   "id": "inv_...",
   "url": "https://portal.bsptest.com/invite/<一次性 token>",

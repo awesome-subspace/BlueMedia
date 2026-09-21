@@ -1,15 +1,17 @@
 ---
 title: "一次性确认开启该 WABA 的模板分析"
-excerpt: "一次性确认开启该 WABA 的模板分析。**开了不能关**。"
+description: "一次性确认开启该 WABA 的模板分析。**开了不能关**。"
 ---
 
-`POST /v1/templates/analytics/enable`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/templates/analytics/enable</code></div>
 
 一次性确认开启该 WABA 的模板分析。**开了不能关**。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -40,7 +42,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

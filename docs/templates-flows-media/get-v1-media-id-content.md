@@ -1,15 +1,17 @@
 ---
 title: "由平台代理下载媒体原始字节"
-excerpt: "由平台代理下载媒体原始字节。"
+description: "由平台代理下载媒体原始字节。"
 ---
 
-`GET /v1/media/{id}/content`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/media/{id}/content</code></div>
 
 由平台代理下载媒体原始字节。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | Meta 媒体 id |
-
 
 ## 响应
 

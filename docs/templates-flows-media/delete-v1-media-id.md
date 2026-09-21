@@ -1,15 +1,17 @@
 ---
 title: "删除 Meta 媒体及本地归属"
-excerpt: "删除 Meta 媒体及本地归属。"
+description: "删除 Meta 媒体及本地归属。"
 ---
 
-`DELETE /v1/media/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/media/{id}</code></div>
 
 删除 Meta 媒体及本地归属。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`media:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`media:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | Meta 媒体 id |
-
 
 ## 响应
 

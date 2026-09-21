@@ -1,15 +1,17 @@
 ---
 title: "单个会话线程"
-excerpt: "单个会话线程：会话信息 + 最近的入站/出站合并消息。"
+description: "单个会话线程：会话信息 + 最近的入站/出站合并消息。"
 ---
 
-`GET /v1/conversations/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/conversations/{id}</code></div>
 
 单个会话线程：会话信息 + 最近的入站/出站合并消息。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -21,7 +23,6 @@ Base URL：`https://api.bsptest.com`
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 会话 ID，`conv_...` |
 | `limit` | query | 否 | integer 1..200 | 返回的消息条数，默认 50。超出范围夹取；无法解析时忽略 |
-
 
 ## 响应
 

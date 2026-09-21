@@ -1,6 +1,6 @@
 ---
 title: "认证与权限"
-excerpt: "除公开端点（Meta 回调、健康检查）外，所有请求都要带 `Authorization: Bearer <API_KEY>`。请把 API Key 当作密码保存，不要放进前端代码、URL、日志或工单截图。"
+description: "除公开端点（Meta 回调、健康检查）外，所有请求都要带 `Authorization: Bearer <API_KEY>`。请把 API Key 当作密码保存，不要放进前端代码、URL、日志或工单截图。"
 ---
 
 除公开端点（Meta 回调、健康检查）外，所有请求都要带 `Authorization: Bearer <API_KEY>`。请把 API Key 当作密码保存，不要放进前端代码、URL、日志或工单截图。

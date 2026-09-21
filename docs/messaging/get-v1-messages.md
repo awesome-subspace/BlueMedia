@@ -1,15 +1,17 @@
 ---
 title: "列出当前账户最近 50 条消息"
-excerpt: "列出当前账户最近 50 条消息，支持 keyset 翻页与状态、时间筛选。"
+description: "列出当前账户最近 50 条消息，支持 keyset 翻页与状态、时间筛选。"
 ---
 
-`GET /v1/messages`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/messages</code></div>
 
 列出当前账户最近 50 条消息，支持 keyset 翻页与状态、时间筛选。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -24,7 +26,6 @@ Base URL：`https://api.bsptest.com`
 | `status` | query | 否 | string | 按消息状态精确匹配（`accepted` / `sending` / `submitted` / `sent` / `delivered` / `read` / `failed`）。拼错的值不会报错，只会得到空列表 |
 | `from` | query | 否 | ISO 8601 date-time | `createdAt >= from`（闭区间下界） |
 | `to` | query | 否 | ISO 8601 date-time | `createdAt <= to`（闭区间上界） |
-
 
 ## 响应
 

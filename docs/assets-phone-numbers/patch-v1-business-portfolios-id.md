@@ -1,15 +1,17 @@
 ---
 title: "修改 Portfolio"
-excerpt: "修改 Business Portfolio 名称或 Meta Business Manager ID。"
+description: "修改 Business Portfolio 名称或 Meta Business Manager ID。"
 ---
 
-`PATCH /v1/business-portfolios/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/business-portfolios/{id}</code></div>
 
 修改 Business Portfolio 名称或 Meta Business Manager ID。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内 Business Portfolio ID，`bm_...` |
-
 
 ## 响应
 

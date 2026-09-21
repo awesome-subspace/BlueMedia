@@ -1,15 +1,17 @@
 ---
 title: "列出端点"
-excerpt: "列出端点；不返回 secret。每个端点带 `lastDelivery`（该端点最近一次投递的 status / responseStatus / attempts / lastError / createdAt），从未投递过为 `null`。刻意不提供 delivered/failed 计数：那是随消息量线性变慢的 COUNT 聚合。"
+description: "列出端点；不返回 secret。每个端点带 `lastDelivery`（该端点最近一次投递的 status / responseStatus / attempts / lastError / createdAt），从未投递过为 `null`。刻意不提供 delivered/failed 计数：那是随消息量线性变慢的 COUNT 聚合。"
 ---
 
-`GET /v1/webhook-endpoints`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/webhook-endpoints</code></div>
 
 列出端点；不返回 secret。每个端点带 `lastDelivery`（该端点最近一次投递的 status / responseStatus / attempts / lastError / createdAt），从未投递过为 `null`。刻意不提供 delivered/failed 计数：那是随消息量线性变慢的 COUNT 聚合。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

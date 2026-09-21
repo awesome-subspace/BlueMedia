@@ -1,15 +1,17 @@
 ---
 title: "列出模板及最新审核状态"
-excerpt: "列出模板及最新审核状态。"
+description: "列出模板及最新审核状态。"
 ---
 
-`GET /v1/templates`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/templates</code></div>
 
 列出模板及最新审核状态。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `wabaId` | query | 否 | string | 按 WABA 过滤，`waba_...`。省略或传空串表示不过滤 |
-
 
 ## 响应
 

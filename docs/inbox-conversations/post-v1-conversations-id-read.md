@@ -1,15 +1,17 @@
 ---
 title: "清零未读计数"
-excerpt: "清零未读计数；不会向 WhatsApp 发送已读回执(那需要 POST /v1/messages/read)。"
+description: "清零未读计数；不会向 WhatsApp 发送已读回执(那需要 POST /v1/messages/read)。"
 ---
 
-`POST /v1/conversations/{id}/read`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/conversations/{id}/read</code></div>
 
 清零未读计数；不会向 WhatsApp 发送已读回执(那需要 POST /v1/messages/read)。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 会话 ID，`conv_...` |
-
 
 ## 响应
 

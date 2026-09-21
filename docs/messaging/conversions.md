@@ -1,6 +1,6 @@
 ---
 title: "转化事件上报"
-excerpt: "把「点击进入 WhatsApp」广告带来的成交回报给 Meta，让广告后台能算出转化。需要 Business Portfolio 已绑定 Pixel。"
+description: "把「点击进入 WhatsApp」广告带来的成交回报给 Meta，让广告后台能算出转化。需要 Business Portfolio 已绑定 Pixel。"
 ---
 
 # 转化事件上报
@@ -12,8 +12,10 @@ excerpt: "把「点击进入 WhatsApp」广告带来的成交回报给 Meta，�
 | [上报转化事件](post-v1-conversions-events.md) | 回报一次成交/加购等转化，关联到对应的广告点击。 |
 | [列出转化事件](get-v1-conversions-events.md) | 查看已上报事件及其上报状态。 |
 
-{% hint style="info" %}
+:::info
+
 Business Portfolio 尚未绑定 Pixel 时收到的事件不会丢——会以 `skipped` 状态存下来，[绑定 Meta Pixel](../assets-phone-numbers/post-v1-business-portfolios-id-dataset.md) 之后自动重新排队。
-{% endhint %}
+
+:::
 
 完整的归因链路、事件字段与去重规则见[广告归因与转化上报](../guides/ctwa-attribution.md)。

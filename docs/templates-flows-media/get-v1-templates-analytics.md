@@ -1,15 +1,17 @@
 ---
 title: "模板分析"
-excerpt: "模板分析：已发送 / 送达 / 已读 / 按钮点击。"
+description: "模板分析：已发送 / 送达 / 已读 / 按钮点击。"
 ---
 
-`GET /v1/templates/analytics`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/templates/analytics</code></div>
 
 模板分析：已发送 / 送达 / 已读 / 按钮点击。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

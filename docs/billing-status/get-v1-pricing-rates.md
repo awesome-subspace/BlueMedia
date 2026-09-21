@@ -1,15 +1,17 @@
 ---
 title: "我的价目表"
-excerpt: "我的价目表：各 market / 类别的单价（已按售价策略换算）。"
+description: "我的价目表：各 market / 类别的单价（已按售价策略换算）。"
 ---
 
-`GET /v1/pricing/rates`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/pricing/rates</code></div>
 
 我的价目表：各 market / 类别的单价（已按售价策略换算）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。本端点当前**不强制额外 scope**（任意有效 API Key 均可调用）；它读的是本账户自己的计费口径，建议仍用带 `billing:read` 的 Key 调用。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。本端点当前**不强制额外 scope**（任意有效 API Key 均可调用）；它读的是本账户自己的计费口径，建议仍用带 `billing:read` 的 Key 调用。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -23,7 +25,6 @@ Base URL：`https://api.bsptest.com`
 | `portfolioId` | query | 否 | string | 按该 Business Portfolio 的合同价计算，`bm_...`。**绑定到单个 Portfolio 的 API Key 会被强制收窄到自己绑定的那个**，传别的值不生效 |
 | `market` | query | 否 | string | 按 market 过滤。同时接受价目表里的 market 名（`&` 与 `and` 两种写法）和国家名（如 `Ukraine`）。**认不出时返回 `400 VALIDATION_FAILED`**，`details.knownMarkets` 给出合法取值——不会静默忽略这个筛选条件 |
 | `category` | query | 否 | string | 按类别过滤（`MARKETING` / `UTILITY` / `AUTHENTICATION` / `SERVICE`） |
-
 
 ## 响应
 

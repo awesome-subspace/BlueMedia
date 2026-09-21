@@ -1,15 +1,17 @@
 ---
 title: "提交出站消息"
-excerpt: "提交出站消息，返回 202 与 accepted 状态。建议携带业务唯一的 Idempotency-Key（最长 200 字符）；当前授权范围内重复 key 返回同一消息；默认限流 600 条/分钟。"
+description: "提交出站消息，返回 202 与 accepted 状态。建议携带业务唯一的 Idempotency-Key（最长 200 字符）；当前授权范围内重复 key 返回同一消息；默认限流 600 条/分钟。"
 ---
 
-`POST /v1/messages`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/messages</code></div>
 
 提交出站消息，返回 202 与 accepted 状态。建议携带业务唯一的 Idempotency-Key（最长 200 字符）；当前授权范围内重复 key 返回同一消息；默认限流 600 条/分钟。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -90,7 +92,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

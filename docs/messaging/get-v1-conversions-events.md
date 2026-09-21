@@ -1,15 +1,17 @@
 ---
 title: "列出当前授权范围内的转化事件及上报状态"
-excerpt: "列出当前授权范围内的转化事件及上报状态。"
+description: "列出当前授权范围内的转化事件及上报状态。"
 ---
 
-`GET /v1/conversions/events`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/conversions/events</code></div>
 
 列出当前授权范围内的转化事件及上报状态。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

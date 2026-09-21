@@ -1,15 +1,17 @@
 ---
 title: "弃用一个已发布的 Flow"
-excerpt: "弃用（下线）一个已发布的 Flow。同样不可逆。"
+description: "弃用（下线）一个已发布的 Flow。同样不可逆。"
 ---
 
-`POST /v1/flows/{id}/deprecate`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/flows/{id}/deprecate</code></div>
 
 弃用（下线）一个已发布的 Flow。同样不可逆。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -46,7 +48,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

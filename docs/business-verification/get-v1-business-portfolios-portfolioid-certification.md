@@ -1,15 +1,17 @@
 ---
 title: "读取最近认证记录"
-excerpt: "读取最近认证记录；未提交过返回 404。"
+description: "读取最近认证记录；未提交过返回 404。"
 ---
 
-`GET /v1/business-portfolios/{portfolioId}/certification`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/business-portfolios/{portfolioId}/certification</code></div>
 
 读取最近认证记录；未提交过返回 404。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `portfolioId` | path | 是 | string | 平台内 Business Portfolio ID，`bm_...` |
-
 
 ## 响应
 

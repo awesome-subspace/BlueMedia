@@ -1,6 +1,6 @@
 ---
 title: "发消息与状态追踪"
-excerpt: "`POST /v1/messages` 的 `202 Accepted` 只代表「平台已受理」，不代表已送达，甚至不代表已提交给 Meta。追踪真实状态需要轮询 `GET /v1/messages/{id}` 或接收状态类 Webhook。"
+description: "`POST /v1/messages` 的 `202 Accepted` 只代表「平台已受理」，不代表已送达，甚至不代表已提交给 Meta。追踪真实状态需要轮询 `GET /v1/messages/{id}` 或接收状态类 Webhook。"
 ---
 
 `POST /v1/messages` 的 `202 Accepted` 只代表「平台已受理」，不代表已送达，甚至不代表已提交给 Meta。追踪真实状态需要轮询 `GET /v1/messages/{id}` 或接收状态类 Webhook。
@@ -18,6 +18,24 @@ excerpt: "`POST /v1/messages` 的 `202 Accepted` 只代表「平台已受理」�
 | `failed`    | 终态。查 `GET /v1/messages/{id}` 返回的 `error` 字段（见[错误码](error-codes.md)页的消息失败码表）。                                    |
 
 状态只会单调前进——迟到或重复的回调不会让状态往回跳（比如不会把已经是 `delivered` 的消息退回 `sent`）。
+
+```mermaid
+stateDiagram-v2
+    [*] --> accepted : POST /v1/messages 返回 202
+    accepted --> sending : 平台开始提交
+    sending --> submitted : Meta 受理并返回 wamid
+    submitted --> sent : Meta 状态回调
+    sent --> delivered : 已送达用户设备
+    delivered --> read : 用户已读
+    sent --> read : 用户停在聊天界面时 Meta 省略 delivered
+    sending --> failed : 提交阶段失败
+    submitted --> failed : 投递阶段失败
+    read --> [*]
+    failed --> [*]
+```
+
+图里 `sent --> read` 这条边是最容易被漏掉的分支：**不要假设状态会逐级齐全出现**。
+
 
 ## 幂等与限流
 

@@ -1,15 +1,17 @@
 ---
 title: "PostgreSQL 与 Redis 就绪检查"
-excerpt: "PostgreSQL 与 Redis 就绪检查。"
+description: "PostgreSQL 与 Redis 就绪检查。"
 ---
 
-`GET /ready`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/ready</code></div>
 
 PostgreSQL 与 Redis 就绪检查。
 
-> 📘 鉴权
->
-> 此接口不需要 API Key。
+:::note[鉴权]
+
+此接口不需要 API Key。
+
+:::
 
 ## 请求
 

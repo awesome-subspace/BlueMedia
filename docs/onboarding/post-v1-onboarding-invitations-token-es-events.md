@@ -1,15 +1,17 @@
 ---
 title: "客户在邀请页上放弃流程或自助报错时的上报"
-excerpt: "【客户侧，无需鉴权】客户在邀请页上放弃流程或自助报错时的上报。恒 202。"
+description: "【客户侧，无需鉴权】客户在邀请页上放弃流程或自助报错时的上报。恒 202。"
 ---
 
-`POST /v1/onboarding/invitations/{token}/es-events`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/onboarding/invitations/{token}/es-events</code></div>
 
 【客户侧，无需鉴权】客户在邀请页上放弃流程或自助报错时的上报。恒 202。
 
-> 📘 鉴权
->
-> 此接口不需要 API Key。
+:::note[鉴权]
+
+此接口不需要 API Key。
+
+:::
 
 ## 请求
 
@@ -71,7 +73,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

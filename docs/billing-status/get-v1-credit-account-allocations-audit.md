@@ -1,15 +1,17 @@
 ---
 title: "Business Portfolio 预算对账"
-excerpt: "Business Portfolio 预算对账：spent 计数与账本汇总的差额。"
+description: "Business Portfolio 预算对账：spent 计数与账本汇总的差额。"
 ---
 
-`GET /v1/credit-account/allocations/audit`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/credit-account/allocations/audit</code></div>
 
 Business Portfolio 预算对账：spent 计数与账本汇总的差额。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

@@ -1,15 +1,17 @@
 ---
 title: "暂停派发"
-excerpt: "暂停派发。已经交给 WhatsApp 的消息追不回来。"
+description: "暂停派发。已经交给 WhatsApp 的消息追不回来。"
 ---
 
-`POST /v1/broadcasts/{id}/pause`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/broadcasts/{id}/pause</code></div>
 
 暂停派发。已经交给 WhatsApp 的消息追不回来。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -43,7 +45,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

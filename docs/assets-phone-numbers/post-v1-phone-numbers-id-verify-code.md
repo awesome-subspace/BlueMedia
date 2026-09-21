@@ -1,15 +1,17 @@
 ---
 title: "提交 Meta 返回的 6 位验证码"
-excerpt: "提交 Meta 返回的 6 位验证码。"
+description: "提交 Meta 返回的 6 位验证码。"
 ---
 
-`POST /v1/phone-numbers/{id}/verify-code`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/verify-code</code></div>
 
 提交 Meta 返回的 6 位验证码。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -46,7 +48,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

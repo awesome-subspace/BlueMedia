@@ -1,15 +1,17 @@
 ---
 title: "查询 Meta 注册、名称、质量和两步验证状态"
-excerpt: "查询 Meta 注册、名称、质量和两步验证状态。"
+description: "查询 Meta 注册、名称、质量和两步验证状态。"
 ---
 
-`GET /v1/phone-numbers/{id}/registration-status`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/phone-numbers/{id}/registration-status</code></div>
 
 查询 Meta 注册、名称、质量和两步验证状态。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内号码 ID，`pn_...` |
-
 
 ## 响应
 

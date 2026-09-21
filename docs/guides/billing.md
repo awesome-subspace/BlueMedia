@@ -1,6 +1,6 @@
 ---
 title: "账务与信用额度"
-excerpt: "每个客户账户的话费管理采用「信用账户 + 追加式账本」：发送前预留额度，Meta 受理后结算扣费，投递失败自动冲回。所有金额都是最小货币单位的整数（minor units）。"
+description: "每个客户账户的话费管理采用「信用账户 + 追加式账本」：发送前预留额度，Meta 受理后结算扣费，投递失败自动冲回。所有金额都是最小货币单位的整数（minor units）。"
 ---
 
 每个客户账户的话费管理采用「信用账户 + 追加式账本」：发送前预留额度，Meta 受理后结算扣费，投递失败自动冲回。所有金额都是最小货币单位的整数（minor units）。
@@ -19,8 +19,11 @@ excerpt: "每个客户账户的话费管理采用「信用账户 + 追加式账�
 | `allocatedMinor: 0`    | **冻结**：这个 Portfolio 一分钱都不能花。与“不限额”是相反的意思，别混用。                     |
 | 剩余额度               | `allocatedMinor − spentMinor − reservedMinor`；`reservedMinor` 是已发出、尚未结算的冻结部分。 |
 
-> 🚧
-> Portfolio 预算用完时，发送以 `402 BM_BUDGET_EXCEEDED` 失败；账户总余额不足时返回 `INSUFFICIENT_FUNDS`。两者含义不同，请根据错误码决定是调整 Portfolio 预算还是联系 BlueMedia 补充账户额度。群发在**创建时**就按总成本试算并拒绝，不会发一半停下。
+:::warning
+
+Portfolio 预算用完时，发送以 `402 BM_BUDGET_EXCEEDED` 失败；账户总余额不足时返回 `INSUFFICIENT_FUNDS`。两者含义不同，请根据错误码决定是调整 Portfolio 预算还是联系 BlueMedia 补充账户额度。群发在**创建时**就按总成本试算并拒绝，不会发一半停下。
+
+:::
 
 各 Portfolio 预算上限之和**允许**超过账户余额（`overAllocated: true` 只是提示），真实消费仍按账户剩余余额先到先得。
 
@@ -34,6 +37,24 @@ excerpt: "每个客户账户的话费管理采用「信用账户 + 追加式账�
 
 账本是追加式的（ledger\_entries，只插不改），同一幂等键只会入账一次——重试、重复回调都不会造成重复扣费。
 
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as 调用方
+    participant P as BlueMedia
+    participant M as Meta
+    C->>P: POST /v1/messages
+    P->>P: 锁定 reserved 额度，创建预留记录
+    Note over P: 余额不足 402 INSUFFICIENT_FUNDS<br/>Portfolio 预算用完 402 BM_BUDGET_EXCEEDED
+    P-->>C: 202 accepted
+    P->>M: 提交消息
+    M-->>P: 受理并返回 wamid
+    P->>P: 结算：预留转实际扣费，写入账本流水
+    M-->>P: 状态回调 failed
+    P->>P: 自动冲回（幂等键按 messageId 生成，重复回调不重复冲）
+```
+
+
 ## 用量接口的两个口径
 
 `GET /v1/credit-account/usage` 里有两组容易混淆的统计，分母不同：
@@ -43,8 +64,11 @@ excerpt: "每个客户账户的话费管理采用「信用账户 + 追加式账�
 | `dailyUsage` / `byCategory` / `totalChargedCount` | **净计费**：对账本按记账时间聚合，扣费 +1、冲回 −1。               |
 | `byMessageType` / `totalMessages`                 | **发送量**：对消息表按创建时间计数，含未计费、失败、已冲回的消息。 |
 
-> 🚧
-> **`totalChargedCount` 与 `totalMessages` 不相等是正常的**，不要据此判断数据错了。真正成立的不变量是：同币种下 `sum(byCategory.spentMinor) == totalSpentMinor`。计费流水找不到对应消息行时分类落 `"unknown"`（不是 null），让异常保持可见。窗口内无扣费时 `totalSpentMinor` 是空对象 `{}`，不是空数组。
+:::warning
+
+**`totalChargedCount` 与 `totalMessages` 不相等是正常的**，不要据此判断数据错了。真正成立的不变量是：同币种下 `sum(byCategory.spentMinor) == totalSpentMinor`。计费流水找不到对应消息行时分类落 `"unknown"`（不是 null），让异常保持可见。窗口内无扣费时 `totalSpentMinor` 是空对象 `{}`，不是空数组。
+
+:::
 
 ## 账本流水
 

@@ -1,15 +1,17 @@
 ---
 title: "Business Portfolio 预算总览"
-excerpt: "Business Portfolio 预算总览：账户余额及各 Portfolio 的上限、已用与剩余。"
+description: "Business Portfolio 预算总览：账户余额及各 Portfolio 的上限、已用与剩余。"
 ---
 
-`GET /v1/credit-account/allocations`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/credit-account/allocations</code></div>
 
 Business Portfolio 预算总览：账户余额及各 Portfolio 的上限、已用与剩余。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

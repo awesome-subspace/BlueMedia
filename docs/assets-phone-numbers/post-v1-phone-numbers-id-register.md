@@ -1,15 +1,17 @@
 ---
 title: "用 6 位 PIN 注册号码"
-excerpt: "用 6 位 PIN 注册号码。"
+description: "用 6 位 PIN 注册号码。"
 ---
 
-`POST /v1/phone-numbers/{id}/register`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/register</code></div>
 
 用 6 位 PIN 注册号码。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -46,7 +48,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

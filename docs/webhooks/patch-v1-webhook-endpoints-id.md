@@ -1,15 +1,17 @@
 ---
 title: "局部更新端点"
-excerpt: "局部更新端点（url / events / metadata）。"
+description: "局部更新端点（url / events / metadata）。"
 ---
 
-`PATCH /v1/webhook-endpoints/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/webhook-endpoints/{id}</code></div>
 
 局部更新端点（url / events / metadata）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -53,7 +55,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

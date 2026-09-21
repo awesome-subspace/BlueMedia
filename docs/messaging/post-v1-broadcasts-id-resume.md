@@ -1,15 +1,17 @@
 ---
 title: "恢复一个暂停的活动"
-excerpt: "恢复一个暂停的活动，从剩下的收件人继续。"
+description: "恢复一个暂停的活动，从剩下的收件人继续。"
 ---
 
-`POST /v1/broadcasts/{id}/resume`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/broadcasts/{id}/resume</code></div>
 
 恢复一个暂停的活动，从剩下的收件人继续。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 群发活动 ID，`bc_...` |
-
 
 ## 响应
 

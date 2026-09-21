@@ -1,15 +1,17 @@
 ---
 title: "进程存活检查"
-excerpt: "进程存活检查。"
+description: "进程存活检查。"
 ---
 
-`GET /live`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/live</code></div>
 
 进程存活检查。
 
-> 📘 鉴权
->
-> 此接口不需要 API Key。
+:::note[鉴权]
+
+此接口不需要 API Key。
+
+:::
 
 ## 请求
 

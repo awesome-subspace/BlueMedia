@@ -1,15 +1,17 @@
 ---
 title: "查询 WABA 用量分析"
-excerpt: "直接查询该 WABA 在 Meta 侧的用量/费用分析，作为本地账本用量视图的交叉核对。messaging 与 pricing 两个字段各自独立请求、独立汇报成败：响应为 { messaging: {ok, data|error}, pricing: {ok, data|error} }，任一字段被 Meta 拒绝时另一字段仍返回数据，错误里带 Meta 原始 code/subcode。注意 pricing 的 COST 对共享 Solution Partner 信用额度的 WABA 不会返回。"
+description: "直接查询该 WABA 在 Meta 侧的用量/费用分析，作为本地账本用量视图的交叉核对。messaging 与 pricing 两个字段各自独立请求、独立汇报成败：响应为 { messaging: {ok, data|error}, pricing: {ok, data|error} }，任一字段被 Meta 拒绝时另一字段仍返回数据，错误里带 Meta 原始 code/subcode。注意 pricing 的 COST 对共享 Solution Partner 信用额度的 WABA 不会返回。"
 ---
 
-`GET /v1/wabas/{id}/analytics`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/wabas/{id}/analytics</code></div>
 
 直接查询该 WABA 在 Meta 侧的用量/费用分析，作为本地账本用量视图的交叉核对。messaging 与 pricing 两个字段各自独立请求、独立汇报成败：响应为 { messaging: {ok, data|error}, pricing: {ok, data|error} }，任一字段被 Meta 拒绝时另一字段仍返回数据，错误里带 Meta 原始 code/subcode。注意 pricing 的 COST 对共享 Solution Partner 信用额度的 WABA 不会返回。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -24,7 +26,6 @@ Base URL：`https://api.bsptest.com`
 | `end` | query | 是 | unix timestamp | 统计区间终点（秒）。**必填**，无法解析为数字时返回 `400 VALIDATION_FAILED` |
 | `granularity` | query | 否 | `HALF_HOUR` \| `DAY` \| `MONTH` | 默认 `DAY`；传其它值不会报错，一律按 `DAY` 处理 |
 | `phoneNumbers` | query | 否 | string | 逗号分隔的 **Meta 号码 id**（纯数字，每段 1–32 位），按号码过滤。含非数字字符时返回 `400 VALIDATION_FAILED` |
-
 
 ## 响应
 

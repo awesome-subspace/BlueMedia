@@ -1,15 +1,17 @@
 ---
 title: "新增或覆盖号码消息路由配置"
-excerpt: "新增或覆盖号码消息路由配置。"
+description: "新增或覆盖号码消息路由配置。"
 ---
 
-`PUT /v1/phone-numbers/{id}/messaging-config`
+<div class="endpoint"><span class="endpoint-method endpoint-method--put">PUT</span><code class="endpoint-path">/v1/phone-numbers/{id}/messaging-config</code></div>
 
 新增或覆盖号码消息路由配置。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -58,7 +60,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

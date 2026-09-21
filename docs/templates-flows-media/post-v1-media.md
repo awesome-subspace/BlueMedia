@@ -1,15 +1,17 @@
 ---
 title: "上传一个 multipart 文件到 Meta"
-excerpt: "上传一个 multipart 文件到 Meta，返回媒体 ID。"
+description: "上传一个 multipart 文件到 Meta，返回媒体 ID。"
 ---
 
-`POST /v1/media`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/media</code></div>
 
 上传一个 multipart 文件到 Meta，返回媒体 ID。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`media:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`media:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -40,7 +42,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

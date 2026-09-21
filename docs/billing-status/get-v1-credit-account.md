@@ -1,15 +1,17 @@
 ---
 title: "读取币种、可用余额和预留余额"
-excerpt: "读取币种、可用余额和预留余额；未配置返回 404。"
+description: "读取币种、可用余额和预留余额；未配置返回 404。"
 ---
 
-`GET /v1/credit-account`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/credit-account</code></div>
 
 读取币种、可用余额和预留余额；未配置返回 404。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

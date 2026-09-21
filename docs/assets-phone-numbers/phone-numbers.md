@@ -1,6 +1,6 @@
 ---
 title: "业务号码记录"
-excerpt: "号码在平台侧的本地记录管理。这组读接口返回的是本地快照而非 Meta 实时状态，PATCH 也只改本地字段、不会同步到 Meta。"
+description: "号码在平台侧的本地记录管理。这组读接口返回的是本地快照而非 Meta 实时状态，PATCH 也只改本地字段、不会同步到 Meta。"
 ---
 
 # 业务号码记录
@@ -22,8 +22,10 @@ excerpt: "号码在平台侧的本地记录管理。这组读接口返回的是�
 | [删除号码](delete-v1-phone-numbers-id.md) | 删除平台侧记录及其子资源。 |
 | [删除影响预览](get-v1-phone-numbers-id-delete-preview.md) | 删除前查看连带影响。 |
 
-{% hint style="warning" %}
+:::warning
+
 `DELETE` 只删除**平台侧**的记录及其子资源（商业资料、路由配置；cascade 时含消息/媒体/会话）。Meta 不允许通过 API 删除号码本身——只能在 WhatsApp Manager 删除，且 30 天内发过收费消息的号码不可删。要让号码在 Cloud API 侧失效但保留历史，用[注销号码](post-v1-phone-numbers-id-deregister.md)。
-{% endhint %}
+
+:::
 
 完整生命周期见[号码注册与生命周期](../guides/phone-numbers.md)。

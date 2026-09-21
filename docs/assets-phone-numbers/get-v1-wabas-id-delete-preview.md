@@ -1,15 +1,17 @@
 ---
 title: "WABA 删除影响预览"
-excerpt: "级联删除影响预览：返回将被删除的号码/模板/消息等数量。只读。"
+description: "级联删除影响预览：返回将被删除的号码/模板/消息等数量。只读。"
 ---
 
-`GET /v1/wabas/{id}/delete-preview`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/wabas/{id}/delete-preview</code></div>
 
 级联删除影响预览：返回将被删除的号码/模板/消息等数量。只读。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内 WABA ID，`waba_...` |
-
 
 ## 响应
 

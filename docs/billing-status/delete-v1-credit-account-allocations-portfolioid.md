@@ -1,15 +1,17 @@
 ---
 title: "取消某个 Business Portfolio 的预算上限"
-excerpt: "取消某个 Business Portfolio 的预算上限，之后只受账户余额约束。"
+description: "取消某个 Business Portfolio 的预算上限，之后只受账户余额约束。"
 ---
 
-`DELETE /v1/credit-account/allocations/{portfolioId}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/credit-account/allocations/{portfolioId}</code></div>
 
 取消某个 Business Portfolio 的预算上限，之后只受账户余额约束。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `portfolioId` | path | 是 | string | 平台内 Business Portfolio ID，`bm_...` |
-
 
 ## 响应
 
