@@ -111,6 +111,77 @@ curl -s -H 'X-Atlantis-UUID: BSPDocSystem' -H 'skip: atlantis' \
 **镜像/包名**小写 `bspdocsystem`（平台侧独立字段）、类型 **Docker**、容器端口 **8080**
 （见 `nginx/docs.conf` 的 `listen`）。
 
+### nginx：全仓只有一份配置
+
+`nginx/docs.conf` 被 `Dockerfile` COPY 进镜像（`/etc/nginx/conf.d/default.conf`），
+容器监听 8080，直接托管静态产物。站点的全部路由规则（缓存、真 404、探针、gzip）
+都在这一份里，跟着镜像走。
+
+请求链路：
+
+```
+云 LB(TLS 终止, *.bsptest.com)
+  → 宿主机 8080   ApiWorker 仓的边缘实例（唯一对外端口，按 server_name 分流）
+    → 127.0.0.1:11820   平台把宿主机端口映射到容器 8080
+      → 容器内 nginx  nginx/docs.conf
+```
+
+本仓曾经还有一份 `nginx/host-docs.conf`（宿主机上另起一套只绑 `127.0.0.1:8083` 的
+nginx 实例做中间跳），已删除：那一跳实际只做「把请求原样转给容器」，而路由规则拆在
+两处的代价是改一条路由要同时动镜像和宿主机，且两处会不同步。
+
+### 边缘侧要加的 server 块（在 ApiWorker 仓提 MR）
+
+域名归属归边缘管——这是边缘 conf 自己文档写明的职责（「域名归属由本文件决定」）。
+在 `senpeng.zheng/ApiWorker` 的 `nginx/apiworker.conf` 里加：
+
+```nginx
+# 与其他 upstream 并列，加在 http{} 里
+upstream docs_site {
+    server 127.0.0.1:11820;   # 平台映射到 BSPDocSystem 容器的 8080
+    keepalive 32;
+}
+
+# 整个域名交给文档站容器；路由细节在 BSPDocSystem 仓的 nginx/docs.conf 里，
+# 文档站改路由不需要动这个仓库。
+server {
+    listen 0.0.0.0:8080;
+    server_name docs.bsptest.com;
+
+    location / {
+        proxy_pass http://docs_site;
+        proxy_buffering on;
+        proxy_buffer_size 4k;
+        proxy_buffers 8 4k;
+        proxy_redirect off;     # 容器已开 absolute_redirect off，跳转是相对地址
+    }
+}
+```
+
+边缘的 `http{}` 层已统一设好 `Host` / `X-Real-IP` / `X-Forwarded-For` /
+`X-Forwarded-Proto`，容器能拿到真实客户端信息，不需要在这个 server 块里重复。
+
+**上线后立刻查一次重复头**：
+
+```sh
+curl -sI https://docs.bsptest.com/ | grep -ci x-frame-options   # 期望 1
+```
+
+边缘 `http{}` 已经下发 `X-Frame-Options` 和 `X-Content-Type-Options`，而容器那份
+`docs.conf` 为了镜像能独立跑也带了同名头 —— 两层都发，响应里会出现两份。结果是 2
+就二选一：删容器那两条（与 center-console / bluechip 两个兄弟仓的做法一致），
+或者在边缘对这个域名单独处理。`Referrer-Policy` 边缘没有，只有容器发，不受影响。
+
+### 被砍掉的两条路由
+
+原 `host-docs.conf` 里还有两组 location，合并时一并删除，因为本仓根本不提供它们：
+
+- `/openapi.json` → 转发给 API（`127.0.0.1:3200`）。这条**搬不进容器**——容器里的
+  `127.0.0.1` 是它自己的 loopback，不是宿主机。而且本仓没有任何页面引用它。
+  真要恢复，应该加在边缘那一侧。
+- `/llms.txt` / `/llms-full.txt`（原本就是注释掉的）。构建产物根下没有这两个文件，
+  开着只会把请求转给容器换回一份 404 页面，对 agent 比直接 404 更糟。
+
 ### 版本号
 
 Atlantis 读 `version.sh` 的 `VERSION` 当镜像 tag，而 **Harbor 拒绝已存在的 tag** —— 同一个版本
