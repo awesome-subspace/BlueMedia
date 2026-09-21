@@ -21,8 +21,9 @@ import DocSidebarItemLink from '@theme/DocSidebarItem/Link';
 import styles from './styles.module.css';
 
 // Ejected from @docusaurus/theme-classic 3.10.2. The upstream component
-// automatically expands the active page's category; this variant deliberately
-// keeps it collapsed until the reader opens it.
+// automatically expands every active ancestor. This variant opens level-one
+// categories by default, but keeps level-two categories collapsed so the
+// sidebar stops at two visible levels until the reader drills down.
 /**
  * When a collapsible category has no link, we still link it to its first child
  * during SSR as a temporary fallback. This allows to be able to navigate inside
@@ -131,10 +132,14 @@ function DocSidebarItemCategoryCollapsible({
   const isActive = isActiveSidebarItem(item, activePath);
   const isCurrentPage = isSamePath(href, activePath);
   const {collapsed, setCollapsed} = useCollapsible({
-    // Keep every category collapsed on first render, including the category
-    // containing the active page. The active page remains highlighted and the
-    // reader can expand the section explicitly when they need its children.
-    initialState: () => (collapsible ? item.collapsed : false),
+    // Show the first two sidebar levels on first render: level-one categories
+    // are open, while nested categories retain sidebarCollapsed=true.
+    initialState: () => {
+      if (!collapsible) {
+        return false;
+      }
+      return level === 1 ? false : item.collapsed;
+    },
   });
   const {expandedItem, setExpandedItem} = useDocSidebarItemsExpandedState();
   // Use this instead of `setCollapsed`, because it is also reactive
