@@ -1,6 +1,6 @@
 ---
 title: "客户侧邀请页（免鉴权）"
-excerpt: "以 /v1/onboarding/invitations/{token} 开头的一组接口刻意不挂 API Key 鉴权——链接里的 token 本身就是凭据，按来源 IP 限流。"
+description: "以 /v1/onboarding/invitations/{token} 开头的一组接口刻意不挂 API Key 鉴权——链接里的 token 本身就是凭据，按来源 IP 限流。"
 ---
 
 # 客户侧邀请页（免鉴权）
@@ -17,6 +17,8 @@ excerpt: "以 /v1/onboarding/invitations/{token} 开头的一组接口刻意不�
 
 无效、过期、已撤销的邀请统一走「邀请失效」，不泄露具体原因。失败响应里的 `requiredInput` 区分客户下一步该做什么：`authorization_code` 表示需要重新授权拿新 code，`null` 表示客户侧无法自行恢复、应联系对接人。
 
-{% hint style="info" %}
+:::info
+
 重试时只允许换 `code`——`wabaId` / `phoneNumberId` 在首次提交时已绑定，更换目标资产会被拒绝。
-{% endhint %}
+
+:::

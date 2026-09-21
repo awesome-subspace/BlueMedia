@@ -1,15 +1,17 @@
 ---
 title: "同步验证状态"
-excerpt: "同步 Business Portfolio 的标准验证状态与 PLBV 认证状态。"
+description: "同步 Business Portfolio 的标准验证状态与 PLBV 认证状态。"
 ---
 
 `POST /v1/business-portfolios/{id}/refresh-verification`
 
 同步 Business Portfolio 的标准验证状态与 PLBV 认证状态。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内 Business Portfolio ID，`bm_...` |
-
 
 ## 响应
 

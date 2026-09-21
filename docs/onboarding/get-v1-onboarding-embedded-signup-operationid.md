@@ -1,15 +1,17 @@
 ---
 title: "查询步骤、错误和已落地资产"
-excerpt: "查询步骤、错误和已落地资产；ID 为 onb_...。"
+description: "查询步骤、错误和已落地资产；ID 为 onb_...。"
 ---
 
 `GET /v1/onboarding/embedded-signup/{operationId}`
 
 查询步骤、错误和已落地资产；ID 为 onb_...。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `operationId` | path | 是 | string | 接入操作 ID，`onb_...` |
-
 
 ## 响应
 

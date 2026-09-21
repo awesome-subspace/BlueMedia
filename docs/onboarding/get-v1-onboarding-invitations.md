@@ -1,15 +1,17 @@
 ---
 title: "列出当前账户已发出的邀请及其状态"
-excerpt: "列出当前账户已发出的邀请及其状态，不回显 Token。"
+description: "列出当前账户已发出的邀请及其状态，不回显 Token。"
 ---
 
 `GET /v1/onboarding/invitations`
 
 列出当前账户已发出的邀请及其状态，不回显 Token。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `limit` | query | 否 | integer 1..100 | 默认 20。**超出范围返回 `400 VALIDATION_FAILED`**，不是夹取 |
-
 
 ## 响应
 

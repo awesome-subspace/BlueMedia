@@ -1,15 +1,17 @@
 ---
 title: "请求 SMS/VOICE 验证码"
-excerpt: "请求 SMS/VOICE 验证码。"
+description: "请求 SMS/VOICE 验证码。"
 ---
 
 `POST /v1/phone-numbers/{id}/request-code`
 
 请求 SMS/VOICE 验证码。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -51,7 +53,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

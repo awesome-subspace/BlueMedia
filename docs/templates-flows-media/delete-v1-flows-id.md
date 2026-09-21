@@ -1,15 +1,17 @@
 ---
 title: "删除 Flow"
-excerpt: "删除 Flow。**仅 DRAFT 可删**；已发布的请用 deprecate。"
+description: "删除 Flow。**仅 DRAFT 可删**；已发布的请用 deprecate。"
 ---
 
 `DELETE /v1/flows/{id}`
 
 删除 Flow。**仅 DRAFT 可删**；已发布的请用 deprecate。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -21,7 +23,6 @@ Base URL：`https://api.bsptest.com`
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | Meta 侧的 Flow id |
 | `wabaId` | query | 是 | string | 平台内 WABA ID，`waba_...`。**必填** |
-
 
 ## 响应
 

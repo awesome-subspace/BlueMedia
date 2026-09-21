@@ -1,15 +1,17 @@
 ---
 title: "取消额度授权"
-excerpt: "取消该 WABA 所属 Business Portfolio 的 BlueMedia 信用额度授权，之后发送模板消息会被 CREDIT_LINE_NOT_READY 拦下。**只更新 BlueMedia 状态，不调用 Meta 撤销**：Meta 的撤销按客户 business 生效，会连带影响该客户全部已共享 WABA，且额度线挂到 WABA 后无法单独摘除。影响范围是整个 Business Portfolio。"
+description: "取消该 WABA 所属 Business Portfolio 的 BlueMedia 信用额度授权，之后发送模板消息会被 CREDIT_LINE_NOT_READY 拦下。**只更新 BlueMedia 状态，不调用 Meta 撤销**：Meta 的撤销按客户 business 生效，会连带影响该客户全部已共享 WABA，且额度线挂到 WABA 后无法单独摘除。影响范围是整个 Business Portfolio。"
 ---
 
 `POST /v1/wabas/{id}/credit-line/deauthorize`
 
 取消该 WABA 所属 Business Portfolio 的 BlueMedia 信用额度授权，之后发送模板消息会被 CREDIT_LINE_NOT_READY 拦下。**只更新 BlueMedia 状态，不调用 Meta 撤销**：Meta 的撤销按客户 business 生效，会连带影响该客户全部已共享 WABA，且额度线挂到 WABA 后无法单独摘除。影响范围是整个 Business Portfolio。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内 WABA ID，`waba_...` |
-
 
 ## 响应
 

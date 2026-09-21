@@ -1,15 +1,17 @@
 ---
 title: "同步 Meta 模板"
-excerpt: "把该 WABA 在 Meta 侧已有的模板导入/刷新到本地。"
+description: "把该 WABA 在 Meta 侧已有的模板导入/刷新到本地。"
 ---
 
 `POST /v1/templates/sync`
 
 把该 WABA 在 Meta 侧已有的模板导入/刷新到本地。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -40,7 +42,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

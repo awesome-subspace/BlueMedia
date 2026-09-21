@@ -1,15 +1,17 @@
 ---
 title: "读取当前账户的账本流水"
-excerpt: "读取当前账户的账本流水，按时间倒序；不接受账户归属参数。窗口内没有流水时 items 为空数组。"
+description: "读取当前账户的账本流水，按时间倒序；不接受账户归属参数。窗口内没有流水时 items 为空数组。"
 ---
 
 `GET /v1/credit-account/ledger`
 
 读取当前账户的账本流水，按时间倒序；不接受账户归属参数。窗口内没有流水时 items 为空数组。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -21,7 +23,6 @@ Base URL：`https://api.bsptest.com`
 | --- | --- | --- | --- | --- |
 | `days` | query | 否 | `7` \| `30` \| `90` | 统计窗口，默认 30。其它值一律按 30 处理 |
 | `limit` | query | 否 | integer 1..200 | 返回条数，默认 50。超出范围夹取 |
-
 
 ## 响应
 

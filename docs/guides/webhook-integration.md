@@ -1,6 +1,6 @@
 ---
 title: "Webhook 集成"
-excerpt: "创建一个回调端点，接收用户消息、状态更新和号码/模板等资产变更，无需轮询。"
+description: "创建一个回调端点，接收用户消息、状态更新和号码/模板等资产变更，无需轮询。"
 ---
 
 创建一个回调端点，接收用户消息、状态更新和号码/模板等资产变更，无需轮询。
@@ -34,8 +34,11 @@ curl -X POST https://api.bsptest.com/v1/webhook-endpoints \
 
 `DELETE /v1/webhook-endpoints/{id}` 是**软停用**（status 变 `disabled`，投递停止，历史记录保留），响应体是停用后的端点对象而不是空 body。要恢复用 `POST /v1/webhook-endpoints/{id}/enable`：验证过的端点回到 `active`；没验证过的连接协议端点回到 `pending`（必须重新过验证，这一点不接受调用方指定）。
 
-> 📘
-> **轮换 secret 前先看这条。**`POST .../rotate-secret` 立即生效、没有重叠期：下一条投递就用新 secret 签名，你还没存好新值时收到的投递会验签失败，并按 4xx 判为**永久失败、不重试**。安全做法是低峰期轮换，或先 `DELETE`（停用）→ 轮换 → 存好 → `POST .../enable`。
+:::note
+
+**轮换 secret 前先看这条。**`POST .../rotate-secret` 立即生效、没有重叠期：下一条投递就用新 secret 签名，你还没存好新值时收到的投递会验签失败，并按 4xx 判为**永久失败、不重试**。安全做法是低峰期轮换，或先 `DELETE`（停用）→ 轮换 → 存好 → `POST .../enable`。
+
+:::
 
 ## URL 的限制
 

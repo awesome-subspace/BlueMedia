@@ -1,15 +1,17 @@
 ---
 title: "上报一条转化事件"
-excerpt: "上报一条转化事件（Conversions API for business messaging）。返回 202 表示已排队，**不代表已发给 Meta**。"
+description: "上报一条转化事件（Conversions API for business messaging）。返回 202 表示已排队，**不代表已发给 Meta**。"
 ---
 
 `POST /v1/conversions/events`
 
 上报一条转化事件（Conversions API for business messaging）。返回 202 表示已排队，**不代表已发给 Meta**。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -91,7 +93,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

@@ -1,15 +1,17 @@
 ---
 title: "编辑模板"
-excerpt: "编辑模板。改完 Meta 会重新审核，本地状态回到 PENDING。"
+description: "编辑模板。改完 Meta 会重新审核，本地状态回到 PENDING。"
 ---
 
 `PATCH /v1/templates/{id}`
 
 编辑模板。改完 Meta 会重新审核，本地状态回到 PENDING。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -63,7 +65,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

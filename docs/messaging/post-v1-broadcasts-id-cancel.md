@@ -1,15 +1,17 @@
 ---
 title: "取消活动"
-excerpt: "取消活动，并把尚未派发的收件人一次性作废。不可恢复。"
+description: "取消活动，并把尚未派发的收件人一次性作废。不可恢复。"
 ---
 
 `POST /v1/broadcasts/{id}/cancel`
 
 取消活动，并把尚未派发的收件人一次性作废。不可恢复。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 群发活动 ID，`bc_...` |
-
 
 ## 响应
 

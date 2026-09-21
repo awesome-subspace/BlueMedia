@@ -1,15 +1,17 @@
 ---
 title: "提交新的显示名称"
-excerpt: "提交新的显示名称并进入 Meta 审核。"
+description: "提交新的显示名称并进入 Meta 审核。"
 ---
 
 `POST /v1/phone-numbers/{id}/display-name`
 
 提交新的显示名称并进入 Meta 审核。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -46,7 +48,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

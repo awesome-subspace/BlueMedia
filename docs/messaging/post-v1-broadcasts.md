@@ -1,15 +1,17 @@
 ---
 title: "创建群发"
-excerpt: "创建群发（批量模板发送）。返回 202 —— 响应返回时一条都还没发出去：真正的发送由平台按节流速度逐条推进。"
+description: "创建群发（批量模板发送）。返回 202 —— 响应返回时一条都还没发出去：真正的发送由平台按节流速度逐条推进。"
 ---
 
 `POST /v1/broadcasts`
 
 创建群发（批量模板发送）。返回 202 —— 响应返回时一条都还没发出去：真正的发送由平台按节流速度逐条推进。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:send`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -131,7 +133,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

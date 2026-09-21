@@ -1,15 +1,17 @@
 ---
 title: "账户自助用量/费用视图"
-excerpt: "账户自助用量/费用视图：余额 + 消费时间线 + 按分类/类型拆分。窗口内没有扣费时，dailyUsage / byCategory 为空数组，totalSpentMinor 为空对象 {}（它是按币种聚合的映射，不是数组）。"
+description: "账户自助用量/费用视图：余额 + 消费时间线 + 按分类/类型拆分。窗口内没有扣费时，dailyUsage / byCategory 为空数组，totalSpentMinor 为空对象 {}（它是按币种聚合的映射，不是数组）。"
 ---
 
 `GET /v1/credit-account/usage`
 
 账户自助用量/费用视图：余额 + 消费时间线 + 按分类/类型拆分。窗口内没有扣费时，dailyUsage / byCategory 为空数组，totalSpentMinor 为空对象 {}（它是按币种聚合的映射，不是数组）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`billing:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `days` | query | 否 | `7` \| `30` \| `90` | 统计窗口，默认 30。**其它值一律按 30 处理**，不报错 |
-
 
 ## 响应
 

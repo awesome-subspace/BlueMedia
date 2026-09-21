@@ -1,15 +1,17 @@
 ---
 title: "完成接入"
-excerpt: "完成接入，返回 201 和可追踪的操作记录。"
+description: "完成接入，返回 201 和可追踪的操作记录。"
 ---
 
 `POST /v1/onboarding/embedded-signup`
 
 完成接入，返回 201 和可追踪的操作记录。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -84,7 +86,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

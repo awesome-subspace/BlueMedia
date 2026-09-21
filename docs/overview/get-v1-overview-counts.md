@@ -1,15 +1,17 @@
 ---
 title: "总览页计数看板"
-excerpt: "总览页计数看板：platform 返回全量账户/资产计数；tenant 返回当前授权范围计数(号码计数需 phone_numbers:read，否则省略该字段)。"
+description: "总览页计数看板：platform 返回全量账户/资产计数；tenant 返回当前授权范围计数(号码计数需 phone_numbers:read，否则省略该字段)。"
 ---
 
 `GET /v1/overview/counts`
 
 总览页计数看板：platform 返回全量账户/资产计数；tenant 返回当前授权范围计数(号码计数需 phone_numbers:read，否则省略该字段)。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

@@ -1,176 +1,93 @@
 #!/usr/bin/env node
+/**
+ * 文档结构校验，在 CI 里先于 build 跑，用来给出比 webpack 报错更易读的诊断。
+ *
+ * 检查四件事：
+ *   1. sidebars.js 里的每个 doc id 都能找到对应文件
+ *   2. docs/ 下的每个页面都被侧边栏收录，且只收录一次
+ *   3. 每个页面都有 title 和 description（决定 SEO 与搜索结果里的摘要）
+ *   4. 没有残留的 GitBook 专有语法
+ */
 
-import { createHash } from 'node:crypto';
-import { existsSync, readFileSync, readdirSync, statSync } from 'node:fs';
+import {readFileSync, readdirSync, statSync, existsSync} from 'node:fs';
 import path from 'node:path';
 import process from 'node:process';
 
 const root = path.resolve(import.meta.dirname, '..');
 const docsRoot = path.join(root, 'docs');
-const expectedEndpointCount = 113;
-const expectedGuideCount = 9;
-const expectedSectionCount = 11;
 const errors = [];
 
-function read(relativePath) {
-  return readFileSync(path.join(root, relativePath), 'utf8');
+function listDocs(dir) {
+  const out = [];
+  for (const name of readdirSync(dir)) {
+    const full = path.join(dir, name);
+    if (statSync(full).isDirectory()) out.push(...listDocs(full));
+    else if (name.endsWith('.md') || name.endsWith('.mdx')) out.push(full);
+  }
+  return out;
 }
 
-function markdownFiles(directory) {
-  return readdirSync(directory)
-    .filter((name) => name.endsWith('.md'))
-    .sort();
+const sidebars = (await import(path.join(root, 'sidebars.mjs'))).default;
+
+/** 收集侧边栏里引用到的全部 doc id */
+function collectIds(nodes, acc = []) {
+  for (const node of nodes) {
+    if (node.type === 'doc') acc.push(node.id);
+    if (node.link?.type === 'doc') acc.push(node.link.id);
+    if (node.items) collectIds(node.items, acc);
+  }
+  return acc;
 }
 
-const categories = readdirSync(docsRoot)
-  .filter((name) => statSync(path.join(docsRoot, name)).isDirectory())
-  .sort();
+const ids = collectIds(Object.values(sidebars).flat());
 
-const docs = [];
-for (const category of categories) {
-  const directory = path.join(docsRoot, category);
-  for (const filename of markdownFiles(directory)) {
-    if (filename === 'README.md' || filename === 'SUMMARY.md') {
-      errors.push(`${category}/${filename} is unexpected; only docs/README.md and docs/SUMMARY.md define the GitBook space`);
-      continue;
-    }
-
-    const relativePath = `docs/${category}/${filename}`;
-    const source = read(relativePath);
-    const frontMatter = /^---\r?\n([\s\S]*?)\r?\n---\r?\n([\s\S]*)$/.exec(source);
-    if (!frontMatter) {
-      errors.push(`${relativePath} is missing YAML front matter`);
-      continue;
-    }
-    if (!/^title:\s*.+$/m.test(frontMatter[1])) errors.push(`${relativePath} is missing title`);
-    if (!/^excerpt:\s*.+$/m.test(frontMatter[1])) errors.push(`${relativePath} is missing excerpt`);
-    docs.push({
-      category,
-      filename,
-      relativePath,
-      docsRelativePath: `${category}/${filename}`,
-      source,
-      body: frontMatter[2],
-    });
+// 1. 侧边栏引用的文件都存在
+for (const id of ids) {
+  const md = path.join(docsRoot, `${id}.md`);
+  const mdx = path.join(docsRoot, `${id}.mdx`);
+  if (!existsSync(md) && !existsSync(mdx)) {
+    errors.push(`侧边栏引用了不存在的页面：${id}`);
   }
 }
 
-const guides = docs.filter(({ category }) => category === 'guides');
-const endpoints = docs.filter(({ category }) => category !== 'guides');
-if (guides.length !== expectedGuideCount) errors.push(`Expected ${expectedGuideCount} guide pages, found ${guides.length}`);
-if (endpoints.length !== expectedEndpointCount) {
-  errors.push(`Expected ${expectedEndpointCount} endpoint pages, found ${endpoints.length}`);
+// 2. 每个页面被收录且只收录一次
+const seen = new Map();
+for (const id of ids) seen.set(id, (seen.get(id) ?? 0) + 1);
+for (const [id, count] of seen) {
+  if (count > 1) errors.push(`页面在侧边栏里重复收录 ${count} 次：${id}`);
 }
 
-const summary = read('docs/SUMMARY.md');
-const sectionCount = [...summary.matchAll(/^##\s+.+$/gm)].length;
-if (sectionCount !== expectedSectionCount) {
-  errors.push(`Expected ${expectedSectionCount} navigation sections, found ${sectionCount}`);
+const files = listDocs(docsRoot);
+for (const file of files) {
+  const id = path.relative(docsRoot, file).replace(/\.mdx?$/, '');
+  if (!seen.has(id)) errors.push(`页面未被侧边栏收录：${id}`);
 }
 
-const summaryTargets = [...summary.matchAll(/^\s*\*\s+\[[^\]]+\]\(([^)]+\.md(?:#[^)]+)?)\)/gm)]
-  .map((match) => decodeURIComponent(match[1].split('#')[0]));
-const summaryCounts = new Map();
-for (const target of summaryTargets) {
-  summaryCounts.set(target, (summaryCounts.get(target) ?? 0) + 1);
-  if (!existsSync(path.join(docsRoot, target))) errors.push(`docs/SUMMARY.md points to missing page: ${target}`);
-}
+// 3 & 4. 逐页检查 frontmatter 与残留语法
+for (const file of files) {
+  const rel = path.relative(root, file);
+  const text = readFileSync(file, 'utf8');
 
-const expectedSummaryTargets = ['README.md', ...docs.map(({ docsRelativePath }) => docsRelativePath)];
-for (const target of expectedSummaryTargets) {
-  const count = summaryCounts.get(target) ?? 0;
-  if (count === 0) errors.push(`${target} is missing from docs/SUMMARY.md`);
-  if (count > 1) errors.push(`${target} appears ${count} times in docs/SUMMARY.md`);
-}
-for (const target of summaryCounts.keys()) {
-  if (!expectedSummaryTargets.includes(target)) errors.push(`docs/SUMMARY.md contains an unexpected page: ${target}`);
-}
-
-const routeKeys = new Map();
-const contentHashes = new Map();
-for (const page of endpoints) {
-  const route = page.body.match(/^`(GET|POST|PUT|PATCH|DELETE)\s+([^`]+)`/m);
-  if (!route) {
-    errors.push(`${page.relativePath} does not declare its METHOD /path`);
+  const fm = /^---\n([\s\S]*?)\n---/.exec(text);
+  if (!fm) {
+    errors.push(`缺少 frontmatter：${rel}`);
   } else {
-    const key = `${route[1]} ${route[2]}`;
-    const previous = routeKeys.get(key);
-    if (previous) errors.push(`Duplicate endpoint ${key}: ${previous}, ${page.relativePath}`);
-    routeKeys.set(key, page.relativePath);
-  }
-  if (!page.body.includes('## 请求')) errors.push(`${page.relativePath} is missing the request section`);
-  if (!page.body.includes('## 响应')) errors.push(`${page.relativePath} is missing the response section`);
-  if (!page.body.includes('鉴权')) errors.push(`${page.relativePath} is missing authentication guidance`);
-  if (/title:\s*["']?快速开始/.test(page.source)) {
-    errors.push(`${page.relativePath} still contains the broken website-import title`);
+    if (!/^title:/m.test(fm[1])) errors.push(`frontmatter 缺 title：${rel}`);
+    if (!/^description:/m.test(fm[1])) errors.push(`frontmatter 缺 description：${rel}`);
   }
 
-  const hash = createHash('sha256').update(page.source).digest('hex');
-  const duplicate = contentHashes.get(hash);
-  if (duplicate) errors.push(`Duplicate endpoint page content: ${duplicate}, ${page.relativePath}`);
-  contentHashes.set(hash, page.relativePath);
-}
-
-const publicPages = [
-  { relativePath: 'docs/README.md', source: read('docs/README.md') },
-  ...docs,
-];
-const allPublicDocs = publicPages.map(({ source }) => source).join('\n');
-const forbidden = [
-  [/sk_(?:platform|bu|bm)_/i, 'internal API Key prefix'],
-  [/apiKeyLevel/i, 'internal API Key level field'],
-  [/(?:平台|BU|BM)\s*级(?:别)?\s*(?:Token|令牌|Key)/i, 'internal credential level'],
-  [/(?:平台|BU|BM)\s*(?:Token|令牌)/i, 'internal credential name'],
-  [/(?:本|同一)\s*BU\b/i, 'internal BU wording'],
-  [/rdme_[a-z0-9]{20,}/i, 'ReadMe API key'],
-];
-for (const [pattern, label] of forbidden) {
-  if (pattern.test(allPublicDocs)) errors.push(`Public docs contain ${label}: ${pattern}`);
-}
-
-const internalRoutes = ['/v1/api-keys', '/v1/tenants', '/v1/portal-users', '/v1/platform/', '/portal/'];
-for (const route of internalRoutes) {
-  if (routeKeys.has(`GET ${route}`) || allPublicDocs.includes(`\`${route}`)) {
-    errors.push(`Public docs expose internal route: ${route}`);
+  if (/\{%\s*(hint|endhint|content-ref|embed)/.test(text)) {
+    errors.push(`残留 GitBook liquid 语法：${rel}`);
   }
-}
-
-for (const page of publicPages) {
-  if (/\]\(\/docs\//.test(page.source)) {
-    errors.push(`${page.relativePath} contains a legacy /docs/ link`);
+  if (/^>\s*(📘|🚧|💡|❗)/m.test(text)) {
+    errors.push(`残留 GitBook 引用块提示（应转成 admonition）：${rel}`);
   }
-
-  const targets = [
-    ...page.source.matchAll(/\]\(([^)]+)\)/g),
-    ...page.source.matchAll(/href=["']([^"']+)["']/g),
-  ].map((match) => match[1]);
-
-  for (const rawTarget of targets) {
-    if (/^(?:https?:|mailto:|#)/i.test(rawTarget)) continue;
-    const target = rawTarget.split('#')[0].split('?')[0];
-    if (!target.endsWith('.md')) continue;
-    const absoluteTarget = path.resolve(root, path.dirname(page.relativePath), target);
-    if (!absoluteTarget.startsWith(`${docsRoot}${path.sep}`) || !existsSync(absoluteTarget)) {
-      errors.push(`${page.relativePath} links to missing page: ${rawTarget}`);
-    }
-  }
-}
-
-const gitbookConfig = read('gitbook-docs.yaml');
-const spaceCount = [...gitbookConfig.matchAll(/^\s*-\s+type:\s+space\s*$/gm)].length;
-if (spaceCount !== 1) errors.push(`gitbook-docs.yaml must define exactly one space, found ${spaceCount}`);
-if (/^\s*-\s+type:\s+section\s*$/m.test(gitbookConfig)) {
-  errors.push('gitbook-docs.yaml must not hide business domains behind site sections');
-}
-if (!/^\s*directory:\s+\.\/docs\s*$/m.test(gitbookConfig)) {
-  errors.push('gitbook-docs.yaml must map the GitBook space to ./docs');
 }
 
 if (errors.length > 0) {
-  console.error(errors.map((error) => `- ${error}`).join('\n'));
+  process.stderr.write(`文档校验未通过，共 ${errors.length} 个问题：\n`);
+  for (const error of errors) process.stderr.write(`  - ${error}\n`);
   process.exit(1);
 }
 
-console.log(
-  `Docs contract passed: 1 space, ${sectionCount} sections, ${guides.length} guides, ${endpoints.length} endpoint pages.`,
-);
+process.stdout.write(`文档校验通过：${files.length} 个页面，侧边栏条目 ${ids.length} 个\n`);

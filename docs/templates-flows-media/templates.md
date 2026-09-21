@@ -1,6 +1,6 @@
 ---
 title: "模板"
-excerpt: "模板的创建、审核状态同步与分析。发送模板消息前平台会校验该模板已 APPROVED，参数必须与创建时声明的占位符数量和顺序完全一致。"
+description: "模板的创建、审核状态同步与分析。发送模板消息前平台会校验该模板已 APPROVED，参数必须与创建时声明的占位符数量和顺序完全一致。"
 ---
 
 # 模板
@@ -19,8 +19,10 @@ excerpt: "模板的创建、审核状态同步与分析。发送模板消息前�
 | [模板分析](get-v1-templates-analytics.md) | 模板的发送与互动数据。 |
 | [开启模板分析](post-v1-templates-analytics-enable.md) | 一次性确认开启该 WABA 的模板分析。 |
 
-{% hint style="info" %}
+:::info
+
 发送时 `components` 里的 `parameters` 必须与创建模板时声明的占位符**数量和顺序完全一致**，否则 Meta 返回参数不匹配（`TEMPLATE_PARAM_MISMATCH`）。平台在发送前会校验模板已 `APPROVED`。
-{% endhint %}
+
+:::
 
 模板相关的失败码（`TEMPLATE_NOT_FOUND` 需先同步、`TEMPLATE_PAUSED` 质量过低被暂停、`TEMPLATE_DISABLED` 已永久停用需新建）见[错误码](../guides/error-codes.md)。这组接口需要 `templates:manage` scope，见[认证与权限](../guides/authentication.md)。

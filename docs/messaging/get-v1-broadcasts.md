@@ -1,15 +1,17 @@
 ---
 title: "列出当前账户的群发活动"
-excerpt: "列出当前账户的群发活动，含派发进度与投递结果计数。"
+description: "列出当前账户的群发活动，含派发进度与投递结果计数。"
 ---
 
 `GET /v1/broadcasts`
 
 列出当前账户的群发活动，含派发进度与投递结果计数。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `limit` | query | 否 | integer 1..200 | 默认 50。大于 200 按 200 处理；非正数或无法解析按 50 处理 |
-
 
 ## 响应
 

@@ -1,15 +1,17 @@
 ---
 title: "上传 / 替换 Flow JSON"
-excerpt: "上传 / 替换 Flow JSON（整份替换）。"
+description: "上传 / 替换 Flow JSON（整份替换）。"
 ---
 
 `POST /v1/flows/{id}/json`
 
 上传 / 替换 Flow JSON（整份替换）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -52,7 +54,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

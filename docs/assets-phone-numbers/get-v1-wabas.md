@@ -1,15 +1,17 @@
 ---
 title: "列出 WABA"
-excerpt: "列出 WABA，可按 Portfolio 过滤。"
+description: "列出 WABA，可按 Portfolio 过滤。"
 ---
 
 `GET /v1/wabas`
 
 列出 WABA，可按 Portfolio 过滤。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `portfolioId` | query | 否 | string | 按 Business Portfolio 过滤，`bm_...`。省略或传空串表示不过滤 |
-
 
 ## 响应
 

@@ -1,6 +1,6 @@
 ---
 title: "客户接入"
-excerpt: "把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）接入 BlueMedia 有两条路径：运营人员代客户完成 Embedded Signup，或生成一次性邀请链接让客户在自己的设备上自助完成 Meta 授权。"
+description: "把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）接入 BlueMedia 有两条路径：运营人员代客户完成 Embedded Signup，或生成一次性邀请链接让客户在自己的设备上自助完成 Meta 授权。"
 ---
 
 把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）接入 BlueMedia 有两条路径：运营人员代客户完成 Embedded Signup，或生成一次性邀请链接让客户在自己的设备上自助完成 Meta 授权。
@@ -12,8 +12,11 @@ excerpt: "把客户的 WhatsApp 资产（Business Portfolio / WABA / 号码）�
 | `POST /v1/onboarding/embedded-signup` | 销售或客服在门户里代客户操作，且已取得客户授权结果               | API Key 或门户会话                            |
 | 邀请链接 `/v1/onboarding/invitations` | 客户自己完成 Meta 授权；客户全程不接触任何 API Key 或 App Secret | 创建/管理需凭证；客户侧凭链接里的一次性 token |
 
-> 📘
-> **两条路径共用同一套编排。**邀请链接的 complete/retry 内部直接复用 Embedded Signup 的状态机，进度模型、步骤、错误码完全一致，只是入口和凭据不同。
+:::note
+
+**两条路径共用同一套编排。**邀请链接的 complete/retry 内部直接复用 Embedded Signup 的状态机，进度模型、步骤、错误码完全一致，只是入口和凭据不同。
+
+:::
 
 ## 编排的五个阶段
 

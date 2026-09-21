@@ -1,6 +1,6 @@
 ---
 title: "服务商侧接入操作"
-excerpt: "运营人员代客户完成 Embedded Signup，并跟踪这条可恢复的五步编排。失败后用 retry 从断点续跑，不要重新创建 operation。"
+description: "运营人员代客户完成 Embedded Signup，并跟踪这条可恢复的五步编排。失败后用 retry 从断点续跑，不要重新创建 operation。"
 ---
 
 # 服务商侧接入操作
@@ -17,8 +17,10 @@ excerpt: "运营人员代客户完成 Embedded Signup，并跟踪这条可恢复
 | [从失败步骤恢复](post-v1-onboarding-embedded-signup-operationid-retry.md) | 从断点续跑。`code` 可选：旧凭据还有效就省略。 |
 | [上报 ES 会话事件](post-v1-onboarding-es-events.md) | 回报 Embedded Signup 弹窗内的会话事件，用于排查客户卡在哪一步。 |
 
-{% hint style="warning" %}
+:::warning
+
 失败后要调 retry **续跑同一条 operation**，而不是重新 POST 创建接口——那会新建一条全新 operation。已完成但当时没注册号码的 operation，也可以用 retry 单独补跑注册步骤。
-{% endhint %}
+
+:::
 
 两条接入路径怎么选、五个步骤各做什么，见[客户接入](../guides/customer-onboarding.md)。

@@ -1,15 +1,17 @@
 ---
 title: "新增或覆盖号码商业资料"
-excerpt: "新增或覆盖号码商业资料。"
+description: "新增或覆盖号码商业资料。"
 ---
 
 `PUT /v1/phone-numbers/{id}/business-profile`
 
 新增或覆盖号码商业资料。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -73,7 +75,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

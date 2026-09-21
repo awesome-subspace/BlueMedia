@@ -1,15 +1,17 @@
 ---
 title: "号码删除影响预览"
-excerpt: "级联删除影响预览：返回将被删除的消息/会话/媒体等数量。只读。"
+description: "级联删除影响预览：返回将被删除的消息/会话/媒体等数量。只读。"
 ---
 
 `GET /v1/phone-numbers/{id}/delete-preview`
 
 级联删除影响预览：返回将被删除的消息/会话/媒体等数量。只读。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内号码 ID，`pn_...` |
-
 
 ## 响应
 

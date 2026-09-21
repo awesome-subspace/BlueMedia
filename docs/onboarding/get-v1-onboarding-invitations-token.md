@@ -1,15 +1,17 @@
 ---
 title: "读取邀请落地页所需的非机密信息"
-excerpt: "【客户侧，无需鉴权】读取邀请落地页所需的非机密信息（客户名、Meta appId/configId）。"
+description: "【客户侧，无需鉴权】读取邀请落地页所需的非机密信息（客户名、Meta appId/configId）。"
 ---
 
 `GET /v1/onboarding/invitations/{token}`
 
 【客户侧，无需鉴权】读取邀请落地页所需的非机密信息（客户名、Meta appId/configId）。
 
-> 📘 鉴权
->
-> 此接口不需要 API Key。
+:::note[鉴权]
+
+此接口不需要 API Key。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `token` | path | 是 | string | 邀请链接里的一次性 token（43 字符 base64url）。它本身就是凭据，本端点不需要 API Key |
-
 
 ## 响应
 

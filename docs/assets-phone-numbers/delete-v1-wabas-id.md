@@ -1,15 +1,17 @@
 ---
 title: "删除 WhatsApp 账户"
-excerpt: "删除 WhatsApp 账户。cascade=true 时自上而下连同子对象一起删除（计费账本与信用账户不受影响，仅在有在途信用预留时返回 409）；不带该参数则保持原行为：存在子对象时返回 409。"
+description: "删除 WhatsApp 账户。cascade=true 时自上而下连同子对象一起删除（计费账本与信用账户不受影响，仅在有在途信用预留时返回 409）；不带该参数则保持原行为：存在子对象时返回 409。"
 ---
 
 `DELETE /v1/wabas/{id}`
 
 删除 WhatsApp 账户。cascade=true 时自上而下连同子对象一起删除（计费账本与信用账户不受影响，仅在有在途信用预留时返回 409）；不带该参数则保持原行为：存在子对象时返回 409。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -21,7 +23,6 @@ Base URL：`https://api.bsptest.com`
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内 WABA ID，`waba_...` |
 | `cascade` | query | 否 | `true` | 只有字面量 `true` 触发级联删除；其它值（含省略）走默认行为——存在子对象时返回 `409`。计费账本与信用账户始终不受影响 |
-
 
 ## 响应
 

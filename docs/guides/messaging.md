@@ -1,6 +1,6 @@
 ---
 title: "发消息与状态追踪"
-excerpt: "`POST /v1/messages` 的 `202 Accepted` 只代表「平台已受理」，不代表已送达，甚至不代表已提交给 Meta。追踪真实状态需要轮询 `GET /v1/messages/{id}` 或接收状态类 Webhook。"
+description: "`POST /v1/messages` 的 `202 Accepted` 只代表「平台已受理」，不代表已送达，甚至不代表已提交给 Meta。追踪真实状态需要轮询 `GET /v1/messages/{id}` 或接收状态类 Webhook。"
 ---
 
 `POST /v1/messages` 的 `202 Accepted` 只代表「平台已受理」，不代表已送达，甚至不代表已提交给 Meta。追踪真实状态需要轮询 `GET /v1/messages/{id}` 或接收状态类 Webhook。

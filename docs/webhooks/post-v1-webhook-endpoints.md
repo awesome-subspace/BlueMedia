@@ -1,15 +1,17 @@
 ---
 title: "创建账户回调端点"
-excerpt: "创建账户回调端点。回调携带 X-Webhook-Signature-256: sha256=...；使用端点 secret 对原始请求体做 HMAC-SHA256，secret 只返回一次。"
+description: "创建账户回调端点。回调携带 X-Webhook-Signature-256: sha256=...；使用端点 secret 对原始请求体做 HMAC-SHA256，secret 只返回一次。"
 ---
 
 `POST /v1/webhook-endpoints`
 
 创建账户回调端点。回调携带 X-Webhook-Signature-256: sha256=...；使用端点 secret 对原始请求体做 HMAC-SHA256，secret 只返回一次。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -82,7 +84,6 @@ Schema：
   "additionalProperties": false
 }
 ```
-
 
 ## 响应
 

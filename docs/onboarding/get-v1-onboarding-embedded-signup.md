@@ -1,15 +1,17 @@
 ---
 title: "查询最近操作"
-excerpt: "查询最近操作；limit 为 1 至 50。"
+description: "查询最近操作；limit 为 1 至 50。"
 ---
 
 `GET /v1/onboarding/embedded-signup`
 
 查询最近操作；limit 为 1 至 50。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `limit` | query | 否 | integer 1..50 | 默认 20。**超出范围返回 `400 VALIDATION_FAILED`**，不是夹取 |
-
 
 ## 响应
 

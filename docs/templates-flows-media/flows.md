@@ -1,6 +1,6 @@
 ---
 title: "Flow"
-excerpt: "WhatsApp Flows 的创建、JSON 上传、预览、发布与弃用。Flow 要先发布才能在 interactive 消息里使用。"
+description: "WhatsApp Flows 的创建、JSON 上传、预览、发布与弃用。Flow 要先发布才能在 interactive 消息里使用。"
 ---
 
 # Flow
@@ -20,8 +20,10 @@ Flow 是在 WhatsApp 会话内呈现的多步交互表单。典型顺序是：�
 | [发布 Flow](post-v1-flows-id-publish.md) | 发布后才能在消息中使用。 |
 | [弃用 Flow](post-v1-flows-id-deprecate.md) | 弃用一个已发布的 Flow。 |
 
-{% hint style="warning" %}
+:::warning
+
 两个与 Flow 相关的发送失败码：`FLOW_BLOCKED`（Flow 被封禁，需先修正）和 `FLOW_THROTTLED`（最近一小时内已发出 10 条使用该 Flow 的消息）。两者都需要先处理 Flow 本身，重发无用。
-{% endhint %}
+
+:::
 
 这组接口需要 `templates:manage` scope。

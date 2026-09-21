@@ -1,15 +1,17 @@
 ---
 title: "提交 Meta 授权结果"
-excerpt: "【客户侧，无需鉴权】提交 Meta 授权结果并触发接入编排。账户与 Portfolio 只取自邀请记录，body 无法覆盖；多传字段会被拒绝。返回 202 不代表接入成功，须读 status。"
+description: "【客户侧，无需鉴权】提交 Meta 授权结果并触发接入编排。账户与 Portfolio 只取自邀请记录，body 无法覆盖；多传字段会被拒绝。返回 202 不代表接入成功，须读 status。"
 ---
 
 `POST /v1/onboarding/invitations/{token}/complete`
 
 【客户侧，无需鉴权】提交 Meta 授权结果并触发接入编排。账户与 Portfolio 只取自邀请记录，body 无法覆盖；多传字段会被拒绝。返回 202 不代表接入成功，须读 status。
 
-> 📘 鉴权
->
-> 此接口不需要 API Key。
+:::note[鉴权]
+
+此接口不需要 API Key。
+
+:::
 
 ## 请求
 
@@ -82,7 +84,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

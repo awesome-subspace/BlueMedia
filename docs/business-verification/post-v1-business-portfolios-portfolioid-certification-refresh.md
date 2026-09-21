@@ -1,15 +1,17 @@
 ---
 title: "刷新 PLBV 认证"
-excerpt: "主动查询并同步该客户最新的 PLBV submission。"
+description: "主动查询并同步该客户最新的 PLBV submission。"
 ---
 
 `POST /v1/business-portfolios/{portfolioId}/certification/refresh`
 
 主动查询并同步该客户最新的 PLBV submission。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `portfolioId` | path | 是 | string | 平台内 Business Portfolio ID，`bm_...` |
-
 
 ## 响应
 

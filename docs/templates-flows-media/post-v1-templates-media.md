@@ -1,15 +1,17 @@
 ---
 title: "上传模板媒体头素材"
-excerpt: "上传模板媒体头素材（multipart），返回填进 components 的 `handle`。"
+description: "上传模板媒体头素材（multipart），返回填进 components 的 `handle`。"
 ---
 
 `POST /v1/templates/media`
 
 上传模板媒体头素材（multipart），返回填进 components 的 `handle`。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -40,7 +42,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

@@ -1,15 +1,17 @@
 ---
 title: "列出 Flow 的资产"
-excerpt: "列出 Flow 的资产（目前只有 FLOW_JSON）。"
+description: "列出 Flow 的资产（目前只有 FLOW_JSON）。"
 ---
 
 `GET /v1/flows/{id}/assets`
 
 列出 Flow 的资产（目前只有 FLOW_JSON）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -21,7 +23,6 @@ Base URL：`https://api.bsptest.com`
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | Meta 侧的 Flow id |
 | `wabaId` | query | 是 | string | 平台内 WABA ID，`waba_...`。**必填** |
-
 
 ## 响应
 

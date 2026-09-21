@@ -1,15 +1,17 @@
 ---
 title: "生成客户接入链接"
-excerpt: "为指定客户和 Business Portfolio 生成一次性接入链接。明文 URL 只在本响应里返回一次（库内只存哈希），请立即发给客户。"
+description: "为指定客户和 Business Portfolio 生成一次性接入链接。明文 URL 只在本响应里返回一次（库内只存哈希），请立即发给客户。"
 ---
 
 `POST /v1/onboarding/invitations`
 
 为指定客户和 Business Portfolio 生成一次性接入链接。明文 URL 只在本响应里返回一次（库内只存哈希），请立即发给客户。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`onboarding:write`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -65,7 +67,6 @@ Schema：
   }
 }
 ```
-
 
 ## 响应
 

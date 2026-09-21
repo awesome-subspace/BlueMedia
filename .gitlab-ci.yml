@@ -1,0 +1,23 @@
+stages:
+  - verify
+
+docs:
+  stage: verify
+  image: node:24
+  cache:
+    key:
+      files:
+        - package-lock.json
+    paths:
+      - .npm/
+  script:
+    - npm ci --cache .npm --prefer-offline
+    - npm run docs:check
+    - npm run build
+  artifacts:
+    paths:
+      - build/
+    expire_in: 1 week
+  rules:
+    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
+    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH

@@ -1,6 +1,6 @@
 ---
 title: "错误码"
-excerpt: "HTTP 错误码、消息投递失败码及处理建议。"
+description: "HTTP 错误码、消息投递失败码及处理建议。"
 ---
 
 ## 错误码

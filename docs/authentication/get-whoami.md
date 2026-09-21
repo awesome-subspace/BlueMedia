@@ -1,15 +1,17 @@
 ---
 title: "验证 API Key"
-excerpt: "验证 API Key，并返回当前账户标识与 API 服务版本。"
+description: "验证 API Key，并返回当前账户标识与 API 服务版本。"
 ---
 
 `GET /whoami`
 
 验证 API Key，并返回当前账户标识与 API 服务版本。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 

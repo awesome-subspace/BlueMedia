@@ -1,15 +1,17 @@
 ---
 title: "发布 Flow"
-excerpt: "发布 Flow。**不可逆**：发布后不能修改或删除。"
+description: "发布 Flow。**不可逆**：发布后不能修改或删除。"
 ---
 
 `POST /v1/flows/{id}/publish`
 
 发布 Flow。**不可逆**：发布后不能修改或删除。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -46,7 +48,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

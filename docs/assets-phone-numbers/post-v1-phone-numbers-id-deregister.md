@@ -1,15 +1,17 @@
 ---
 title: "从 Cloud API 注销号码"
-excerpt: "从 Cloud API 注销号码。"
+description: "从 Cloud API 注销号码。"
 ---
 
 `POST /v1/phone-numbers/{id}/deregister`
 
 从 Cloud API 注销号码。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`phone_numbers:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 平台内号码 ID，`pn_...` |
-
 
 ## 响应
 

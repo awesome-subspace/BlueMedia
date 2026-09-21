@@ -1,15 +1,17 @@
 ---
 title: "触发所有权验证"
-excerpt: "触发所有权验证（两阶段协议的第二阶段）。"
+description: "触发所有权验证（两阶段协议的第二阶段）。"
 ---
 
 `POST /v1/webhook-endpoints/{id}/verify`
 
 触发所有权验证（两阶段协议的第二阶段）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 回调端点 ID，`whe_...` |
-
 
 ## 响应
 

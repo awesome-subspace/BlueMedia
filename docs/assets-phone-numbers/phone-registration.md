@@ -1,6 +1,6 @@
 ---
 title: "号码注册与验证"
-excerpt: "代理 Meta 的号码所有权验证、Cloud API 注册、两步验证 PIN 与显示名称审核。72 小时内最多 10 次 register/deregister。"
+description: "代理 Meta 的号码所有权验证、Cloud API 注册、两步验证 PIN 与显示名称审核。72 小时内最多 10 次 register/deregister。"
 ---
 
 # 号码注册与验证
@@ -20,8 +20,10 @@ excerpt: "代理 Meta 的号码所有权验证、Cloud API 注册、两步验证
 | [设置两步验证 PIN](post-v1-phone-numbers-id-two-step-pin.md) | 设置或轮换 PIN。忘记旧 PIN 时直接设新值覆盖即可。 |
 | [修改显示名称](post-v1-phone-numbers-id-display-name.md) | 提交新名称进入 Meta 审核，不会立即生效。 |
 
-{% hint style="warning" %}
+:::warning
+
 **72 小时内最多 10 次 register/deregister 请求**（Meta 侧规则）。超限后 Meta 返回错误码 133016，并封禁该号码 72 小时的注册能力。调试接入流程时不要拿同一个号码反复注册。
-{% endhint %}
+
+:::
 
 两个容易踩的点：`register` 的 `pin` 有双重语义（首次注册是「设置 PIN」，已开启两步验证时是「现有 PIN」，Meta 不区分）；显示名称审核通过后**必须重新调一次 register**，新名称才真正同步到 WhatsApp 服务端。详见[号码注册与生命周期](../guides/phone-numbers.md)。

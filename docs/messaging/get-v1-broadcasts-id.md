@@ -1,15 +1,17 @@
 ---
 title: "单个活动"
-excerpt: "单个活动：状态、预估费用、派发进度与投递结果。"
+description: "单个活动：状态、预估费用、派发进度与投递结果。"
 ---
 
 `GET /v1/broadcasts/{id}`
 
 单个活动：状态、预估费用、派发进度与投递结果。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`messages:read`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -20,7 +22,6 @@ Base URL：`https://api.bsptest.com`
 | 名称 | 位置 | 必填 | 类型/约束 | 说明 |
 | --- | --- | --- | --- | --- |
 | `id` | path | 是 | string | 群发活动 ID，`bc_...` |
-
 
 ## 响应
 

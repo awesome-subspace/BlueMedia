@@ -1,15 +1,17 @@
 ---
 title: "修改 Flow 的名称 / 分类 / 数据交换端点"
-excerpt: "修改 Flow 的名称 / 分类 / 数据交换端点。"
+description: "修改 Flow 的名称 / 分类 / 数据交换端点。"
 ---
 
 `PATCH /v1/flows/{id}`
 
 修改 Flow 的名称 / 分类 / 数据交换端点。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`，所需 scope：`templates:manage`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -61,7 +63,6 @@ Schema：
   ]
 }
 ```
-
 
 ## 响应
 

@@ -1,15 +1,17 @@
 ---
 title: "获取免登录的 Flow 预览链接"
-excerpt: "获取免登录的 Flow 预览链接（30 天有效）。"
+description: "获取免登录的 Flow 预览链接（30 天有效）。"
 ---
 
 `GET /v1/flows/{id}/preview`
 
 获取免登录的 Flow 预览链接（30 天有效）。
 
-> 📘 鉴权
->
-> 请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+:::note[鉴权]
+
+请求头携带 `Authorization: Bearer <API_KEY>`。API Key 的可访问资源由当前授权范围决定。
+
+:::
 
 ## 请求
 
@@ -22,7 +24,6 @@ Base URL：`https://api.bsptest.com`
 | `id` | path | 是 | string | Meta 侧的 Flow id |
 | `wabaId` | query | 是 | string | 平台内 WABA ID，`waba_...`。**必填** |
 | `invalidate` | query | 否 | `true` | 只有字面量 `true` 生效：作废旧的预览链接并生成新的。默认不作废 |
-
 
 ## 响应
 

@@ -1,6 +1,6 @@
 ---
 title: "号码注册与生命周期"
-excerpt: "号码在 Meta 侧的添加与所有权验证需要在 WhatsApp Manager 完成；BlueMedia API 负责同步已存在的号码，并代理 Meta 的注册、验证、改名、注销等生命周期操作。"
+description: "号码在 Meta 侧的添加与所有权验证需要在 WhatsApp Manager 完成；BlueMedia API 负责同步已存在的号码，并代理 Meta 的注册、验证、改名、注销等生命周期操作。"
 ---
 
 号码在 Meta 侧的添加与所有权验证需要在 WhatsApp Manager 完成；BlueMedia API 负责同步已存在的号码，并代理 Meta 的注册、验证、改名、注销等生命周期操作。
@@ -21,8 +21,11 @@ excerpt: "号码在 Meta 侧的添加与所有权验证需要在 WhatsApp Manage
 2.  `POST .../verify-code` — 提交收到的 6 位验证码完成所有权验证。验证码约 10 分钟有效、一次性，多次失败可能触发 Meta 临时限制。
 3.  `POST .../register` — 用 6 位 PIN 注册到 Cloud API。注册成功后本地状态直接标记为已连接。
 
-> 📘
-> **已在 WhatsApp Manager 验证过的号码跳过前两步**，直接 register 即可。平台不强制这个顺序——对未验证号码直接 register 会被 Meta 拒绝，按返回的错误判断下一步。
+:::note
+
+**已在 WhatsApp Manager 验证过的号码跳过前两步**，直接 register 即可。平台不强制这个顺序——对未验证号码直接 register 会被 Meta 拒绝，按返回的错误判断下一步。
+
+:::
 
 `register` 的 `pin` 参数有双重语义：首次注册时是"给这个号码设置的两步验证 PIN"；号码已开启两步验证时则是"现有 PIN"。Meta 不区分这两种情况。
 
@@ -39,8 +42,11 @@ excerpt: "号码在 Meta 侧的添加与所有权验证需要在 WhatsApp Manage
 
 ## 注册/注销限流
 
-> 🚧
-> **72 小时内最多 10 次 register/deregister 请求**（Meta 侧规则）。超限后 Meta 返回错误码 133016，并封禁该号码 72 小时的注册能力。调试接入流程时注意不要拿同一个号码反复注册。
+:::warning
+
+**72 小时内最多 10 次 register/deregister 请求**（Meta 侧规则）。超限后 Meta 返回错误码 133016，并封禁该号码 72 小时的注册能力。调试接入流程时注意不要拿同一个号码反复注册。
+
+:::
 
 ## 注销 vs 删除
 
