@@ -106,10 +106,28 @@ curl -s -H 'X-Atlantis-UUID: BSPDocSystem' -H 'skip: atlantis' \
 ```
 
 已登记返回 `is_docker: 1`；没登记返回 `is_vm/is_docker/is_k8s` 全零（与随手编的名字完全一致）。
+**2026-09-21 已完成登记**，实测返回 `is_docker: 1`。
 
-登记时要填的：**服务名** `BSPDocSystem`（与 `.gitlab-ci.yml` 的 `ATLS_SVC_NAME` 逐字一致）、
+登记项：**服务名** `BSPDocSystem`（与 `.gitlab-ci.yml` 的 `ATLS_SVC_NAME` 逐字一致）、
 **镜像/包名**小写 `bspdocsystem`（平台侧独立字段）、类型 **Docker**、容器端口 **8080**
 （见 `nginx/docs.conf` 的 `listen`）。
+
+### 服务名与镜像名大小写不一致 → 发布阶段 404
+
+服务名是 `BSPDocSystem`、镜像/包名是 `bspdocsystem`，而平台生成的构建脚本在 Docker 分支
+用**服务名**拼发布包目录，部署 agent 又按**镜像名**去 OSS 取：
+
+```
+开始从oss安装包:bspdocsystem-1.0.1
+下载svc pkg失败，err:oss: StatusCode=404, ErrorCode=NoSuchKey
+package安装失败
+```
+
+**这时候镜像已经推进 Harbor 了，CI 是绿的**，只有平台发布页红 —— 从流水线日志里看不出原因。
+
+`scripts/atlantis-build-wrapper.sh` 在「拉取平台脚本」和「执行」之间插一行 sed 修正它，
+由 `ATLS_USE_LOCAL_BUILD_SH` 启用。ApiWorker 用的是同一个补丁。补丁打不上会立即失败并
+打印实际内容，不会静默跑一个错的构建。
 
 ### nginx：全仓只有一份配置
 
