@@ -72,6 +72,7 @@ const config = {
           path: 'docs',
           routeBasePath: 'docs',
           sidebarPath: './sidebars.mjs',
+          sidebarCollapsed: true,
           editUrl: `${GITLAB_URL}/-/edit/main/`,
           showLastUpdateTime: gitAvailable,
           breadcrumbs: true,
