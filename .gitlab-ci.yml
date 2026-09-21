@@ -32,13 +32,23 @@ variables:
   #     --data '{"svc_name":"BSPDocSystem","namespace":"","env":"prod","svc_branch":"main"}' \
   #     https://atlantis-api.bluemedia-inc.com/deploy/ci/config
   #
-  # 2026-09-21 实测：BSPDocSystem → 全零（**尚未登记**）。平台侧登记完成前，这条流水线
-  # 必然红在 109012，与本文件写得对不对无关。登记项见 README 的「部署」一节。
+  # 2026-09-21 实测：BSPDocSystem → `is_docker: 1`，**已登记**。
+  # （同日更早一次探测是全零，那时还没登记完；结论会随平台状态变，别照抄旧结论，重跑一次探测。）
   ATLS_SVC_NAME: "BSPDocSystem"
 
   # 用本仓库自带的多阶段 Dockerfile（自含 FROM，不需要 ATLS_RUNNING_BASE_IMAGE）
   ATLS_DOCKER_FILE_PATH: "Dockerfile"
   ATLS_LOCAL_DOCKERFILE: 1
+
+  # 包装平台生成的构建脚本，修正 Docker 发布包的命名大小写。
+  #
+  # 平台生成的 __atls_build_docker() 用**服务名**拼包目录（BSPDocSystem-<VER>），
+  # 而部署 agent 按**镜像/包名**去 OSS 取（bspdocsystem-<VER>），于是发布阶段 404：
+  #   下载svc pkg失败，err:oss: StatusCode=404, ErrorCode=NoSuchKey
+  # 注意这时候镜像已经推进 Harbor 了，**CI 是绿的**，只有平台发布页红 ——
+  # 所以从流水线日志里看不出原因。详见脚本头部注释。
+  ATLS_USE_LOCAL_BUILD_SH: 1
+  ATLS_LOCAL_BUILD_FILE_PATH: "./scripts/atlantis-build-wrapper.sh"
 
   # 命名空间：默认空。若服务登记在特定 namespace 下，改成对应值。
   ATLS_NS: ""
