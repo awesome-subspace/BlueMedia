@@ -3,7 +3,7 @@ title: "我的售价策略"
 description: "我的售价策略（含历史生效记录）。"
 ---
 
-`GET /v1/pricing/tariff`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/pricing/tariff</code></div>
 
 我的售价策略（含历史生效记录）。
 

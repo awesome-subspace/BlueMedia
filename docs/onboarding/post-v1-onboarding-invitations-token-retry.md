@@ -3,7 +3,7 @@ title: "首次授权失败后"
 description: "【客户侧，无需鉴权】首次授权失败后，用新的 Meta code 继续**同一条** operation（不会新建接入任务）。只接受 code：wabaId/phoneNumberId 已记在 operation 上，重试时不允许更换目标资产。仅 failed 且链接未过期的邀请可重试；已完成的返回 409。"
 ---
 
-`POST /v1/onboarding/invitations/{token}/retry`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/onboarding/invitations/{token}/retry</code></div>
 
 【客户侧，无需鉴权】首次授权失败后，用新的 Meta code 继续**同一条** operation（不会新建接入任务）。只接受 code：wabaId/phoneNumberId 已记在 operation 上，重试时不允许更换目标资产。仅 failed 且链接未过期的邀请可重试；已完成的返回 409。
 

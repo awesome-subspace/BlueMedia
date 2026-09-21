@@ -3,7 +3,7 @@ title: "修改 Portfolio"
 description: "修改 Business Portfolio 名称或 Meta Business Manager ID。"
 ---
 
-`PATCH /v1/business-portfolios/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/business-portfolios/{id}</code></div>
 
 修改 Business Portfolio 名称或 Meta Business Manager ID。
 

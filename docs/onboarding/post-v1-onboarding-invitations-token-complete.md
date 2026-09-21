@@ -3,7 +3,7 @@ title: "提交 Meta 授权结果"
 description: "【客户侧，无需鉴权】提交 Meta 授权结果并触发接入编排。账户与 Portfolio 只取自邀请记录，body 无法覆盖；多传字段会被拒绝。返回 202 不代表接入成功，须读 status。"
 ---
 
-`POST /v1/onboarding/invitations/{token}/complete`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/onboarding/invitations/{token}/complete</code></div>
 
 【客户侧，无需鉴权】提交 Meta 授权结果并触发接入编排。账户与 Portfolio 只取自邀请记录，body 无法覆盖；多传字段会被拒绝。返回 202 不代表接入成功，须读 status。
 

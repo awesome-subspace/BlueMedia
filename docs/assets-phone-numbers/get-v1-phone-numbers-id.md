@@ -3,7 +3,7 @@ title: "读取号码详情"
 description: "读取号码详情。"
 ---
 
-`GET /v1/phone-numbers/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/phone-numbers/{id}</code></div>
 
 读取号码详情。
 

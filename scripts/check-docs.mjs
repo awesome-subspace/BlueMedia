@@ -17,6 +17,26 @@ const root = path.resolve(import.meta.dirname, '..');
 const docsRoot = path.join(root, 'docs');
 const errors = [];
 
+/** 与 docusaurus.config.js 的 prism.additionalLanguages 保持一致 */
+const KNOWN_LANGUAGES = new Set([
+  'bash',
+  'json',
+  'js',
+  'jsx',
+  'ts',
+  'tsx',
+  'text',
+  'yaml',
+  'http',
+  'python',
+  'mermaid',
+  'css',
+  'html',
+  'diff',
+  'md',
+  'sql',
+]);
+
 function listDocs(dir) {
   const out = [];
   for (const name of readdirSync(dir)) {
@@ -81,6 +101,15 @@ for (const file of files) {
   }
   if (/^>\s*(📘|🚧|💡|❗)/m.test(text)) {
     errors.push(`残留 GitBook 引用块提示（应转成 admonition）：${rel}`);
+  }
+
+  // 代码块围栏的第一个词必须是 Prism 认得的语言，否则高亮会静默失效。
+  // 想给代码块加标题请用 ```json title="..."，不要把标题直接写成语言名。
+  for (const [, info] of text.matchAll(/^```([^\n`]+)$/gm)) {
+    const lang = info.trim().split(/\s+/)[0].toLowerCase();
+    if (!KNOWN_LANGUAGES.has(lang)) {
+      errors.push(`代码块语言 \`${lang}\` 不被支持（用 lang title="..." 写标题）：${rel}`);
+    }
   }
 }
 

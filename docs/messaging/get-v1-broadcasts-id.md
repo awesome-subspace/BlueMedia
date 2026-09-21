@@ -3,7 +3,7 @@ title: "单个活动"
 description: "单个活动：状态、预估费用、派发进度与投递结果。"
 ---
 
-`GET /v1/broadcasts/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/broadcasts/{id}</code></div>
 
 单个活动：状态、预估费用、派发进度与投递结果。
 

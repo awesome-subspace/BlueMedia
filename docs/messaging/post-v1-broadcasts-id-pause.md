@@ -3,7 +3,7 @@ title: "暂停派发"
 description: "暂停派发。已经交给 WhatsApp 的消息追不回来。"
 ---
 
-`POST /v1/broadcasts/{id}/pause`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/broadcasts/{id}/pause</code></div>
 
 暂停派发。已经交给 WhatsApp 的消息追不回来。
 

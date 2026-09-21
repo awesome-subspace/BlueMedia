@@ -3,7 +3,7 @@ title: "收件人明细"
 description: "收件人明细。status 过滤用来直接拉「哪些人失败了」。"
 ---
 
-`GET /v1/broadcasts/{id}/recipients`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/broadcasts/{id}/recipients</code></div>
 
 收件人明细。status 过滤用来直接拉「哪些人失败了」。
 

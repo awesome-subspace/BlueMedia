@@ -3,7 +3,7 @@ title: "列出当前账户已发出的邀请及其状态"
 description: "列出当前账户已发出的邀请及其状态，不回显 Token。"
 ---
 
-`GET /v1/onboarding/invitations`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/onboarding/invitations</code></div>
 
 列出当前账户已发出的邀请及其状态，不回显 Token。
 

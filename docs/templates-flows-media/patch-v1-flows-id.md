@@ -3,7 +3,7 @@ title: "修改 Flow 的名称 / 分类 / 数据交换端点"
 description: "修改 Flow 的名称 / 分类 / 数据交换端点。"
 ---
 
-`PATCH /v1/flows/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/flows/{id}</code></div>
 
 修改 Flow 的名称 / 分类 / 数据交换端点。
 

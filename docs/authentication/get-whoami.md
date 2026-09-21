@@ -3,7 +3,7 @@ title: "验证 API Key"
 description: "验证 API Key，并返回当前账户标识与 API 服务版本。"
 ---
 
-`GET /whoami`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/whoami</code></div>
 
 验证 API Key，并返回当前账户标识与 API 服务版本。
 

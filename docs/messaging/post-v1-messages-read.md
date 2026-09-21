@@ -3,7 +3,7 @@ title: "标记一条入站消息为已读"
 description: "标记一条入站消息为已读(可选附带输入中指示器)；实时生效、不计费，不是发送。"
 ---
 
-`POST /v1/messages/read`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/messages/read</code></div>
 
 标记一条入站消息为已读(可选附带输入中指示器)；实时生效、不计费，不是发送。
 

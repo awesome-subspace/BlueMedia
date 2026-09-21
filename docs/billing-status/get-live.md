@@ -3,7 +3,7 @@ title: "进程存活检查"
 description: "进程存活检查。"
 ---
 
-`GET /live`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/live</code></div>
 
 进程存活检查。
 

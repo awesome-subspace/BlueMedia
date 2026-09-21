@@ -3,7 +3,7 @@ title: "拉取 Meta 侧号码状态"
 description: "拉取 Meta 侧号码状态并落库。"
 ---
 
-`POST /v1/phone-numbers/{id}/refresh`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/refresh</code></div>
 
 拉取 Meta 侧号码状态并落库。
 

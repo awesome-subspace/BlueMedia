@@ -25,6 +25,16 @@ description: "号码在 Meta 侧的添加与所有权验证需要在 WhatsApp Ma
 
 **已在 WhatsApp Manager 验证过的号码跳过前两步**，直接 register 即可。平台不强制这个顺序——对未验证号码直接 register 会被 Meta 拒绝，按返回的错误判断下一步。
 
+```mermaid
+flowchart LR
+    A([未验证所有权的号码]) --> B["POST .../request-code<br/>SMS 或 VOICE"]
+    B --> C["POST .../verify-code<br/>6 位码，约 10 分钟有效"]
+    C --> D["POST .../register<br/>用 6 位 PIN 注册到 Cloud API"]
+    D --> E([已连接])
+    A2([已在 WhatsApp Manager 验证过]) -. 跳过前两步 .-> D
+```
+
+
 :::
 
 `register` 的 `pin` 参数有双重语义：首次注册时是"给这个号码设置的两步验证 PIN"；号码已开启两步验证时则是"现有 PIN"。Meta 不区分这两种情况。

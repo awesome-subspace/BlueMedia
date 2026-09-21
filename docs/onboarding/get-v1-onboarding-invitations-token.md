@@ -3,7 +3,7 @@ title: "读取邀请落地页所需的非机密信息"
 description: "【客户侧，无需鉴权】读取邀请落地页所需的非机密信息（客户名、Meta appId/configId）。"
 ---
 
-`GET /v1/onboarding/invitations/{token}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/onboarding/invitations/{token}</code></div>
 
 【客户侧，无需鉴权】读取邀请落地页所需的非机密信息（客户名、Meta appId/configId）。
 

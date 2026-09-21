@@ -3,7 +3,7 @@ title: "轮询接入进度"
 description: "【客户侧，无需鉴权】轮询接入进度。仅返回脱敏步骤与错误，不含任何 Token、code 或账户信息。"
 ---
 
-`GET /v1/onboarding/invitations/{token}/status`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/onboarding/invitations/{token}/status</code></div>
 
 【客户侧，无需鉴权】轮询接入进度。仅返回脱敏步骤与错误，不含任何 Token、code 或账户信息。
 

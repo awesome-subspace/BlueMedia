@@ -3,7 +3,7 @@ title: "读取最近认证记录"
 description: "读取最近认证记录；未提交过返回 404。"
 ---
 
-`GET /v1/business-portfolios/{portfolioId}/certification`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/business-portfolios/{portfolioId}/certification</code></div>
 
 读取最近认证记录；未提交过返回 404。
 

@@ -3,7 +3,7 @@ title: "触发所有权验证"
 description: "触发所有权验证（两阶段协议的第二阶段）。"
 ---
 
-`POST /v1/webhook-endpoints/{id}/verify`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/webhook-endpoints/{id}/verify</code></div>
 
 触发所有权验证（两阶段协议的第二阶段）。
 

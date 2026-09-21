@@ -3,7 +3,7 @@ title: "同步验证状态"
 description: "同步 Business Portfolio 的标准验证状态与 PLBV 认证状态。"
 ---
 
-`POST /v1/business-portfolios/{id}/refresh-verification`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/business-portfolios/{id}/refresh-verification</code></div>
 
 同步 Business Portfolio 的标准验证状态与 PLBV 认证状态。
 

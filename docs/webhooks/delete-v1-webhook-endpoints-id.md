@@ -3,7 +3,7 @@ title: "停用端点并保留历史记录"
 description: "停用端点并保留历史记录。"
 ---
 
-`DELETE /v1/webhook-endpoints/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/webhook-endpoints/{id}</code></div>
 
 停用端点并保留历史记录。
 

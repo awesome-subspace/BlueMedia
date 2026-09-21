@@ -3,7 +3,7 @@ title: "设置或轮换两步验证 PIN"
 description: "设置或轮换两步验证 PIN。"
 ---
 
-`POST /v1/phone-numbers/{id}/two-step-pin`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/two-step-pin</code></div>
 
 设置或轮换两步验证 PIN。
 

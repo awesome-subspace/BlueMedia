@@ -3,7 +3,7 @@ title: "列出 WABA"
 description: "列出 WABA，可按 Portfolio 过滤。"
 ---
 
-`GET /v1/wabas`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/wabas</code></div>
 
 列出 WABA，可按 Portfolio 过滤。
 

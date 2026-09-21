@@ -3,7 +3,7 @@ title: "用 6 位 PIN 注册号码"
 description: "用 6 位 PIN 注册号码。"
 ---
 
-`POST /v1/phone-numbers/{id}/register`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/register</code></div>
 
 用 6 位 PIN 注册号码。
 

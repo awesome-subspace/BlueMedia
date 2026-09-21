@@ -7,7 +7,7 @@ const GITLAB_URL = 'http://git.domob-inc.cn/wenqiao.kang/BSPDocSystem';
 const config = {
   title: 'BSP 开发者文档',
   tagline: '接入 WhatsApp Business Platform 所需的全部接口与指南',
-  favicon: 'img/favicon.svg',
+  favicon: 'img/favicon.png',
 
   url: 'http://git.domob-inc.cn',
   baseUrl: '/',
@@ -32,6 +32,7 @@ const config = {
   // 需要写 JSX 的页面用 .mdx 后缀即可。
   markdown: {
     format: 'detect',
+    mermaid: true,
     hooks: {
       onBrokenMarkdownLinks: 'throw',
     },
@@ -59,6 +60,7 @@ const config = {
   ],
 
   themes: [
+    '@docusaurus/theme-mermaid',
     [
       '@easyops-cn/docusaurus-search-local',
       /** @type {import('@easyops-cn/docusaurus-search-local').PluginOptions} */
@@ -80,10 +82,12 @@ const config = {
         respectPrefersColorScheme: true,
       },
       navbar: {
-        title: 'BSP 开发者文档',
+        title: '开发者文档',
         logo: {
-          alt: 'BSP',
-          src: 'img/logo.svg',
+          alt: 'BlueMedia',
+          src: 'img/logo-bluemedia.svg',
+          srcDark: 'img/logo-bluemedia-dark.svg',
+          height: 26,
         },
         items: [
           {
@@ -101,6 +105,18 @@ const config = {
             to: '/docs/guides/error-codes',
             label: '错误码',
             position: 'left',
+          },
+          {
+            type: 'dropdown',
+            label: '参考',
+            position: 'left',
+            items: [
+              {to: '/docs/reference/glossary', label: '术语表'},
+              {to: '/docs/reference/rate-limits', label: '限流与配额'},
+              {to: '/docs/reference/idempotency', label: '幂等与重试'},
+              {to: '/docs/reference/faq', label: '常见问题'},
+              {to: '/docs/reference/changelog', label: '更新日志'},
+            ],
           },
           {
             href: GITLAB_URL,
@@ -132,13 +148,16 @@ const config = {
             title: '排障',
             items: [
               {label: '错误码', to: '/docs/guides/error-codes'},
-              {label: 'Webhook 集成', to: '/docs/guides/webhook-integration'},
-              {label: '账务与信用额度', to: '/docs/guides/billing'},
+              {label: '常见问题', to: '/docs/reference/faq'},
+              {label: '限流与配额', to: '/docs/reference/rate-limits'},
+              {label: '幂等与重试', to: '/docs/reference/idempotency'},
             ],
           },
           {
             title: '更多',
             items: [
+              {label: '术语表', to: '/docs/reference/glossary'},
+              {label: '更新日志', to: '/docs/reference/changelog'},
               {label: '源码仓库', href: GITLAB_URL},
             ],
           },
@@ -148,12 +167,23 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['bash', 'json', 'http', 'yaml'],
+        additionalLanguages: ['bash', 'json', 'http', 'yaml', 'python'],
       },
       docs: {
         sidebar: {
           hideable: true,
           autoCollapseCategories: true,
+        },
+      },
+      mermaid: {
+        theme: {light: 'neutral', dark: 'dark'},
+        options: {
+          themeVariables: {
+            primaryColor: '#eef1fb',
+            primaryBorderColor: '#2d44ba',
+            primaryTextColor: '#041726',
+            lineColor: '#7986cb',
+          },
         },
       },
       tableOfContents: {

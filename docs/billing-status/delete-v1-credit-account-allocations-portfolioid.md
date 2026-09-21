@@ -3,7 +3,7 @@ title: "取消某个 Business Portfolio 的预算上限"
 description: "取消某个 Business Portfolio 的预算上限，之后只受账户余额约束。"
 ---
 
-`DELETE /v1/credit-account/allocations/{portfolioId}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/credit-account/allocations/{portfolioId}</code></div>
 
 取消某个 Business Portfolio 的预算上限，之后只受账户余额约束。
 

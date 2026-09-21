@@ -3,7 +3,7 @@ title: "恢复一个暂停的活动"
 description: "恢复一个暂停的活动，从剩下的收件人继续。"
 ---
 
-`POST /v1/broadcasts/{id}/resume`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/broadcasts/{id}/resume</code></div>
 
 恢复一个暂停的活动，从剩下的收件人继续。
 

@@ -3,7 +3,7 @@ title: "手工创建 Portfolio"
 description: "手工创建 Portfolio；推荐使用 Embedded Signup。"
 ---
 
-`POST /v1/business-portfolios`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/business-portfolios</code></div>
 
 手工创建 Portfolio；推荐使用 Embedded Signup。
 

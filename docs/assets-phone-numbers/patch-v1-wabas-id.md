@@ -3,7 +3,7 @@ title: "修改名称、验证状态或审核状态"
 description: "修改名称、验证状态或审核状态。"
 ---
 
-`PATCH /v1/wabas/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/wabas/{id}</code></div>
 
 修改名称、验证状态或审核状态。
 

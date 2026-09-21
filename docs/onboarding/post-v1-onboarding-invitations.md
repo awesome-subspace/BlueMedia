@@ -3,7 +3,7 @@ title: "生成客户接入链接"
 description: "为指定客户和 Business Portfolio 生成一次性接入链接。明文 URL 只在本响应里返回一次（库内只存哈希），请立即发给客户。"
 ---
 
-`POST /v1/onboarding/invitations`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/onboarding/invitations</code></div>
 
 为指定客户和 Business Portfolio 生成一次性接入链接。明文 URL 只在本响应里返回一次（库内只存哈希），请立即发给客户。
 

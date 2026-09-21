@@ -3,7 +3,7 @@ title: "上传模板媒体头素材"
 description: "上传模板媒体头素材（multipart），返回填进 components 的 `handle`。"
 ---
 
-`POST /v1/templates/media`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/templates/media</code></div>
 
 上传模板媒体头素材（multipart），返回填进 components 的 `handle`。
 

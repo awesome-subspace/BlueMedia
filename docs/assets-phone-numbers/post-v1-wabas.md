@@ -3,7 +3,7 @@ title: "手工创建 WABA 记录"
 description: "手工创建 WABA 记录。"
 ---
 
-`POST /v1/wabas`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/wabas</code></div>
 
 手工创建 WABA 记录。
 

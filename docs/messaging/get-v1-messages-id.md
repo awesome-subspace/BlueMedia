@@ -3,7 +3,7 @@ title: "读取最终状态、wamid 和失败原因"
 description: "读取最终状态、wamid 和失败原因。"
 ---
 
-`GET /v1/messages/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/messages/{id}</code></div>
 
 读取最终状态、wamid 和失败原因。
 

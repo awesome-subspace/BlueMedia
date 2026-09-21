@@ -3,7 +3,7 @@ title: "局部更新端点"
 description: "局部更新端点（url / events / metadata）。"
 ---
 
-`PATCH /v1/webhook-endpoints/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/webhook-endpoints/{id}</code></div>
 
 局部更新端点（url / events / metadata）。
 

@@ -3,7 +3,7 @@ title: "设置某个 Business Portfolio 的预算上限"
 description: "设置某个 Business Portfolio 的预算上限。"
 ---
 
-`PUT /v1/credit-account/allocations/{portfolioId}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--put">PUT</span><code class="endpoint-path">/v1/credit-account/allocations/{portfolioId}</code></div>
 
 设置某个 Business Portfolio 的预算上限。
 

@@ -3,7 +3,7 @@ title: "一次性确认开启该 WABA 的模板分析"
 description: "一次性确认开启该 WABA 的模板分析。**开了不能关**。"
 ---
 
-`POST /v1/templates/analytics/enable`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/templates/analytics/enable</code></div>
 
 一次性确认开启该 WABA 的模板分析。**开了不能关**。
 

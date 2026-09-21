@@ -3,7 +3,7 @@ title: "读取当前账户的账本流水"
 description: "读取当前账户的账本流水，按时间倒序；不接受账户归属参数。窗口内没有流水时 items 为空数组。"
 ---
 
-`GET /v1/credit-account/ledger`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/credit-account/ledger</code></div>
 
 读取当前账户的账本流水，按时间倒序；不接受账户归属参数。窗口内没有流水时 items 为空数组。
 

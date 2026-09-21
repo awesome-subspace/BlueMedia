@@ -3,7 +3,7 @@ title: "列出当前账户最近 50 条消息"
 description: "列出当前账户最近 50 条消息，支持 keyset 翻页与状态、时间筛选。"
 ---
 
-`GET /v1/messages`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/messages</code></div>
 
 列出当前账户最近 50 条消息，支持 keyset 翻页与状态、时间筛选。
 

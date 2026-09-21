@@ -3,7 +3,7 @@ title: "新增或覆盖号码消息路由配置"
 description: "新增或覆盖号码消息路由配置。"
 ---
 
-`PUT /v1/phone-numbers/{id}/messaging-config`
+<div class="endpoint"><span class="endpoint-method endpoint-method--put">PUT</span><code class="endpoint-path">/v1/phone-numbers/{id}/messaging-config</code></div>
 
 新增或覆盖号码消息路由配置。
 

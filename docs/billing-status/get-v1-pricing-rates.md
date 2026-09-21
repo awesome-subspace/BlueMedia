@@ -3,7 +3,7 @@ title: "我的价目表"
 description: "我的价目表：各 market / 类别的单价（已按售价策略换算）。"
 ---
 
-`GET /v1/pricing/rates`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/pricing/rates</code></div>
 
 我的价目表：各 market / 类别的单价（已按售价策略换算）。
 

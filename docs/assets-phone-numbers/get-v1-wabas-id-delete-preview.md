@@ -3,7 +3,7 @@ title: "WABA 删除影响预览"
 description: "级联删除影响预览：返回将被删除的号码/模板/消息等数量。只读。"
 ---
 
-`GET /v1/wabas/{id}/delete-preview`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/wabas/{id}/delete-preview</code></div>
 
 级联删除影响预览：返回将被删除的号码/模板/消息等数量。只读。
 

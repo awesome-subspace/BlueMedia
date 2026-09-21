@@ -3,7 +3,7 @@ title: "收件箱列表"
 description: "收件箱列表，按最新活动排序；before(ISO 时间)做游标分页。"
 ---
 
-`GET /v1/conversations`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/conversations</code></div>
 
 收件箱列表，按最新活动排序；before(ISO 时间)做游标分页。
 

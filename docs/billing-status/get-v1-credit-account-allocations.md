@@ -3,7 +3,7 @@ title: "Business Portfolio 预算总览"
 description: "Business Portfolio 预算总览：账户余额及各 Portfolio 的上限、已用与剩余。"
 ---
 
-`GET /v1/credit-account/allocations`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/credit-account/allocations</code></div>
 
 Business Portfolio 预算总览：账户余额及各 Portfolio 的上限、已用与剩余。
 

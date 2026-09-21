@@ -3,7 +3,7 @@ title: "创建群发"
 description: "创建群发（批量模板发送）。返回 202 —— 响应返回时一条都还没发出去：真正的发送由平台按节流速度逐条推进。"
 ---
 
-`POST /v1/broadcasts`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/broadcasts</code></div>
 
 创建群发（批量模板发送）。返回 202 —— 响应返回时一条都还没发出去：真正的发送由平台按节流速度逐条推进。
 

@@ -3,7 +3,7 @@ title: "刷新 PLBV 认证"
 description: "主动查询并同步该客户最新的 PLBV submission。"
 ---
 
-`POST /v1/business-portfolios/{portfolioId}/certification/refresh`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/business-portfolios/{portfolioId}/certification/refresh</code></div>
 
 主动查询并同步该客户最新的 PLBV submission。
 

@@ -3,7 +3,7 @@ title: "Business Portfolio 预算对账"
 description: "Business Portfolio 预算对账：spent 计数与账本汇总的差额。"
 ---
 
-`GET /v1/credit-account/allocations/audit`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/credit-account/allocations/audit</code></div>
 
 Business Portfolio 预算对账：spent 计数与账本汇总的差额。
 

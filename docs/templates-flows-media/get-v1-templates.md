@@ -3,7 +3,7 @@ title: "列出模板及最新审核状态"
 description: "列出模板及最新审核状态。"
 ---
 
-`GET /v1/templates`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/templates</code></div>
 
 列出模板及最新审核状态。
 

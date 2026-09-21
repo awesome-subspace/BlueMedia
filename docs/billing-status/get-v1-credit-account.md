@@ -3,7 +3,7 @@ title: "读取币种、可用余额和预留余额"
 description: "读取币种、可用余额和预留余额；未配置返回 404。"
 ---
 
-`GET /v1/credit-account`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/credit-account</code></div>
 
 读取币种、可用余额和预留余额；未配置返回 404。
 

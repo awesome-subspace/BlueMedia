@@ -3,7 +3,7 @@ title: "查询步骤、错误和已落地资产"
 description: "查询步骤、错误和已落地资产；ID 为 onb_...。"
 ---
 
-`GET /v1/onboarding/embedded-signup/{operationId}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/onboarding/embedded-signup/{operationId}</code></div>
 
 查询步骤、错误和已落地资产；ID 为 onb_...。
 

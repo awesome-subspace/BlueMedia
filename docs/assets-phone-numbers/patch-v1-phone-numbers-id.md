@@ -3,7 +3,7 @@ title: "更新名称、质量、消息限制、吞吐或状态"
 description: "更新名称、质量、消息限制、吞吐或状态。"
 ---
 
-`PATCH /v1/phone-numbers/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/phone-numbers/{id}</code></div>
 
 更新名称、质量、消息限制、吞吐或状态。
 

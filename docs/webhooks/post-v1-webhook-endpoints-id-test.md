@@ -3,7 +3,7 @@ title: "发一条测试事件"
 description: "发一条测试事件（与 verify 同一机制）。"
 ---
 
-`POST /v1/webhook-endpoints/{id}/test`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/webhook-endpoints/{id}/test</code></div>
 
 发一条测试事件（与 verify 同一机制）。
 

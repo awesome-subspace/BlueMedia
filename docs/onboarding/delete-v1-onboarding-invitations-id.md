@@ -3,7 +3,7 @@ title: "撤销当前账户中尚未使用的邀请"
 description: "撤销当前账户中尚未使用的邀请；已完成的邀请不可撤销（返回 409）。"
 ---
 
-`DELETE /v1/onboarding/invitations/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/onboarding/invitations/{id}</code></div>
 
 撤销当前账户中尚未使用的邀请；已完成的邀请不可撤销（返回 409）。
 

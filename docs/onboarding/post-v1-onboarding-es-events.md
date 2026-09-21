@@ -3,7 +3,7 @@ title: "上报一次 Embedded Signup 会话事件"
 description: "上报一次 Embedded Signup 会话事件（客户放弃在哪一屏、或客户自助报错）。恒 202。"
 ---
 
-`POST /v1/onboarding/es-events`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/onboarding/es-events</code></div>
 
 上报一次 Embedded Signup 会话事件（客户放弃在哪一屏、或客户自助报错）。恒 202。
 

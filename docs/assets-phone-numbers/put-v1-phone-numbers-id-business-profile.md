@@ -3,7 +3,7 @@ title: "新增或覆盖号码商业资料"
 description: "新增或覆盖号码商业资料。"
 ---
 
-`PUT /v1/phone-numbers/{id}/business-profile`
+<div class="endpoint"><span class="endpoint-method endpoint-method--put">PUT</span><code class="endpoint-path">/v1/phone-numbers/{id}/business-profile</code></div>
 
 新增或覆盖号码商业资料。
 

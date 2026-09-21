@@ -3,7 +3,7 @@ title: "重新启用被停用的端点"
 description: "重新启用被停用（DELETE）的端点。"
 ---
 
-`POST /v1/webhook-endpoints/{id}/enable`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/webhook-endpoints/{id}/enable</code></div>
 
 重新启用被停用（DELETE）的端点。
 

@@ -3,7 +3,7 @@ title: "取消额度授权"
 description: "取消该 WABA 所属 Business Portfolio 的 BlueMedia 信用额度授权，之后发送模板消息会被 CREDIT_LINE_NOT_READY 拦下。**只更新 BlueMedia 状态，不调用 Meta 撤销**：Meta 的撤销按客户 business 生效，会连带影响该客户全部已共享 WABA，且额度线挂到 WABA 后无法单独摘除。影响范围是整个 Business Portfolio。"
 ---
 
-`POST /v1/wabas/{id}/credit-line/deauthorize`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/wabas/{id}/credit-line/deauthorize</code></div>
 
 取消该 WABA 所属 Business Portfolio 的 BlueMedia 信用额度授权，之后发送模板消息会被 CREDIT_LINE_NOT_READY 拦下。**只更新 BlueMedia 状态，不调用 Meta 撤销**：Meta 的撤销按客户 business 生效，会连带影响该客户全部已共享 WABA，且额度线挂到 WABA 后无法单独摘除。影响范围是整个 Business Portfolio。
 

@@ -3,7 +3,7 @@ title: "由平台代理下载媒体原始字节"
 description: "由平台代理下载媒体原始字节。"
 ---
 
-`GET /v1/media/{id}/content`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/media/{id}/content</code></div>
 
 由平台代理下载媒体原始字节。
 

@@ -3,7 +3,7 @@ title: "绑定 Meta Pixel"
 description: "绑定或更换该 Business Portfolio 的 Meta Pixel（dataset）。同时把此前因缺 Pixel 而跳过的转化事件重新排队。"
 ---
 
-`POST /v1/business-portfolios/{id}/dataset`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/business-portfolios/{id}/dataset</code></div>
 
 绑定或更换该 Business Portfolio 的 Meta Pixel（dataset）。同时把此前因缺 Pixel 而跳过的转化事件重新排队。
 

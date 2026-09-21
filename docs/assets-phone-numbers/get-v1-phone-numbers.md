@@ -3,7 +3,7 @@ title: "列出号码"
 description: "列出号码，可按 WABA 过滤。"
 ---
 
-`GET /v1/phone-numbers`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/phone-numbers</code></div>
 
 列出号码，可按 WABA 过滤。
 

@@ -3,7 +3,7 @@ title: "查询 Meta 注册、名称、质量和两步验证状态"
 description: "查询 Meta 注册、名称、质量和两步验证状态。"
 ---
 
-`GET /v1/phone-numbers/{id}/registration-status`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/phone-numbers/{id}/registration-status</code></div>
 
 查询 Meta 注册、名称、质量和两步验证状态。
 

@@ -3,7 +3,7 @@ title: "授权 BlueMedia 信用额度并挂载到该 WABA"
 description: "授权 BlueMedia 信用额度并挂载到该 WABA。Meta 会先向客户的 Business Portfolio 共享额度，再挂载到指定 WABA，因此同一 Portfolio 下的其它 WABA 会共享授权。重复调用不会重复授权或重复挂载；挂载失败仍返回 200，原因见 waba.error。"
 ---
 
-`POST /v1/wabas/{id}/credit-line/authorize`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/wabas/{id}/credit-line/authorize</code></div>
 
 授权 BlueMedia 信用额度并挂载到该 WABA。Meta 会先向客户的 Business Portfolio 共享额度，再挂载到指定 WABA，因此同一 Portfolio 下的其它 WABA 会共享授权。重复调用不会重复授权或重复挂载；挂载失败仍返回 200，原因见 waba.error。
 

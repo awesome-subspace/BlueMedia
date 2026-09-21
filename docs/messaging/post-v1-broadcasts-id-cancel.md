@@ -3,7 +3,7 @@ title: "取消活动"
 description: "取消活动，并把尚未派发的收件人一次性作废。不可恢复。"
 ---
 
-`POST /v1/broadcasts/{id}/cancel`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/broadcasts/{id}/cancel</code></div>
 
 取消活动，并把尚未派发的收件人一次性作废。不可恢复。
 

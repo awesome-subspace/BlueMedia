@@ -3,7 +3,7 @@ title: "删除模板"
 description: "删除模板，返回 204。"
 ---
 
-`DELETE /v1/templates/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/templates/{id}</code></div>
 
 删除模板，返回 204。
 

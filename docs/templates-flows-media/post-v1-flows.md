@@ -3,7 +3,7 @@ title: "创建 Flow"
 description: "创建 Flow（可同时上传 Flow JSON 并直接发布）。"
 ---
 
-`POST /v1/flows`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/flows</code></div>
 
 创建 Flow（可同时上传 Flow JSON 并直接发布）。
 

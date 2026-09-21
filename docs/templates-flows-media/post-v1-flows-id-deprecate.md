@@ -3,7 +3,7 @@ title: "弃用一个已发布的 Flow"
 description: "弃用（下线）一个已发布的 Flow。同样不可逆。"
 ---
 
-`POST /v1/flows/{id}/deprecate`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/flows/{id}/deprecate</code></div>
 
 弃用（下线）一个已发布的 Flow。同样不可逆。
 

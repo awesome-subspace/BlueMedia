@@ -3,7 +3,7 @@ title: "上传 / 替换 Flow JSON"
 description: "上传 / 替换 Flow JSON（整份替换）。"
 ---
 
-`POST /v1/flows/{id}/json`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/flows/{id}/json</code></div>
 
 上传 / 替换 Flow JSON（整份替换）。
 

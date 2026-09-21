@@ -3,7 +3,7 @@ title: "读取模板详情"
 description: "读取模板详情。"
 ---
 
-`GET /v1/templates/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/templates/{id}</code></div>
 
 读取模板详情。
 

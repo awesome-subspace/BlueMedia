@@ -3,7 +3,7 @@ title: "查询最近操作"
 description: "查询最近操作；limit 为 1 至 50。"
 ---
 
-`GET /v1/onboarding/embedded-signup`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/onboarding/embedded-signup</code></div>
 
 查询最近操作；limit 为 1 至 50。
 

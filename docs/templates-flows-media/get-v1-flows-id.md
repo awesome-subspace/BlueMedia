@@ -3,7 +3,7 @@ title: "校验 WABA 归属后读取 Flow 详情"
 description: "校验 WABA 归属后读取 Flow 详情。"
 ---
 
-`GET /v1/flows/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/flows/{id}</code></div>
 
 校验 WABA 归属后读取 Flow 详情。
 

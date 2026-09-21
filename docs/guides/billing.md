@@ -37,6 +37,24 @@ Portfolio 预算用完时，发送以 `402 BM_BUDGET_EXCEEDED` 失败；账户�
 
 账本是追加式的（ledger\_entries，只插不改），同一幂等键只会入账一次——重试、重复回调都不会造成重复扣费。
 
+```mermaid
+sequenceDiagram
+    autonumber
+    participant C as 调用方
+    participant P as BlueMedia
+    participant M as Meta
+    C->>P: POST /v1/messages
+    P->>P: 锁定 reserved 额度，创建预留记录
+    Note over P: 余额不足 402 INSUFFICIENT_FUNDS<br/>Portfolio 预算用完 402 BM_BUDGET_EXCEEDED
+    P-->>C: 202 accepted
+    P->>M: 提交消息
+    M-->>P: 受理并返回 wamid
+    P->>P: 结算：预留转实际扣费，写入账本流水
+    M-->>P: 状态回调 failed
+    P->>P: 自动冲回（幂等键按 messageId 生成，重复回调不重复冲）
+```
+
+
 ## 用量接口的两个口径
 
 `GET /v1/credit-account/usage` 里有两组容易混淆的统计，分母不同：

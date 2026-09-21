@@ -3,7 +3,7 @@ title: "轮换签名密钥"
 description: "轮换签名密钥，返回一次性新明文。"
 ---
 
-`POST /v1/webhook-endpoints/{id}/rotate-secret`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/webhook-endpoints/{id}/rotate-secret</code></div>
 
 轮换签名密钥，返回一次性新明文。
 

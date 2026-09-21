@@ -3,7 +3,7 @@ title: "列出 Portfolios"
 description: "列出当前 API Key 可访问的 Business Portfolios。"
 ---
 
-`GET /v1/business-portfolios`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/business-portfolios</code></div>
 
 列出当前 API Key 可访问的 Business Portfolios。
 

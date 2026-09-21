@@ -1,16 +1,24 @@
 /**
  * BSP 开发者文档主题。
- * 走克制的蓝色技术文档风：正文密度高、代码块清晰、暗色不刺眼。
+ *
+ * 配色取自 BlueMedia 品牌站（bluemediagroup.cn）：
+ *   主色 #2d44ba / #1d34aa / #3f51b5，浅色调 #7986cb，深色底 #041726。
+ * 浅色模式主色 #2d44ba 在白底对比度 7.93:1，暗色模式主色 #8f9bdb 在 #041726 上 6.82:1，
+ * 均满足 WCAG AAA 正文要求。
  */
 
 :root {
-  --ifm-color-primary: #1b64f2;
-  --ifm-color-primary-dark: #0f56e0;
-  --ifm-color-primary-darker: #0e51d3;
-  --ifm-color-primary-darkest: #0c43ae;
-  --ifm-color-primary-light: #3a79f4;
-  --ifm-color-primary-lighter: #4883f5;
-  --ifm-color-primary-lightest: #6f9df7;
+  /* 品牌深蓝 */
+  --ifm-color-primary: #2d44ba;
+  --ifm-color-primary-dark: #2839a7;
+  --ifm-color-primary-darker: #23349c;
+  --ifm-color-primary-darkest: #1d34aa;
+  --ifm-color-primary-light: #3f51b5;
+  --ifm-color-primary-lighter: #4f61c6;
+  --ifm-color-primary-lightest: #7986cb;
+
+  --bsp-brand-ink: #041726;
+  --bsp-brand-tint: #eef1fb;
 
   --ifm-code-font-size: 88%;
   --ifm-font-size-base: 15.5px;
@@ -18,23 +26,33 @@
   --ifm-global-radius: 8px;
   --ifm-navbar-shadow: 0 1px 0 var(--ifm-color-emphasis-200);
   --ifm-heading-font-weight: 650;
-  --ifm-table-head-background: var(--ifm-color-emphasis-100);
+  --ifm-table-head-background: var(--bsp-brand-tint);
+  --ifm-link-hover-color: var(--ifm-color-primary-darkest);
 
-  --docusaurus-highlighted-code-line-bg: rgb(0 0 0 / 8%);
+  --docusaurus-highlighted-code-line-bg: rgb(45 68 186 / 12%);
 }
 
 [data-theme='dark'] {
-  --ifm-color-primary: #6f9df7;
-  --ifm-color-primary-dark: #4d86f5;
-  --ifm-color-primary-darker: #3c7bf4;
-  --ifm-color-primary-darkest: #1058e2;
-  --ifm-color-primary-light: #91b4f9;
-  --ifm-color-primary-lighter: #a2bffa;
-  --ifm-color-primary-lightest: #d5e2fd;
+  --ifm-color-primary: #8f9bdb;
+  --ifm-color-primary-dark: #7986cb;
+  --ifm-color-primary-darker: #6a78c4;
+  --ifm-color-primary-darkest: #5967b8;
+  --ifm-color-primary-light: #a4aee4;
+  --ifm-color-primary-lighter: #b6bdea;
+  --ifm-color-primary-lightest: #d5daf5;
 
-  --ifm-background-color: #10131a;
-  --ifm-background-surface-color: #161a23;
-  --docusaurus-highlighted-code-line-bg: rgb(255 255 255 / 10%);
+  /* 品牌深蓝底，而不是中性灰黑 */
+  --ifm-background-color: #041726;
+  --ifm-background-surface-color: #0a2133;
+  --bsp-brand-tint: #102b40;
+  --ifm-table-head-background: var(--bsp-brand-tint);
+
+  --docusaurus-highlighted-code-line-bg: rgb(143 155 219 / 18%);
+}
+
+/* 导航栏在暗色下用品牌底色，和正文区分开 */
+[data-theme='dark'] .navbar {
+  background: #061d2f;
 }
 
 /* 接口页开头的 `GET /v1/...` 单行代码，放大成醒目的端点标识 */
@@ -45,7 +63,12 @@
   padding: 0.45rem 0.8rem;
   border-radius: var(--ifm-global-radius);
   border: 1px solid var(--ifm-color-emphasis-300);
-  background: var(--ifm-color-emphasis-100);
+  background: var(--bsp-brand-tint);
+  color: var(--ifm-color-primary-darkest);
+}
+
+[data-theme='dark'] .markdown > p:first-of-type > code:only-child {
+  color: var(--ifm-color-primary-light);
 }
 
 /* 参数/响应表格：接口文档里表格很多，压紧一点更好读 */
@@ -91,4 +114,130 @@
 
 .theme-admonition p:last-child {
   margin-bottom: 0;
+}
+
+/* ------------------------------------------------------------------ */
+/* 侧边栏 HTTP 方法徽标                                                */
+/* ------------------------------------------------------------------ */
+
+.api-method > .menu__link,
+.api-method > .menu__list-item-collapsible > .menu__link {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.api-method > .menu__link::before,
+.api-method > .menu__list-item-collapsible > .menu__link::before {
+  content: '';
+  flex: 0 0 auto;
+  width: 2.9rem;
+  padding: 0.05rem 0;
+  border-radius: 4px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.6rem;
+  font-weight: 700;
+  line-height: 1.5;
+  letter-spacing: 0.02em;
+  text-align: center;
+  color: #fff;
+}
+
+.api-method.get > .menu__link::before {
+  content: 'GET';
+  background: #2d44ba;
+}
+
+.api-method.post > .menu__link::before {
+  content: 'POST';
+  background: #1f7a4d;
+}
+
+.api-method.put > .menu__link::before {
+  content: 'PUT';
+  background: #9a5b12;
+}
+
+.api-method.patch > .menu__link::before {
+  content: 'PATCH';
+  background: #7a5ba6;
+}
+
+.api-method.delete > .menu__link::before {
+  content: 'DEL';
+  background: #a32b2b;
+}
+
+[data-theme='dark'] .api-method.get > .menu__link::before {
+  background: #5967b8;
+}
+
+[data-theme='dark'] .api-method.post > .menu__link::before {
+  background: #2a9161;
+}
+
+[data-theme='dark'] .api-method.put > .menu__link::before {
+  background: #b57320;
+}
+
+[data-theme='dark'] .api-method.patch > .menu__link::before {
+  background: #9273bf;
+}
+
+[data-theme='dark'] .api-method.delete > .menu__link::before {
+  background: #c04040;
+}
+
+/* ------------------------------------------------------------------ */
+/* 页内端点标识（由 scripts 生成的 .endpoint 块）                       */
+/* ------------------------------------------------------------------ */
+
+.endpoint {
+  display: flex;
+  align-items: center;
+  flex-wrap: wrap;
+  gap: 0.6rem;
+  margin: 0 0 1.5rem;
+  padding: 0.7rem 0.85rem;
+  border: 1px solid var(--ifm-color-emphasis-200);
+  border-radius: var(--ifm-global-radius);
+  background: var(--bsp-brand-tint);
+}
+
+.endpoint-method {
+  flex: 0 0 auto;
+  padding: 0.2rem 0.55rem;
+  border-radius: 5px;
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.72rem;
+  font-weight: 700;
+  letter-spacing: 0.04em;
+  color: #fff;
+}
+
+.endpoint-method--get {
+  background: #2d44ba;
+}
+.endpoint-method--post {
+  background: #1f7a4d;
+}
+.endpoint-method--put {
+  background: #9a5b12;
+}
+.endpoint-method--patch {
+  background: #7a5ba6;
+}
+.endpoint-method--delete {
+  background: #a32b2b;
+}
+
+.endpoint-path {
+  font-family: var(--ifm-font-family-monospace);
+  font-size: 0.95rem;
+  font-weight: 600;
+  word-break: break-all;
+  background: none;
+  border: none;
+  padding: 0;
+  color: var(--ifm-heading-color);
 }

@@ -3,7 +3,7 @@ title: "诊断客户 Token Scopes"
 description: "诊断该 portfolio 的客户 Embedded Signup token 被 Meta 授予了哪些 scope（经 debug_token）。用于判断 analytics/WABA 状态的权限报错是 token 缺 whatsapp_business_management 还是平台 App 缺 Advanced Access。不回显 token 本身。"
 ---
 
-`GET /v1/business-portfolios/{id}/token-scopes`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/business-portfolios/{id}/token-scopes</code></div>
 
 诊断该 portfolio 的客户 Embedded Signup token 被 Meta 授予了哪些 scope（经 debug_token）。用于判断 analytics/WABA 状态的权限报错是 token 缺 whatsapp_business_management 还是平台 App 缺 Advanced Access。不回显 token 本身。
 

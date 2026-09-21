@@ -3,7 +3,7 @@ title: "同步 Meta 模板"
 description: "把该 WABA 在 Meta 侧已有的模板导入/刷新到本地。"
 ---
 
-`POST /v1/templates/sync`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/templates/sync</code></div>
 
 把该 WABA 在 Meta 侧已有的模板导入/刷新到本地。
 

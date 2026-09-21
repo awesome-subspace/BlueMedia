@@ -3,7 +3,7 @@ title: "列出当前授权范围内的转化事件及上报状态"
 description: "列出当前授权范围内的转化事件及上报状态。"
 ---
 
-`GET /v1/conversions/events`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/conversions/events</code></div>
 
 列出当前授权范围内的转化事件及上报状态。
 

@@ -3,7 +3,7 @@ title: "账户自助用量/费用视图"
 description: "账户自助用量/费用视图：余额 + 消费时间线 + 按分类/类型拆分。窗口内没有扣费时，dailyUsage / byCategory 为空数组，totalSpentMinor 为空对象 {}（它是按币种聚合的映射，不是数组）。"
 ---
 
-`GET /v1/credit-account/usage`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/credit-account/usage</code></div>
 
 账户自助用量/费用视图：余额 + 消费时间线 + 按分类/类型拆分。窗口内没有扣费时，dailyUsage / byCategory 为空数组，totalSpentMinor 为空对象 {}（它是按币种聚合的映射，不是数组）。
 

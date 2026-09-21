@@ -3,7 +3,7 @@ title: "删除 Flow"
 description: "删除 Flow。**仅 DRAFT 可删**；已发布的请用 deprecate。"
 ---
 
-`DELETE /v1/flows/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/flows/{id}</code></div>
 
 删除 Flow。**仅 DRAFT 可删**；已发布的请用 deprecate。
 

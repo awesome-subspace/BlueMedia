@@ -3,7 +3,7 @@ title: "从 Cloud API 注销号码"
 description: "从 Cloud API 注销号码。"
 ---
 
-`POST /v1/phone-numbers/{id}/deregister`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/deregister</code></div>
 
 从 Cloud API 注销号码。
 

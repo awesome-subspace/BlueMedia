@@ -3,7 +3,7 @@ title: "上报一条转化事件"
 description: "上报一条转化事件（Conversions API for business messaging）。返回 202 表示已排队，**不代表已发给 Meta**。"
 ---
 
-`POST /v1/conversions/events`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/conversions/events</code></div>
 
 上报一条转化事件（Conversions API for business messaging）。返回 202 表示已排队，**不代表已发给 Meta**。
 

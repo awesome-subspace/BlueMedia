@@ -3,7 +3,7 @@ title: "读取 Portfolio 详情"
 description: "读取 Portfolio 详情。"
 ---
 
-`GET /v1/business-portfolios/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/business-portfolios/{id}</code></div>
 
 读取 Portfolio 详情。
 

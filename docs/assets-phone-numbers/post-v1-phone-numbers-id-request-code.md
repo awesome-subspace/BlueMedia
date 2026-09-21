@@ -3,7 +3,7 @@ title: "请求 SMS/VOICE 验证码"
 description: "请求 SMS/VOICE 验证码。"
 ---
 
-`POST /v1/phone-numbers/{id}/request-code`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/request-code</code></div>
 
 请求 SMS/VOICE 验证码。
 

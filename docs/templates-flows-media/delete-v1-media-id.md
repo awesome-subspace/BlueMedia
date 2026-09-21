@@ -3,7 +3,7 @@ title: "删除 Meta 媒体及本地归属"
 description: "删除 Meta 媒体及本地归属。"
 ---
 
-`DELETE /v1/media/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/media/{id}</code></div>
 
 删除 Meta 媒体及本地归属。
 

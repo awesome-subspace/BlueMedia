@@ -3,7 +3,7 @@ title: "读取 WABA 的 Flow 列表"
 description: "读取 WABA 的 Flow 列表；wabaId 必填。"
 ---
 
-`GET /v1/flows`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/flows</code></div>
 
 读取 WABA 的 Flow 列表；wabaId 必填。
 

@@ -3,7 +3,7 @@ title: "列出当前账户的群发活动"
 description: "列出当前账户的群发活动，含派发进度与投递结果计数。"
 ---
 
-`GET /v1/broadcasts`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/broadcasts</code></div>
 
 列出当前账户的群发活动，含派发进度与投递结果计数。
 

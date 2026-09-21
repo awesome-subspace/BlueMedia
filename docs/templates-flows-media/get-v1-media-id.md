@@ -3,7 +3,7 @@ title: "读取媒体 MIME、大小、哈希和临时 URL"
 description: "读取媒体 MIME、大小、哈希和临时 URL。"
 ---
 
-`GET /v1/media/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/media/{id}</code></div>
 
 读取媒体 MIME、大小、哈希和临时 URL。
 

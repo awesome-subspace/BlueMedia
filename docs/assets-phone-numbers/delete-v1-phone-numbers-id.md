@@ -3,7 +3,7 @@ title: "删除业务号码"
 description: "删除业务号码（同时清理本地商业资料与消息配置）。cascade=true 时自上而下连同子对象一起删除（计费账本与信用账户不受影响，仅在有在途信用预留时返回 409）；不带该参数则保持原行为：存在子对象时返回 409。"
 ---
 
-`DELETE /v1/phone-numbers/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/phone-numbers/{id}</code></div>
 
 删除业务号码（同时清理本地商业资料与消息配置）。cascade=true 时自上而下连同子对象一起删除（计费账本与信用账户不受影响，仅在有在途信用预留时返回 409）；不带该参数则保持原行为：存在子对象时返回 409。
 

@@ -22,7 +22,7 @@ description: "用户点「点击进入 WhatsApp」广告（Click to WhatsApp，C
 
 收件箱列表和会话详情都会带上广告归因字段：
 
-```GET /v1/conversations 的一条记录（截取）
+```json title="GET /v1/conversations 的一条记录（截取）"
 {
   "id": "conv_...",
   "contactWaId": "8613800138000",
@@ -62,7 +62,7 @@ curl -X POST https://api.bsptest.com/v1/conversions/events \
   }'
 ```
 
-```202 Accepted
+```json title="202 Accepted"
 {
   "accepted": true,
   "queued": true,

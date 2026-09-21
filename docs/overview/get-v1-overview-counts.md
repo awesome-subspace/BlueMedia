@@ -3,7 +3,7 @@ title: "总览页计数看板"
 description: "总览页计数看板：platform 返回全量账户/资产计数；tenant 返回当前授权范围计数(号码计数需 phone_numbers:read，否则省略该字段)。"
 ---
 
-`GET /v1/overview/counts`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/overview/counts</code></div>
 
 总览页计数看板：platform 返回全量账户/资产计数；tenant 返回当前授权范围计数(号码计数需 phone_numbers:read，否则省略该字段)。
 

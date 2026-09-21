@@ -3,7 +3,7 @@ title: "清零未读计数"
 description: "清零未读计数；不会向 WhatsApp 发送已读回执(那需要 POST /v1/messages/read)。"
 ---
 
-`POST /v1/conversations/{id}/read`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/conversations/{id}/read</code></div>
 
 清零未读计数；不会向 WhatsApp 发送已读回执(那需要 POST /v1/messages/read)。
 

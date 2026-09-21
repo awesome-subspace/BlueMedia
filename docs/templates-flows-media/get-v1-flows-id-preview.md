@@ -3,7 +3,7 @@ title: "获取免登录的 Flow 预览链接"
 description: "获取免登录的 Flow 预览链接（30 天有效）。"
 ---
 
-`GET /v1/flows/{id}/preview`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/flows/{id}/preview</code></div>
 
 获取免登录的 Flow 预览链接（30 天有效）。
 

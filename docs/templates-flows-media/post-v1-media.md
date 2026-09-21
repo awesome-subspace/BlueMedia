@@ -3,7 +3,7 @@ title: "上传一个 multipart 文件到 Meta"
 description: "上传一个 multipart 文件到 Meta，返回媒体 ID。"
 ---
 
-`POST /v1/media`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/media</code></div>
 
 上传一个 multipart 文件到 Meta，返回媒体 ID。
 

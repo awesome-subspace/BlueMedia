@@ -3,7 +3,7 @@ title: "从失败步骤恢复"
 description: "从失败步骤恢复；号码注册使用平台自动生成并加密保存的默认 PIN。"
 ---
 
-`POST /v1/onboarding/embedded-signup/{operationId}/retry`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/onboarding/embedded-signup/{operationId}/retry</code></div>
 
 从失败步骤恢复；号码注册使用平台自动生成并加密保存的默认 PIN。
 

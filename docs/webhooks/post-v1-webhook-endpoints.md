@@ -3,7 +3,7 @@ title: "创建账户回调端点"
 description: "创建账户回调端点。回调携带 X-Webhook-Signature-256: sha256=...；使用端点 secret 对原始请求体做 HMAC-SHA256，secret 只返回一次。"
 ---
 
-`POST /v1/webhook-endpoints`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/webhook-endpoints</code></div>
 
 创建账户回调端点。回调携带 X-Webhook-Signature-256: sha256=...；使用端点 secret 对原始请求体做 HMAC-SHA256，secret 只返回一次。
 

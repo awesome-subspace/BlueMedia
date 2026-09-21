@@ -3,7 +3,7 @@ title: "编辑模板"
 description: "编辑模板。改完 Meta 会重新审核，本地状态回到 PENDING。"
 ---
 
-`PATCH /v1/templates/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--patch">PATCH</span><code class="endpoint-path">/v1/templates/{id}</code></div>
 
 编辑模板。改完 Meta 会重新审核，本地状态回到 PENDING。
 

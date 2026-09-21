@@ -3,7 +3,7 @@ title: "发布 Flow"
 description: "发布 Flow。**不可逆**：发布后不能修改或删除。"
 ---
 
-`POST /v1/flows/{id}/publish`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/flows/{id}/publish</code></div>
 
 发布 Flow。**不可逆**：发布后不能修改或删除。
 

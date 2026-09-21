@@ -3,7 +3,7 @@ title: "单个会话线程"
 description: "单个会话线程：会话信息 + 最近的入站/出站合并消息。"
 ---
 
-`GET /v1/conversations/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/conversations/{id}</code></div>
 
 单个会话线程：会话信息 + 最近的入站/出站合并消息。
 

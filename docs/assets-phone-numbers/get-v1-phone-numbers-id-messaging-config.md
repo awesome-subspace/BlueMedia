@@ -3,7 +3,7 @@ title: "读取号码当前消息路由配置"
 description: "读取号码当前消息路由配置；从未配置过返回 `null`。"
 ---
 
-`GET /v1/phone-numbers/{id}/messaging-config`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/phone-numbers/{id}/messaging-config</code></div>
 
 读取号码当前消息路由配置；从未配置过返回 `null`。
 

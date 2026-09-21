@@ -3,7 +3,7 @@ title: "提交 Meta 返回的 6 位验证码"
 description: "提交 Meta 返回的 6 位验证码。"
 ---
 
-`POST /v1/phone-numbers/{id}/verify-code`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/verify-code</code></div>
 
 提交 Meta 返回的 6 位验证码。
 

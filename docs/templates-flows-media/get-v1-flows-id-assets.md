@@ -3,7 +3,7 @@ title: "列出 Flow 的资产"
 description: "列出 Flow 的资产（目前只有 FLOW_JSON）。"
 ---
 
-`GET /v1/flows/{id}/assets`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/flows/{id}/assets</code></div>
 
 列出 Flow 的资产（目前只有 FLOW_JSON）。
 

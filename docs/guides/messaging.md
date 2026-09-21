@@ -19,6 +19,24 @@ description: "`POST /v1/messages` 的 `202 Accepted` 只代表「平台已受理
 
 状态只会单调前进——迟到或重复的回调不会让状态往回跳（比如不会把已经是 `delivered` 的消息退回 `sent`）。
 
+```mermaid
+stateDiagram-v2
+    [*] --> accepted : POST /v1/messages 返回 202
+    accepted --> sending : 平台开始提交
+    sending --> submitted : Meta 受理并返回 wamid
+    submitted --> sent : Meta 状态回调
+    sent --> delivered : 已送达用户设备
+    delivered --> read : 用户已读
+    sent --> read : 用户停在聊天界面时 Meta 省略 delivered
+    sending --> failed : 提交阶段失败
+    submitted --> failed : 投递阶段失败
+    read --> [*]
+    failed --> [*]
+```
+
+图里 `sent --> read` 这条边是最容易被漏掉的分支：**不要假设状态会逐级齐全出现**。
+
+
 ## 幂等与限流
 
 建议每个业务事件生成一个稳定的 `Idempotency-Key`（≤200 字符）：在当前授权范围内重复 key 返回**原来那条**消息，不会重复发送，网络超时重试时这是唯一安全的做法。默认每个 API Key 对应的账户限流 600 条/分钟，超限返回 `429 RATE_LIMITED`，退避后重试即可。

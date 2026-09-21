@@ -3,7 +3,7 @@ title: "手工创建业务号码记录"
 description: "手工创建业务号码记录。"
 ---
 
-`POST /v1/phone-numbers`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers</code></div>
 
 手工创建业务号码记录。
 

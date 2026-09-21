@@ -3,7 +3,7 @@ title: "读取号码当前商业资料"
 description: "读取号码当前商业资料；从未填写过返回 `null`。"
 ---
 
-`GET /v1/phone-numbers/{id}/business-profile`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/phone-numbers/{id}/business-profile</code></div>
 
 读取号码当前商业资料；从未填写过返回 `null`。
 

@@ -3,7 +3,7 @@ title: "OAuth token 端点"
 description: "OAuth token 端点：支持 authorization_code 与 refresh_token。"
 ---
 
-`POST /oauth/token`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/oauth/token</code></div>
 
 OAuth token 端点：支持 authorization_code 与 refresh_token。
 

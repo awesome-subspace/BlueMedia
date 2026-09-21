@@ -3,7 +3,7 @@ title: "提交新的显示名称"
 description: "提交新的显示名称并进入 Meta 审核。"
 ---
 
-`POST /v1/phone-numbers/{id}/display-name`
+<div class="endpoint"><span class="endpoint-method endpoint-method--post">POST</span><code class="endpoint-path">/v1/phone-numbers/{id}/display-name</code></div>
 
 提交新的显示名称并进入 Meta 审核。
 

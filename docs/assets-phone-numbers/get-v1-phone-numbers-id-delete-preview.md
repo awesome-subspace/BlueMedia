@@ -3,7 +3,7 @@ title: "号码删除影响预览"
 description: "级联删除影响预览：返回将被删除的消息/会话/媒体等数量。只读。"
 ---
 
-`GET /v1/phone-numbers/{id}/delete-preview`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/phone-numbers/{id}/delete-preview</code></div>
 
 级联删除影响预览：返回将被删除的消息/会话/媒体等数量。只读。
 

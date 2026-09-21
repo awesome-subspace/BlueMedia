@@ -3,7 +3,7 @@ title: "读取单个端点"
 description: "读取单个端点。"
 ---
 
-`GET /v1/webhook-endpoints/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--get">GET</span><code class="endpoint-path">/v1/webhook-endpoints/{id}</code></div>
 
 读取单个端点。
 

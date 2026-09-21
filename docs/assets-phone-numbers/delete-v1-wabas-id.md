@@ -3,7 +3,7 @@ title: "删除 WhatsApp 账户"
 description: "删除 WhatsApp 账户。cascade=true 时自上而下连同子对象一起删除（计费账本与信用账户不受影响，仅在有在途信用预留时返回 409）；不带该参数则保持原行为：存在子对象时返回 409。"
 ---
 
-`DELETE /v1/wabas/{id}`
+<div class="endpoint"><span class="endpoint-method endpoint-method--delete">DELETE</span><code class="endpoint-path">/v1/wabas/{id}</code></div>
 
 删除 WhatsApp 账户。cascade=true 时自上而下连同子对象一起删除（计费账本与信用账户不受影响，仅在有在途信用预留时返回 409）；不带该参数则保持原行为：存在子对象时返回 409。
 
