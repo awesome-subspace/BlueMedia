@@ -1,0 +1,25 @@
+# 依赖与产物不进构建上下文：node_modules 上万个文件会让 docker build 的
+# "sending build context" 这一步慢到分钟级，而 builder 阶段会自己 npm ci。
+node_modules
+build
+.docusaurus
+.cache-loader
+
+.gitignore
+
+# ⚠️ 刻意**不**排除 .git：docs 配置开了 showLastUpdateTime，Docusaurus 要读 git
+# 提交时间来渲染「最后更新于」。排除掉的话构建会直接失败：
+#   Error: This Docusaurus site is outside any Git worktree.
+# 本仓 .git 只有几 MB，进构建上下文的代价可以忽略。
+
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+
+.DS_Store
+Thumbs.db
+
+.env.local
+.env.development.local
+.env.test.local
+.env.production.local
