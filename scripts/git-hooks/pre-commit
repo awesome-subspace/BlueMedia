@@ -1,0 +1,34 @@
+#!/usr/bin/env bash
+# 每次提交自动把 version.sh 的补丁号 +1（1.0.N -> 1.0.N+1）并纳入本次提交。
+#
+# 为什么必须有：Atlantis 构建读 version.sh 的 VERSION 作为镜像 tag，而 Harbor
+# **拒绝已存在的 tag** —— 同一个版本号推第二次，流水线在 `docker manifest inspect`
+# 那步直接失败。需要抬 major/minor 时直接手改 version.sh，本 hook 只动补丁号。
+#
+# 启用（hooksPath 是每个 clone 各自的配置，克隆后要手动开一次）：
+#   git config core.hooksPath scripts/git-hooks
+set -euo pipefail
+
+repo_root="$(git rev-parse --show-toplevel)"
+version_file="$repo_root/version.sh"
+[ -f "$version_file" ] || exit 0
+
+current="$(grep -oE 'VERSION=[0-9]+\.[0-9]+\.[0-9]+' "$version_file" | head -1 | cut -d= -f2 || true)"
+if [ -z "$current" ]; then
+  echo "pre-commit: version.sh 中未找到 X.Y.Z 形式的 VERSION，跳过自增" >&2
+  exit 0
+fi
+
+major="${current%%.*}"
+rest="${current#*.}"
+minor="${rest%%.*}"
+patch="${rest##*.}"
+next="${major}.${minor}.$((patch + 1))"
+
+# BSD sed(macOS) 与 GNU sed(Linux) 的 -i 参数不兼容，用临时文件绕开
+tmp="$(mktemp)"
+sed "s/VERSION=${current}/VERSION=${next}/" "$version_file" > "$tmp"
+mv "$tmp" "$version_file"
+
+git add "$version_file"
+echo "pre-commit: VERSION ${current} -> ${next}"

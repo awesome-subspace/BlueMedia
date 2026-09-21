@@ -1,7 +1,32 @@
 // @ts-check
+import {execFileSync} from 'node:child_process';
 import {themes as prismThemes} from 'prism-react-renderer';
 
+/**
+ * 「最后更新于」需要读 git 提交时间，而构建镜像用的 node:24-bookworm-slim
+ * **不带 git 二进制**——强行开启会让构建直接失败：
+ *   Error: This Docusaurus site is outside any Git worktree.
+ *
+ * 装 git 要走 Debian 源，而公司 runner 能不能到那个源没有先例可依（ApiWorker 的
+ * Dockerfile 全程没用过 apt），为一个锦上添花的功能引入没验证过的网络依赖不值得。
+ * 所以这里按能力探测：本地开发有 git 就显示时间戳，镜像里没有就静默关掉。
+ * 想让线上也显示，在 Dockerfile 的 builder 阶段装上 git 即可，无需改这里。
+ */
+const gitAvailable = (() => {
+  try {
+    execFileSync('git', ['rev-parse', '--is-inside-work-tree'], {stdio: 'ignore'});
+    return true;
+  } catch {
+    return false;
+  }
+})();
+
 const GITLAB_URL = 'http://git.domob-inc.cn/wenqiao.kang/BSPDocSystem';
+
+// 站点对外地址在**构建期**定下来（Docusaurus 会把 url/baseUrl 编译进产物，
+// 运行期改环境变量没有任何效果）。Dockerfile 以构建参数传入，本地开发用默认值。
+const SITE_URL = process.env.DOCS_URL || 'http://localhost:3000';
+const SITE_BASE_URL = process.env.DOCS_BASE_URL || '/';
 
 /** @type {import('@docusaurus/types').Config} */
 const config = {
@@ -9,8 +34,8 @@ const config = {
   tagline: '接入 WhatsApp Business Platform 所需的全部接口与指南',
   favicon: 'img/favicon.png',
 
-  url: 'http://git.domob-inc.cn',
-  baseUrl: '/',
+  url: SITE_URL,
+  baseUrl: SITE_BASE_URL,
   organizationName: 'wenqiao.kang',
   projectName: 'BSPDocSystem',
 
@@ -48,7 +73,7 @@ const config = {
           routeBasePath: 'docs',
           sidebarPath: './sidebars.mjs',
           editUrl: `${GITLAB_URL}/-/edit/main/`,
-          showLastUpdateTime: true,
+          showLastUpdateTime: gitAvailable,
           breadcrumbs: true,
         },
         blog: false,
@@ -167,7 +192,18 @@ const config = {
       prism: {
         theme: prismThemes.github,
         darkTheme: prismThemes.dracula,
-        additionalLanguages: ['bash', 'json', 'http', 'yaml', 'python'],
+        additionalLanguages: [
+          'bash',
+          'json',
+          'http',
+          'yaml',
+          'python',
+          'go',
+          'java',
+          // php 依赖 markup-templating，必须排在它前面
+          'markup-templating',
+          'php',
+        ],
       },
       docs: {
         sidebar: {

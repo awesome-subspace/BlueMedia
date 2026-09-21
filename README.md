@@ -65,7 +65,76 @@ npm run docs:check # 结构校验（CI 会先跑它）
 - 不解释平台、BU、BM 的内部 Token 层级，也不展示内部 Key 前缀。
 - 稳定协议字段和错误码（例如 `tenantId`、`BM_BUDGET_EXCEEDED`）不得擅自改名。
 
-## CI
+## CI / 部署
 
-`.gitlab-ci.yml` 在 MR 和默认分支上跑 `docs:check` + `build`，构建产物作为 artifact 保留一周。
-`build` 阶段开了 `onBrokenLinks: 'throw'`，任何死链都会让流水线失败。
+走公司 **Atlantis** 那条路：GitLab CI → bfo runner 调 Atlantis API → 用本仓根 `Dockerfile`
+构建镜像 → 推内网 Harbor → Atlantis 平台部署。
+
+```
+main     → prod        develop → pre
+tags     → prod        其余分支 → test
+```
+
+### 校验为什么不在单独的 CI 作业里
+
+公司 runner **连不上 Docker Hub**，`image: node:24` 这类 docker-executor 作业会卡在拉镜像。
+所以把门禁放进 Dockerfile 的 builder 阶段：
+
+```dockerfile
+RUN npm run docs:check && npm run build
+```
+
+`docs:check` 管结构（frontmatter、侧边栏收录、GitBook 残留语法、代码块语言），`build` 开着
+`onBrokenLinks: 'throw'` 管死链。任一失败 → 镜像构建失败 → 流水线红。只有一条构建路径，
+不会出现「CI 绿了但镜像里是旧产物」。
+
+### 平台侧要先登记（否则流水线必红）
+
+Atlantis 上必须存在同名服务，否则流水线在**构建之前**就挂：
+
+```
+109012 control script: 请确保服务在 Atlantis 平台已添加
+```
+
+这句读起来像「服务没登记」，实际是「**这个名字**没登记」，报错里区分不出来。查某个名字在不在：
+
+```sh
+curl -s -H 'X-Atlantis-UUID: BSPDocSystem' -H 'skip: atlantis' \
+  -H 'Content-type: application/json' -X POST \
+  --data '{"svc_name":"BSPDocSystem","namespace":"","env":"prod","svc_branch":"main"}' \
+  https://atlantis-api.bluemedia-inc.com/deploy/ci/config
+```
+
+已登记返回 `is_docker: 1`；没登记返回 `is_vm/is_docker/is_k8s` 全零（与随手编的名字完全一致）。
+
+登记时要填的：**服务名** `BSPDocSystem`（与 `.gitlab-ci.yml` 的 `ATLS_SVC_NAME` 逐字一致）、
+**镜像/包名**小写 `bspdocsystem`（平台侧独立字段）、类型 **Docker**、容器端口 **8080**
+（见 `nginx/docs.conf` 的 `listen`）。
+
+### 版本号
+
+Atlantis 读 `version.sh` 的 `VERSION` 当镜像 tag，而 **Harbor 拒绝已存在的 tag** —— 同一个版本
+推第二次，流水线直接失败。`scripts/git-hooks/pre-commit` 每次提交自动把补丁号 +1，克隆后启用一次：
+
+```sh
+git config core.hooksPath scripts/git-hooks
+```
+
+`git merge` 不触发 pre-commit，非快进合并进 `main` 后要手动抬一下版本号（改完用
+`git commit --no-verify`，否则 hook 会在你选的数字上再 +1）。
+
+### 站点地址是构建期固定的
+
+Docusaurus 把 `url` / `baseUrl` 编译进产物，运行期改环境变量没有任何效果。构建参数：
+
+```sh
+docker build --build-arg DOCS_URL=https://docs.bsptest.com --build-arg DOCS_BASE_URL=/ .
+```
+
+不传则回落到 `http://localhost:3000`（见 `docusaurus.config.js`）。
+
+### 「最后更新于」在镜像里是关掉的
+
+它要读 git 提交时间，而 `node:24-bookworm-slim` 不带 git 二进制，强开会让构建失败
+（`This Docusaurus site is outside any Git worktree.`）。配置按 git 可用性自动探测：本地开发显示，
+镜像里静默关闭。想让线上也显示，在 builder 阶段装上 git 即可，不用改配置。

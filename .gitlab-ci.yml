@@ -1,23 +1,73 @@
-stages:
-  - verify
+# GitLab CI/CD —— BSPDocSystem（BSP 开发者文档站）
+#
+# 走公司 Atlantis 铺好的路：include 远程模板 → bfo(shell executor) runner 调 Atlantis API，
+# 用本仓库根 Dockerfile 构建镜像、推送内网 Harbor，由 Atlantis 平台部署。
+#
+# ⚠️ 为什么这里没有独立的 lint/build 作业
+# 公司 runner **连不上 Docker Hub**，所以 `image: node:24` 这种 docker-executor 作业会在
+# 拉镜像那一步直接失败（不是构建失败，是根本起不来）。因此校验全部放进 Dockerfile 的
+# builder 阶段（`npm run docs:check && npm run build`）—— 文档结构错误或死链会让**镜像构建**
+# 失败，等价于 CI 失败，而且只有一套构建路径，不会出现"CI 绿了但镜像里是旧产物"。
 
-docs:
-  stage: verify
-  image: node:24
-  cache:
-    key:
-      files:
-        - package-lock.json
-    paths:
-      - .npm/
-  script:
-    - npm ci --cache .npm --prefer-offline
-    - npm run docs:check
-    - npm run build
-  artifacts:
-    paths:
-      - build/
-    expire_in: 1 week
-  rules:
-    - if: $CI_PIPELINE_SOURCE == 'merge_request_event'
-    - if: $CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH
+# 引入通用 ci 文件（请勿修改此部分）
+include:
+  - remote: "https://git.domob-inc.cn/bluefocus/atlantis/-/raw/master/ci.yml"
+
+stages:
+  - build
+  - notify
+
+variables:
+  # Atlantis 平台上的服务名。模板默认就是 ${CI_PROJECT_NAME}，这里显式写出来是因为
+  # 这个值错了的失败方式极难认：流水线会在**构建之前**挂在下载控制脚本那一步，平台回
+  #   109012 control script: 请确保服务在 Atlantis 平台已添加
+  # 读起来像"服务没登记"，实际是"这个名字没登记"，两者在报错里无法区分。
+  #
+  # 判断某个名字有没有登记（不要靠猜，一次 curl 就有答案）：对**已登记**的名字返回
+  # `is_docker: 1`，没登记的返回 `is_vm/is_docker/is_k8s` 全零，且与一个随手编造的
+  # 名字返回完全一致。
+  #
+  #   curl -s -H 'X-Atlantis-UUID: BSPDocSystem' -H 'skip: atlantis' \
+  #     -H 'Content-type: application/json' -X POST \
+  #     --data '{"svc_name":"BSPDocSystem","namespace":"","env":"prod","svc_branch":"main"}' \
+  #     https://atlantis-api.bluemedia-inc.com/deploy/ci/config
+  #
+  # 2026-09-21 实测：BSPDocSystem → 全零（**尚未登记**）。平台侧登记完成前，这条流水线
+  # 必然红在 109012，与本文件写得对不对无关。登记项见 README 的「部署」一节。
+  ATLS_SVC_NAME: "BSPDocSystem"
+
+  # 用本仓库自带的多阶段 Dockerfile（自含 FROM，不需要 ATLS_RUNNING_BASE_IMAGE）
+  ATLS_DOCKER_FILE_PATH: "Dockerfile"
+  ATLS_LOCAL_DOCKERFILE: 1
+
+  # 命名空间：默认空。若服务登记在特定 namespace 下，改成对应值。
+  ATLS_NS: ""
+
+  # 推送失败重试次数（模板默认 3）。保持默认即可。
+
+# 分支 → 环境（本仓库默认分支为 main）：
+#   prod 生产 → main
+#   pre  预发 → develop
+#   tag  打标签 → tags
+#   test 测试 → 其余分支
+compile_prod:
+  extends: .compile_prod
+  only:
+    - main
+
+compile_pre:
+  extends: .compile_pre
+  only:
+    - develop
+
+compile_tag:
+  extends: .compile_tag
+  only:
+    - tags
+
+compile_test:
+  extends: .compile_test
+  except:
+    - tags
+    - main
+    - develop
