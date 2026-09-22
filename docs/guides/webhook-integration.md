@@ -176,6 +176,8 @@ Meta 入站事件：
 
 有两种形状，和签名方案配套出现。
 
+每种事件都有可直接用于 Ajv、JSON Schema Validator 或代码生成器的独立 Schema，入口见 [OpenAPI 与 Agent 接入](../reference/openapi.md)。OpenAPI 3.1 的 `webhooks` 节也引用同一组契约。
+
 ### Meta 入站事件（扇出，配默认签名方案）
 
 回调体是 `{ kind, ...上下文字段, message / status / value }` 的形态，字段随 `kind` 变化：

@@ -190,15 +190,17 @@ curl -sI https://docs.bsptest.com/ | grep -ci x-frame-options   # 期望 1
 就二选一：删容器那两条（与 center-console / bluechip 两个兄弟仓的做法一致），
 或者在边缘对这个域名单独处理。`Referrer-Policy` 边缘没有，只有容器发，不受影响。
 
-### 被砍掉的两条路由
+### 机器可读入口
 
-原 `host-docs.conf` 里还有两组 location，合并时一并删除，因为本仓根本不提供它们：
+文档镜像直接托管以下静态资源，不依赖容器访问 API 服务：
 
-- `/openapi.json` → 转发给 API（`127.0.0.1:3200`）。这条**搬不进容器**——容器里的
-  `127.0.0.1` 是它自己的 loopback，不是宿主机。而且本仓没有任何页面引用它。
-  真要恢复，应该加在边缘那一侧。
-- `/llms.txt` / `/llms-full.txt`（原本就是注释掉的）。构建产物根下没有这两个文件，
-  开着只会把请求转给容器换回一份 404 页面，对 agent 比直接 404 更糟。
+- `/openapi.yaml` 与 `/openapi.json`：从 API 服务公开契约同步，并补充对外消息/Webhook Schema；
+- `/llms.txt` 与 `/llms-full.txt`：构建时从文档源生成；
+- `/markdown/<doc-id>.md`：每个页面对应的纯 Markdown；
+- `/schemas/webhooks/*.schema.json`：按事件类型拆分的 Webhook JSON Schema；
+- `/changelog.json`：机器可读变更日志。
+
+更新 API 契约时先运行 `npm run openapi:sync`；普通文档构建会自动重新生成 Agent 文件。
 
 ### 版本号
 

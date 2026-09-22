@@ -985,6 +985,11 @@ const sidebars = {
       items: [
         {
           type: 'doc',
+          id: 'reference/openapi',
+          label: 'OpenAPI 与 Agent 接入'
+        },
+        {
+          type: 'doc',
           id: 'reference/glossary',
           label: '术语表'
         },

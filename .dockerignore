@@ -4,6 +4,10 @@ node_modules
 build
 .docusaurus
 .cache-loader
+.generated-agent-files
+static/markdown
+static/llms.txt
+static/llms-full.txt
 
 .gitignore
 

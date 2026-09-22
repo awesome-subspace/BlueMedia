@@ -10,6 +10,10 @@ Thumbs.db
 # Generated files
 .docusaurus
 .cache-loader
+.generated-agent-files
+/static/markdown/
+/static/llms.txt
+/static/llms-full.txt
 
 # Misc
 .env.local

@@ -31,8 +31,12 @@ Base URL：`https://api.bsptest.com`
 
 | 状态码 | 说明 |
 | --- | --- |
-| `200` | OK |
-| `4xx` | 客户端错误 |
+| `200` | `MessageRecord[]`，按 `createdAt` 倒序；响应是裸数组，没有 `total` |
+| `401` | API Key 缺失或无效 |
+| `403` | 当前凭证不能访问该资源 |
+| `500` | 平台内部错误 |
+
+每个数组元素的完整字段、空值规则和状态枚举见 [OpenAPI 与 Agent 接入](../reference/openapi.md)中的 `MessageRecord`。客户端不应根据字段名自行推断类型。
 
 通用错误信封及处理建议见[错误码](../guides/error-codes.md)。
 
@@ -49,6 +53,12 @@ Base URL：`https://api.bsptest.com`
 `status` 精确匹配（`accepted`/`sending`/`submitted`/`sent`/`delivered`/`read`/`failed`）；`from`/`to` 是 `createdAt` 的闭区间，ISO 字符串。
 
 **无法解析的值一律忽略而不是 400**，与 `GET /v1/billing-console/ledger` 的 `from`/`to` 一致：调用方多半是看板上的一个控件，一个半输入状态（`2026-0`）不该让整页 400；忽略的语义是"这一侧不设边界"，与不传相同。拼错的 `status` 会得到空列表 —— 而空列表在界面上是看得见的。
+
+:::warning[调用方必须预校验]
+
+当前服务端不会对拼错的 `status` 返回 400。请使用 OpenAPI 中的状态枚举生成类型或在请求前校验，避免把 `status=deliverd` 得到的空数组误判为“没有已送达消息”。
+
+:::
 
 #### 不传任何参数
 

@@ -137,6 +137,7 @@ const config = {
             label: '参考',
             position: 'left',
             items: [
+              {to: '/docs/reference/openapi', label: 'OpenAPI 与 Agent 接入'},
               {to: '/docs/reference/glossary', label: '术语表'},
               {to: '/docs/reference/rate-limits', label: '限流与配额'},
               {to: '/docs/reference/idempotency', label: '幂等与重试'},
@@ -182,6 +183,7 @@ const config = {
           {
             title: '更多',
             items: [
+              {label: 'OpenAPI 与 Agent 接入', to: '/docs/reference/openapi'},
               {label: '术语表', to: '/docs/reference/glossary'},
               {label: '更新日志', to: '/docs/reference/changelog'},
               {label: '源码仓库', href: GITLAB_URL},
