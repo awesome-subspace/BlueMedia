@@ -3,7 +3,6 @@ import clsx from "clsx";
 import { ThemeClassNames } from "@docusaurus/theme-common";
 import { useDoc } from "@docusaurus/plugin-content-docs/client";
 import Heading from "@theme/Heading";
-import Link from "@docusaurus/Link";
 import MDXContent from "@theme/MDXContent";
 import styles from "./styles.module.css";
 
@@ -20,12 +19,20 @@ export default function DocItemContent({ children }) {
   return (
     <div className={clsx(ThemeClassNames.docs.docMarkdown, "markdown")}>
       <div className={styles.agentActions} aria-label="机器可读版本">
-        <Link to={`/markdown/${metadata.id}.md`} data-noBrokenLinkCheck>
+        <a
+          href={`/markdown/${metadata.id}.md`}
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           查看 Markdown
-        </Link>
-        <Link to="/openapi.yaml" data-noBrokenLinkCheck>
+        </a>
+        <a
+          href="/openapi.yaml"
+          target="_blank"
+          rel="noopener noreferrer"
+        >
           OpenAPI 3.1
-        </Link>
+        </a>
       </div>
       {syntheticTitle && (
         <header>
