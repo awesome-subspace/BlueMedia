@@ -3,6 +3,28 @@ title: "错误码"
 description: "HTTP 错误码、消息投递失败码及处理建议。"
 ---
 
+## HTTP 错误信封
+
+所有 API 错误使用同一信封，并在响应头返回同一个请求追踪 ID：
+
+```http
+HTTP/1.1 429 Too Many Requests
+X-Request-Id: req_01923abc
+Content-Type: application/json
+
+{
+  "error": {
+    "code": "RATE_LIMITED",
+    "message": "rate limit exceeded",
+    "retryable": true,
+    "httpStatus": 429,
+    "requestId": "req_01923abc"
+  }
+}
+```
+
+请把 `requestId` 写入调用方日志；需要人工排查时，同时提供它、请求时间和接口路径。`details` 与 `upstream` 只在相关错误中出现，完整结构见 [OpenAPI 与 Agent 接入](../reference/openapi.md)。
+
 ## 错误码
 
 | code | httpStatus | retryable | 说明 |

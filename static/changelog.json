@@ -1,0 +1,41 @@
+{
+  "$schema": "https://docs.bsptest.com/schemas/changelog.schema.json",
+  "updatedAt": "2026-09-22",
+  "entries": [
+    {
+      "date": "2026-09-22",
+      "changes": [
+        {
+          "type": "Added",
+          "scope": "machine-readable",
+          "summary": "Published OpenAPI 3.1, llms.txt, per-page Markdown and webhook JSON Schemas."
+        },
+        {
+          "type": "Fixed",
+          "scope": "POST /v1/messages",
+          "summary": "Replaced the ambiguous dynamic payload schema with oneOf/discriminator variants and explicit recipient/media constraints."
+        },
+        {
+          "type": "Added",
+          "scope": "POST /v1/messages; GET /v1/messages; GET /v1/messages/{id}",
+          "summary": "Added success response schemas and explicit error response contracts."
+        },
+        {
+          "type": "Changed",
+          "scope": "GET /v1/messages",
+          "summary": "Documented typed query parameters and the existing lenient invalid-filter behavior; runtime behavior is unchanged."
+        }
+      ]
+    },
+    {
+      "date": "2026-09-21",
+      "changes": [
+        {
+          "type": "Changed",
+          "scope": "documentation",
+          "summary": "Migrated the documentation site from GitBook to Docusaurus and reorganized navigation by business domain."
+        }
+      ]
+    }
+  ]
+}

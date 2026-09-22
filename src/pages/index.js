@@ -234,6 +234,9 @@ export default function Home() {
                 <Link className={styles.btnSecondary} to="/docs/">
                   阅读文档
                 </Link>
+                <Link className={styles.btnSecondary} to="/docs/reference/openapi">
+                  OpenAPI 3.1
+                </Link>
               </div>
             </div>
 

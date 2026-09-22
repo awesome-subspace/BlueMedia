@@ -50,55 +50,60 @@ Content-Type：`application/json`
 }
 ```
 
-Schema：
+完整请求契约见 [OpenAPI 与 Agent 接入](../reference/openapi.md)中的 `MessageRequest`。它使用 `oneOf` + `discriminator` 描述 11 种消息，而不是把动态的 `<type>` 错写成字符串：
 
-```json
-{
-  "type": "object",
-  "properties": {
-    "phoneNumberId": {
-      "type": "string",
-      "description": "string · 必填 — 平台内号码 ID，pn_...；从 GET /v1/phone-numbers 获取当前授权范围实际拥有的号码，不要沿用示例里的占位符"
-    },
-    "to": {
-      "type": "string",
-      "description": "string · 可选 — E.164 收件人号码，去掉 +。与 `toUserId` **二者至少给一个**"
-    },
-    "toUserId": {
-      "type": "string",
-      "description": "string · 可选 — 收件人 BSUID（Meta 请求体里叫 `recipient`），如 `US.13491208655302741918`"
-    },
-    "type": {
-      "type": "string",
-      "description": "string · 必填 — text / template / image / video / audio / document / sticker / interactive"
-    },
-    "<type>": {
-      "type": "string",
-      "description": "object · 可选 — 与 type 同名的内容对象；按 type 条件必填"
-    }
-  },
-  "required": [
-    "phoneNumberId",
-    "type"
-  ],
-  "example": {
-    "phoneNumberId": "<YOUR_PHONE_NUMBER_ID>",
-    "to": "8613800138000",
-    "type": "text",
-    "text": {
-      "body": "你好",
-      "preview_url": false
-    }
-  }
-}
+```yaml
+MessageRequest:
+  oneOf:
+    - $ref: '#/components/schemas/TextMessageRequest'
+    - $ref: '#/components/schemas/TemplateMessageRequest'
+    - $ref: '#/components/schemas/ImageMessageRequest'
+    - $ref: '#/components/schemas/VideoMessageRequest'
+    # 其余类型见 OpenAPI
+  discriminator:
+    propertyName: type
 ```
+
+Schema 还会校验 `to` / `toUserId` 至少一个，以及媒体 `id` / `link` 恰好一个。`type` 省略仅是 text 的向后兼容行为；新代码建议显式传 `type`。
 
 ## 响应
 
 | 状态码 | 说明 |
 | --- | --- |
-| `202` | Accepted |
-| `4xx` | 客户端错误 |
+| `202` | 已受理，返回完整 `MessageRecord`；不代表已送达 |
+| `400` | 请求体、收件人或幂等键格式错误 |
+| `401` | API Key 缺失或无效 |
+| `403` | scope 不足，或收件人已退订营销消息 |
+| `404` | 发送号码不存在或不在当前授权范围 |
+| `409` | 幂等冲突，或 24 小时客服窗口已关闭 |
+| `429` | 调用频率或 Meta 人均互动冷却限制 |
+| `500` | 平台内部错误 |
+
+成功响应示例：
+
+```json
+{
+  "id": "msg_01923abc",
+  "tenantId": "tenant_01923abc",
+  "phoneNumberId": "pn_01923abc",
+  "metaPhoneNumberId": "1234567890",
+  "toNumber": "8613800138000",
+  "toUserId": null,
+  "type": "text",
+  "content": {"body": "你好", "preview_url": false},
+  "category": null,
+  "status": "accepted",
+  "wamid": null,
+  "errorCode": null,
+  "errorMessage": null,
+  "metaError": null,
+  "idempotencyKey": "order-8821-notify",
+  "createdAt": "2026-09-22T10:00:00.000Z",
+  "updatedAt": "2026-09-22T10:00:00.000Z"
+}
+```
+
+错误响应都带 `X-Request-Id` 响应头，响应体中的 `error.requestId` 与它相同。完整字段定义见 [OpenAPI 与 Agent 接入](../reference/openapi.md)中的 `ErrorResponse`。
 
 通用错误信封及处理建议见[错误码](../guides/error-codes.md)。
 

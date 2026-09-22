@@ -46,11 +46,9 @@ RUN npm ci --no-audit --no-fund
 
 COPY . .
 
-# 校验放在构建前：docs:check 的报错比 webpack 的可读得多（缺 frontmatter、
-# 页面没被侧边栏收录、残留 GitBook 语法、代码块语言写错）。
-# build 开着 onBrokenLinks: 'throw'，任何死链都会让这一层失败 —— 这就是本项目的 CI 门禁。
-RUN npm run docs:check \
- && npm run build
+# build 会先生成 Agent 文件并执行 docs:check；Docusaurus 还会以
+# onBrokenLinks: 'throw' 阻止死链发布。
+RUN npm run build
 
 # ---------------------------------------------------------------------------
 # runtime：nginx 托管静态产物

@@ -27,8 +27,13 @@ Base URL：`https://api.bsptest.com`
 
 | 状态码 | 说明 |
 | --- | --- |
-| `200` | OK |
-| `4xx` | 客户端错误 |
+| `200` | `MessageDetails`，包含状态与结构化失败原因 |
+| `401` | API Key 缺失或无效 |
+| `403` | 当前凭证不能访问该资源 |
+| `404` | 消息不存在或不属于当前账户 |
+| `500` | 平台内部错误 |
+
+完整响应结构见 [OpenAPI 与 Agent 接入](../reference/openapi.md)中的 `MessageDetails`。
 
 通用错误信封及处理建议见[错误码](../guides/error-codes.md)。
 

@@ -15,6 +15,8 @@ description: "平台侧限流、Meta 侧限流、各类时效与大小上限的�
 | Cloud API 吞吐上限（码 `130429`） | Meta | `META_THROUGHPUT_LIMIT` | 平台自动重试 |
 | 同一发送号码对同一收件号码短时间发送过多（码 `131056`） | Meta | `PAIR_RATE_LIMIT` | 平台自动重试 |
 
+当前 `429` 响应**不保证携带 `Retry-After`**。调用方应先检查 `error.retryable`：为 `true` 时使用带抖动的指数退避，为 `false`（例如 `ENGAGEMENT_COOLDOWN`）时不要自动重试。后续若服务端加入 `Retry-After`，应优先采用响应头给出的等待时间。
+
 :::warning
 
 `ENGAGEMENT_COOLDOWN`（429）**不是**可退避重试的限流。该收件人触发了 Meta 人均互动上限（131049），平台在本地 24 小时冷却期内直接拒绝再发模板——**24 小时内重试会延长 Meta 的封禁**。请等待或更换收件人。

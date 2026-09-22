@@ -5,14 +5,16 @@
   "description": "BSP 开发者文档系统（Docusaurus）",
   "scripts": {
     "start": "docusaurus start",
-    "build": "docusaurus build",
+    "build": "npm run docs:check && docusaurus build",
     "serve": "docusaurus serve",
     "clear": "docusaurus clear",
     "docusaurus": "docusaurus",
     "swizzle": "docusaurus swizzle",
     "write-translations": "docusaurus write-translations",
     "write-heading-ids": "docusaurus write-heading-ids",
-    "docs:check": "node scripts/check-docs.mjs"
+    "docs:check": "npm run agent:generate && node scripts/check-docs.mjs",
+    "agent:generate": "node scripts/generate-agent-files.mjs",
+    "openapi:sync": "node scripts/sync-openapi.mjs"
   },
   "dependencies": {
     "@docusaurus/core": "3.10.2",
@@ -29,7 +31,8 @@
   },
   "devDependencies": {
     "@docusaurus/module-type-aliases": "3.10.2",
-    "@docusaurus/types": "3.10.2"
+    "@docusaurus/types": "3.10.2",
+    "yaml": "^2.9.1"
   },
   "browserslist": {
     "production": [

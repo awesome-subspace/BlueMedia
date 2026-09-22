@@ -1,0 +1,37 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "$id": "https://docs.bsptest.com/schemas/changelog.schema.json",
+  "title": "BlueMedia API changelog",
+  "type": "object",
+  "required": ["updatedAt", "entries"],
+  "properties": {
+    "updatedAt": {"type": "string", "format": "date"},
+    "entries": {
+      "type": "array",
+      "items": {
+        "type": "object",
+        "required": ["date", "changes"],
+        "properties": {
+          "date": {"type": "string", "format": "date"},
+          "changes": {
+            "type": "array",
+            "items": {
+              "type": "object",
+              "required": ["type", "scope", "summary"],
+              "properties": {
+                "type": {"enum": ["Added", "Changed", "Deprecated", "Removed", "Fixed", "Breaking"]},
+                "scope": {"type": "string"},
+                "summary": {"type": "string"},
+                "sunset": {"type": "string", "format": "date"},
+                "migration": {"type": "string"}
+              },
+              "additionalProperties": false
+            }
+          }
+        },
+        "additionalProperties": false
+      }
+    }
+  },
+  "additionalProperties": false
+}

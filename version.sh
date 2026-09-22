@@ -5,4 +5,4 @@
 # ⚠️ Harbor 拒绝已存在的 tag —— 同一个 VERSION 推第二次会让流水线直接失败
 # （`已经存在，请修改版本号再进行提交`）。scripts/git-hooks/pre-commit 每次提交
 # 自动把补丁号 +1；启用方式见 README。需要抬主版本时直接改这里。
-export VERSION=1.0.4
+export VERSION=1.0.5
