@@ -215,7 +215,7 @@ export default function Home() {
             <div className={styles.heroCopy}>
               <img
                 className={styles.heroLogo}
-                src={useBaseUrl('/img/logo-bluemedia-dark.svg')}
+                src={useBaseUrl('/img/logo-bluemedia-color.png')}
                 alt="BlueMedia"
               />
               <h1 className={styles.heroTitle}>
