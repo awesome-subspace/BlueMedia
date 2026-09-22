@@ -111,8 +111,8 @@ const config = {
         title: '开发者文档',
         logo: {
           alt: 'BlueMedia',
-          src: 'img/logo-bluemedia.svg',
-          srcDark: 'img/logo-bluemedia-dark.svg',
+          src: 'img/logo-bluemedia-color.png',
+          srcDark: 'img/logo-bluemedia-color.png',
           height: 26,
         },
         items: [
